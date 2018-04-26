@@ -6,49 +6,49 @@ package com.manager.master.bean;
  */
 public class UserAccountBean {
 
-    private int ACCOUNT_ID;             //账户ID
-    private String ACCOUNT_NAME;        //账户名
-    private String ACCOUNT_PASSWORD;    //账户密码
-    private String ACCOUNT_MOBILE;      //手机号
-    private int USER_ID;                //用户ID
+    private int accountId;             //账户ID
+    private String accountName;        //账户名
+    private String accountPassword;    //账户密码
+    private String accountMobile;      //手机号
+    private int userId;                //用户ID
 
-    public int getACCOUNT_ID() {
-        return ACCOUNT_ID;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setACCOUNT_ID(int ACCOUNT_ID) {
-        this.ACCOUNT_ID = ACCOUNT_ID;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
-    public String getACCOUNT_NAME() {
-        return ACCOUNT_NAME;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setACCOUNT_NAME(String ACCOUNT_NAME) {
-        this.ACCOUNT_NAME = ACCOUNT_NAME;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
-    public String getACCOUNT_PASSWORD() {
-        return ACCOUNT_PASSWORD;
+    public String getAccountPassword() {
+        return accountPassword;
     }
 
-    public void setACCOUNT_PASSWORD(String ACCOUNT_PASSWORD) {
-        this.ACCOUNT_PASSWORD = ACCOUNT_PASSWORD;
+    public void setAccountPassword(String accountPassword) {
+        this.accountPassword = accountPassword;
     }
 
-    public String getACCOUNT_MOBILE() {
-        return ACCOUNT_MOBILE;
+    public String getAccountMobile() {
+        return accountMobile;
     }
 
-    public void setACCOUNT_MOBILE(String ACCOUNT_MOBILE) {
-        this.ACCOUNT_MOBILE = ACCOUNT_MOBILE;
+    public void setAccountMobile(String accountMobile) {
+        this.accountMobile = accountMobile;
     }
 
-    public int getUSER_ID() {
-        return USER_ID;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUSER_ID(int USER_ID) {
-        this.USER_ID = USER_ID;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

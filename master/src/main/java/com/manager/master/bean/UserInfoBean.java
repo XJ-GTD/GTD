@@ -6,67 +6,68 @@ package com.manager.master.bean;
  */
 public class UserInfoBean {
 
-    private int USER_ID;	        //用户ID
-    private int ACCOUNT_ID;     //账户ID
-    private String NICKNAME;	    //昵称
-    private String EMAIL;         //邮箱
-    private String USER_NAME; 	//姓名
-    private String ID_NUMBER; 	//身份证号
-    private String USER_HEAD; 	//头像URL
+    private int userId;	        //用户ID
+    private int accountId;     //账户ID
+    private String nickname;	    //昵称
+    private String email;         //邮箱
+    private String userName; 	//姓名
+    private String idNumber; 	//身份证号
+    private String userHead; 	//头像URL
 
-    public int getUSER_ID() {
-        return USER_ID;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUSER_ID(int USER_ID) {
-        this.USER_ID = USER_ID;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getACCOUNT_ID() {
-        return ACCOUNT_ID;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setACCOUNT_ID(int ACCOUNT_ID) {
-        this.ACCOUNT_ID = ACCOUNT_ID;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
-    public String getNICKNAME() {
-        return NICKNAME;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNICKNAME(String NICKNAME) {
-        this.NICKNAME = NICKNAME;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getEMAIL() {
-        return EMAIL;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEMAIL(String EMAIL) {
-        this.EMAIL = EMAIL;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUSER_NAME() {
-        return USER_NAME;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUSER_NAME(String USER_NAME) {
-        this.USER_NAME = USER_NAME;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getID_NUMBER() {
-        return ID_NUMBER;
+    public String getIdNumber() {
+        return idNumber;
     }
 
-    public void setID_NUMBER(String ID_NUMBER) {
-        this.ID_NUMBER = ID_NUMBER;
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
-    public String getUSER_HEAD() {
-        return USER_HEAD;
+    public String getUserHead() {
+        return userHead;
     }
 
-    public void setUSER_HEAD(String USER_HEAD) {
-        this.USER_HEAD = USER_HEAD;
+    public void setUserHead(String userHead) {
+        this.userHead = userHead;
     }
 }
