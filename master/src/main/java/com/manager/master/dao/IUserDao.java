@@ -9,6 +9,10 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface IUserDao {
 
+    /**
+     * 查询用户账户信息
+     * @return
+     */
     @Select("select * from GTD_ACCOUNT")
     UserAccountBean findUser();
 }

@@ -8,5 +8,9 @@ import com.manager.master.bean.UserAccountBean;
  */
 public interface IUserService {
 
+    /**
+     * 查询用户账户信息
+     * @return
+     */
     public UserAccountBean findUser();
 }

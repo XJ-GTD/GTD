@@ -18,7 +18,6 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private IUserDao userDao;
 
-
     @Override
     public UserAccountBean findUser() {
         return userDao.findUser();

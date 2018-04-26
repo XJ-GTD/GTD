@@ -21,6 +21,11 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    /**
+     * 查询用户账户信息
+     * @param userName
+     * @return
+     */
     @RequestMapping(value = "/find/{userName}", method = RequestMethod.GET)
     public BaseOutBean findUser(@PathVariable String userName) {
         BaseOutBean outBean = new BaseOutBean();
