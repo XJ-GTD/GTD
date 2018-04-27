@@ -3,6 +3,8 @@ package com.manager.master.controller;
 import com.manager.master.bean.UserInfoBean;
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.service.IUserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+
+    private Logger logger = LogManager.getLogger(this.getClass());
 
     @Autowired
     IUserService userService;
@@ -35,10 +39,20 @@ public class UserController {
 
         userInfoBean = userService.findUser(mobile);
 
-        data.put("user", userInfoBean);
-        outBean.setData(data);
-        outBean.setCode("0");
-        outBean.setMessage("Find Success!");
+        if (userInfoBean != null) {
+            data.put("user", userInfoBean);
+            outBean.setData(data);
+            outBean.setCode("0");
+            outBean.setMessage("Find Success!");
+            logger.info("[查询成功]"+ data);
+        } else {
+            data.put("user", userInfoBean);
+            outBean.setData(data);
+            outBean.setCode("1");
+            outBean.setMessage("Find fail!");
+            logger.info("[查询失败]" + data);
+        }
+
         return outBean;
     }
 }
