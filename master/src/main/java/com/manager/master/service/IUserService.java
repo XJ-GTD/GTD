@@ -1,6 +1,6 @@
 package com.manager.master.service;
 
-import com.manager.master.bean.UserAccountBean;
+import com.manager.master.bean.UserInfoBean;
 
 /**
  * create by wzy on 2018/04/24.
@@ -9,8 +9,8 @@ import com.manager.master.bean.UserAccountBean;
 public interface IUserService {
 
     /**
-     * 查询用户账户信息
+     * 查询用户信息
      * @return
      */
-    public UserAccountBean findUser();
+    public UserInfoBean findUser(String mobile);
 }
