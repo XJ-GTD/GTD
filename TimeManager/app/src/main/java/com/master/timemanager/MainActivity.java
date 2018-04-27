@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
             }
         });
-        wv.loadUrl("file:///android_asset/html/home/index-calendar");
+        wv.loadUrl("file:///android_asset/html/home/index-calendar.html");
     }
 
     private Button.OnClickListener btn1_clickListener = new Button.OnClickListener(){
