@@ -8,9 +8,9 @@ public class UserInfoBean {
 
     private int userId;	        //用户ID
     private int accountId;     //账户ID
-    private String nickname;	    //昵称
+    private String userName;	    //昵称
     private String email;         //邮箱
-    private String userName; 	//姓名
+    private String realName; 	//姓名
     private String idNumber; 	//身份证号
     private String userHead; 	//头像URL
 
@@ -29,14 +29,6 @@ public class UserInfoBean {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getEmail() {
@@ -69,5 +61,13 @@ public class UserInfoBean {
 
     public void setUserHead(String userHead) {
         this.userHead = userHead;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

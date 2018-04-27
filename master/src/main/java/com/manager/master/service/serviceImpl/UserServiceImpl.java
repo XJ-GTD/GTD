@@ -1,6 +1,6 @@
 package com.manager.master.service.serviceImpl;
 
-import com.manager.master.bean.UserAccountBean;
+import com.manager.master.bean.UserInfoBean;
 import com.manager.master.dao.IUserDao;
 import com.manager.master.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,8 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao;
 
     @Override
-    public UserAccountBean findUser() {
-        return userDao.findUser();
+    public UserInfoBean findUser(String mobile) {
+        return userDao.findUser(mobile);
     }
+
 }
