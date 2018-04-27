@@ -55,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
             }
         });
-        wv.loadUrl("file:///android_asset/index.html");
+        wv.loadUrl("file:///android_asset/html/home/index-calendar");
     }
 
     private Button.OnClickListener btn1_clickListener = new Button.OnClickListener(){
 
         @Override
         public void onClick(View view) {
-//            wv.loadUrl("file:///android_asset/index.html");
+//            wv.loadUrl("file:///android_asset/index-calendar.html");
 //            wv.loadUrl("https://www.baidu.com/");
         }
     };
