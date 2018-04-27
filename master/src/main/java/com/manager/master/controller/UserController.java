@@ -1,7 +1,7 @@
 package com.manager.master.controller;
 
-import com.manager.master.bean.BaseOutBean;
-import com.manager.master.bean.UserAccountBean;
+import com.manager.master.bean.UserInfoBean;
+import com.manager.master.dto.BaseOutDto;
 import com.manager.master.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +22,20 @@ public class UserController {
     IUserService userService;
 
     /**
-     * 查询用户账户信息
-     * @param userName
+     * 查询用户信息
+     * @param mobile
      * @return
      */
-    @RequestMapping(value = "/find/{userName}", method = RequestMethod.GET)
-    public BaseOutBean findUser(@PathVariable String userName) {
-        BaseOutBean outBean = new BaseOutBean();
-        Map<String, UserAccountBean> data = new HashMap<>();
-        UserAccountBean userAccountBean = new UserAccountBean();
+    @RequestMapping(value = "/find/{mobile}", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseOutDto findUser(@PathVariable String mobile) {
+        BaseOutDto outBean = new BaseOutDto();
+        Map<String, UserInfoBean> data = new HashMap<>();
+        UserInfoBean userInfoBean = new UserInfoBean();
 
-        userAccountBean = userService.findUser();
+        userInfoBean = userService.findUser(mobile);
 
-        data.put("user", userAccountBean);
+        data.put("user", userInfoBean);
         outBean.setData(data);
         outBean.setCode("0");
         outBean.setMessage("Find Success!");

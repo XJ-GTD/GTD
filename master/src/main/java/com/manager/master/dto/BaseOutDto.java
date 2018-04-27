@@ -1,4 +1,4 @@
-package com.manager.master.bean;
+package com.manager.master.dto;
 
 import java.util.Map;
 
@@ -6,7 +6,7 @@ import java.util.Map;
  * create by wzy on 2018/04/26
  * 基本输出类
  */
-public class BaseOutBean {
+public class BaseOutDto {
     private String message;
     private String code;
     private Map<String, ?> data;
