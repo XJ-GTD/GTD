@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         //去掉标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        webView = (WebView) findViewById(R.id.wv_webview);
+        btnCalendar = (Button) findViewById(R.id.btnCalendar);
         init();
     }
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setWebView() {
-        WebSettings settings = webView.getSettings();
+        settings = webView.getSettings();
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient() {
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "提示一下", 0).show();
             }
 
-                        @android.webkit.JavascriptInterface
+            @android.webkit.JavascriptInterface
             public void toast2(String str) {
                 Toast.makeText(MainActivity.this, "输入框中输入的内容是：" + str, 0)
                         .show();
