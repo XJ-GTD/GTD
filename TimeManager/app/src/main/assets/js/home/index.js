@@ -1,5 +1,5 @@
 function calendarClick() {
-    window.location.href = "file:///android_asset/html/home/index-calendar.html";
+    window.location.href = "file:///android_asset/html/home/index_calendar.html";
 }
 
 function suiji(){
