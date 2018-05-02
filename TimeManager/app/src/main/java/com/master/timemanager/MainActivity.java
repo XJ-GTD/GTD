@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         //去掉标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        webView = (WebView) findViewById(R.id.wv_webview);
-        btnCalendar = (Button) findViewById(R.id.btnCalendar);
         init();
     }
 
