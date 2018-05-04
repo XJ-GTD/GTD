@@ -6,9 +6,9 @@ package com.manager.master.dto;
  */
 public class UserInfoInDto {
 
-    private String accountName;     //
-    private String password;        //
-    private String mobile;
+    private String accountName;     //登录账号
+    private String password;        //登录密码
+    private String mobile;          //登录手机
 
     public String getAccountName() {
         return accountName;
