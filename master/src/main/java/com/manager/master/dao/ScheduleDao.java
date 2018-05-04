@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * create by zy on 2018/05/04.
  * 用户管理
@@ -18,8 +20,10 @@ public interface ScheduleDao {
      * 查询个人日程信息
      * @return
      */
-    @Select("select * from GTD_SCHEDULE where SCHEDULE_EXECUTOR = #{scheduleExecutor}")
-    ScheduleOutDao findSchedule(@Param("scheduleExecutor") String scheduleExecutor);
+    @Select("select gs.*,ges.* FROM gtd_schedule gs inner join gtd_executor_schedule ges \n" +
+            "on gs.SCHEDULE_ID=ges.SCHEDULE_ID " +
+            "where ges.USER_ID = #{scheduleExecutor}")
+    List<ScheduleOutDao> findSchedule(@Param("scheduleExecutor") String scheduleExecutor);
     /**
      * 查询用户信息
      * @return

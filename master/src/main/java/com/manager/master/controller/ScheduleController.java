@@ -11,7 +11,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,17 +54,16 @@ public class ScheduleController {
     @ResponseBody
     public BaseOutDto find(@RequestBody ScheduleInDao inDto) {
         BaseOutDto outBean = new BaseOutDto();
-        Map<String, ScheduleOutDao> data = new HashMap<>();
-
-        ScheduleOutDao Schedule = scheduleService.findSchedule(inDto.getScheduleIssuer());
-        if(Schedule!=null){
-            data.put("scheduleinfo", Schedule);
+        Map<String, List<ScheduleOutDao>> data = new HashMap<>();
+        List<ScheduleOutDao> ScheduleData= scheduleService.findSchedule(inDto.getScheduleExecutor());
+        if(ScheduleData!=null){
+            data.put("scheduleinfo", ScheduleData);
             outBean.setData(data);
             outBean.setCode("0");
             outBean.setMessage("[查询成功]");
             logger.info("[查询成功]"+ data);
         }else{
-            data.put("scheduleinfo", Schedule);
+            data.put("scheduleinfo", ScheduleData);
             outBean.setData(data);
             outBean.setCode("1");
             outBean.setMessage("[查询失败]");

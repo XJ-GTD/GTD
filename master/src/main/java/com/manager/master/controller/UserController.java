@@ -50,7 +50,7 @@ public class UserController {
             data.put("userinfo", userAccountBean);
             outBean.setData(data);
             outBean.setCode("1");
-            outBean.setMessage("[登录失败]：用户名或密码输入错误!");
+            outBean.setMessage("[登录失败]:用户名或密码输入错误!");
             logger.info("[登录失败]" + data);
         }
         return outBean;

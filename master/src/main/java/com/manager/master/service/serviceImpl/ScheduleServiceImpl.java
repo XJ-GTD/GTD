@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * create by wzy on 2018/04/24.
@@ -24,7 +25,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     private ScheduleDao scheduleDao;
 
     @Override
-    public ScheduleOutDao findSchedule(String scheduleExecutor) {
+    public List<ScheduleOutDao> findSchedule(String scheduleExecutor) {
         scheduleDao.findSchedule(scheduleExecutor);
         return scheduleDao.findSchedule(scheduleExecutor);
     }
