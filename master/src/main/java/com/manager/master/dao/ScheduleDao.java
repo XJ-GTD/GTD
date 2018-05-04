@@ -23,7 +23,7 @@ public interface ScheduleDao {
     @Select("select gs.*,ges.* FROM gtd_schedule gs inner join gtd_executor_schedule ges \n" +
             "on gs.SCHEDULE_ID=ges.SCHEDULE_ID " +
             "where ges.USER_ID = #{scheduleExecutor}")
-    List<ScheduleOutDao> findSchedule(@Param("scheduleExecutor") String scheduleExecutor);
+    List<ScheduleOutDao> findSchedule(@Param("scheduleExecutor") int scheduleExecutor);
     /**
      * 查询用户信息
      * @return

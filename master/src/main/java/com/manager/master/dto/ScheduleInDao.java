@@ -1,26 +1,22 @@
 package com.manager.master.dto;
 
+import java.util.Date;
+
 public class ScheduleInDao {
     String scheduleName;         //事件名
     String scheduleDetial;       //事件详情
-    String scheduleIssuer;       //发布人
-    String scheduleExecutor;       //执行人EXECUTOR
-    String scheduleStartDate;     //完成时间SCHEDULE_START_DATE
-    String scheduledEndDate;     //截止时间SCHEDULE_END_DATE
+    int scheduleIssuer;       //发布人
+    int scheduleExecutor;       //执行人EXECUTOR
+    Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
+    Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
+    Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
+    Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     String GroupId;          //组群idGROUP_ID
     String scheduledMap;     //位置SCHEDULE_MAP
     String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
-
-    public String getScheduleExecutor() {
-        return scheduleExecutor;
-    }
-
-    public void setScheduleExecutor(String scheduleExecutor) {
-        this.scheduleExecutor = scheduleExecutor;
-    }
 
     public String getScheduleName() {
         return scheduleName;
@@ -38,27 +34,51 @@ public class ScheduleInDao {
         this.scheduleDetial = scheduleDetial;
     }
 
-    public String getScheduleIssuer() {
+    public int getScheduleIssuer() {
         return scheduleIssuer;
     }
 
-    public void setScheduleIssuer(String scheduleIssuer) {
+    public void setScheduleIssuer(int scheduleIssuer) {
         this.scheduleIssuer = scheduleIssuer;
     }
 
-    public String getScheduleStartDate() {
+    public int getScheduleExecutor() {
+        return scheduleExecutor;
+    }
+
+    public void setScheduleExecutor(int scheduleExecutor) {
+        this.scheduleExecutor = scheduleExecutor;
+    }
+
+    public Date getScheduleCreateDate() {
+        return scheduleCreateDate;
+    }
+
+    public void setScheduleCreateDate(Date scheduleCreateDate) {
+        this.scheduleCreateDate = scheduleCreateDate;
+    }
+
+    public Date getScheduleStartDate() {
         return scheduleStartDate;
     }
 
-    public void setScheduleStartDate(String scheduleStartDate) {
+    public void setScheduleStartDate(Date scheduleStartDate) {
         this.scheduleStartDate = scheduleStartDate;
     }
 
-    public String getScheduledEndDate() {
+    public Date getScheduleFinshDate() {
+        return scheduleFinshDate;
+    }
+
+    public void setScheduleFinshDate(Date scheduleFinshDate) {
+        this.scheduleFinshDate = scheduleFinshDate;
+    }
+
+    public Date getScheduledEndDate() {
         return scheduledEndDate;
     }
 
-    public void setScheduledEndDate(String scheduledEndDate) {
+    public void setScheduledEndDate(Date scheduledEndDate) {
         this.scheduledEndDate = scheduledEndDate;
     }
 

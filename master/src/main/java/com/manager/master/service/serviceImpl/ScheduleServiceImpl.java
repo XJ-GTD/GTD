@@ -7,8 +7,11 @@ import com.manager.master.service.ScheduleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,14 +27,25 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Resource
     private ScheduleDao scheduleDao;
 
+    /**
+     * 查询个人日程
+     * @param scheduleExecutor
+     * @return
+     */
     @Override
-    public List<ScheduleOutDao> findSchedule(String scheduleExecutor) {
+    public List<ScheduleOutDao> findSchedule(int scheduleExecutor) {
         scheduleDao.findSchedule(scheduleExecutor);
         return scheduleDao.findSchedule(scheduleExecutor);
     }
 
+    /**
+     * 添加日程
+     * @param inDto
+     * @return
+     */
     @Override
-    public ScheduleOutDao creatySchedule(String mobile, String passWord) {
+    public ScheduleOutDao creatySchedule(@RequestBody ScheduleInDao inDto) {
+        inDto.setScheduleCreateDate(new Date());// new Date()为获取当前系统时间
         return null;
     }
 }

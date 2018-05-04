@@ -1,6 +1,8 @@
 package com.manager.master.service;
 
+import com.manager.master.dto.ScheduleInDao;
 import com.manager.master.dto.ScheduleOutDao;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -14,11 +16,10 @@ public interface ScheduleService {
      * 查询个人日程信息
      * @return
      */
-    List<ScheduleOutDao>  findSchedule(String scheduleExecutor);
+    List<ScheduleOutDao>  findSchedule(int scheduleExecutor);
     /**
      * 日程创建
-     * @param mobile  登录账号
-     * @param passWord    登录密码
+     * @param
      */
-    ScheduleOutDao creatySchedule(String mobile, String passWord);
+    ScheduleOutDao creatySchedule(@RequestBody ScheduleInDao inDto);
 }

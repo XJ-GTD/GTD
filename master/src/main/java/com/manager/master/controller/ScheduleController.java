@@ -36,7 +36,7 @@ public class ScheduleController {
     @ResponseBody
     public BaseOutDto creaty(@RequestBody ScheduleInDao inDto) {
         BaseOutDto outBean = new BaseOutDto();
-
+        ScheduleOutDao ScheduleData= scheduleService.creatySchedule(inDto);
         return outBean;
     }
     /**
