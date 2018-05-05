@@ -25,10 +25,10 @@ public interface ScheduleDao {
             "where ges.USER_ID = #{scheduleExecutor}")
     List<ScheduleOutDto> findSchedule(@Param("scheduleExecutor") int scheduleExecutor);
     /**
-     * 查询用户信息
+     * 添加个人日程
      * @return
      */
-    @Insert("INSERT INTO gtd.gtd_schedule (" +
+    @Select("INSERT INTO gtd.gtd_schedule (" +
             "`SCHEDULE_NAME`, `SCHEDULE_DETIAL`, `SCHEDULE_ISSUER`,`SCHEDULE_CREATE_DATE`,`SCHEDULE_START_DATE`,`SCHEDULE_FINISH_DATE`,`SCHEDULE_END_DATE`,`SCHEDULE_STATE`, " +
             "`GROUP_ID`,`SCHEDULE_MAP`, `SCHEDULE_REMIND_DATE`,`SCHEDULE_REMIND_REPEAT`,`SCHEDULE_REMIND_REPEAT_TYPE`) " +
             "VALUES (" +
@@ -39,5 +39,31 @@ public interface ScheduleDao {
                                   @Param("scheduledEndDate")   Date scheduledEndDate,@Param("scheduledState")  String scheduledState,@Param("groupId")  int  groupId,
                                   @Param("scheduledMap")  String scheduledMap,@Param("scheduledRenindDate")  String scheduledRenindDate,@Param("scheduledRenindRepeat")  String scheduledRenindRepeat,
                                   @Param("scheduledRenindRepeatType")  String  scheduledRenindRepeatType);
+
+
+    /**
+     *获取上次添加日程id
+     */
+    @Select("SELECT LAST_INSERT_ID()")
+    int  selectScheduleId();
+
+
+    /**
+     * 添加执行事件表
+     * @return
+     */
+    @Insert("INSERT INTO gtd.gtd_schedule (" +
+            "`USER_ID`, `SCHEDULE_ID`, `EXECUTOR_FINISH_DATE`," +
+            "`EXECUTOR_STATE`,`EXECUTOR_REMIND_DATE`,`EXECUTOR_REMIND_REPEAT`," +
+            "`EXECUTOR_REMIND_REPEAT_TYPE`) " +
+            "VALUES (" +
+            " #{scheduledId}, #{userid}, #{executorFinshDate}," +
+            "#{scheduledState}, #{executorRenindDate},#{executorRenindRepeat}," +
+            "#{executorRenindRepeatType})")
+
+
+    void creatyExecutorScheduleId(@Param("scheduledId") int scheduledId,@Param("userid") int  userid,@Param("executorFinshDate") Date executorFinshDate,
+                                  @Param("scheduledState") String scheduledState,@Param("executorRenindDate") Date executorRenindDate,@Param("executorRenindRepeat") String executorRenindRepeat,
+                                  @Param("executorRenindRepeatType") String executorRenindRepeatType);
 
 }

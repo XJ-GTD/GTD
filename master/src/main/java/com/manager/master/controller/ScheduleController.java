@@ -33,7 +33,7 @@ public class ScheduleController {
     @ResponseBody
     public BaseOutDto creaty(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
-        Map<String, ScheduleOutDto> data = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
         if(inDto.getScheduleName()==null  &&  "".equals(inDto.getScheduleName())){
             outBean.setCode("1");
             outBean.setMessage("[事件名为空]");
@@ -54,9 +54,18 @@ public class ScheduleController {
             outBean.setMessage("[群组ID为空]");
             logger.info("[群组ID为空！]");
         }
-        ScheduleOutDto ScheduleData= scheduleService.creatySchedule(inDto);
-        data.put("scheduleinfo", ScheduleData);
+        scheduleService.creatySchedule(inDto);
+        //查询日程id
+        int  ScheduleId=scheduleService.selectScheduleId();
+        inDto.setScheduledId(ScheduleId);
+        //添加日程关联
+        scheduleService.creatyExecutorSchedule(inDto);
+
+
+        data.put("scheduleinfo", ScheduleId);
         outBean.setData(data);
+        outBean.setCode("0");
+        outBean.setMessage("[创建成功]");
         logger.info("[创建成功]");
         return outBean;
     }
