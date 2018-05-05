@@ -2,7 +2,7 @@ package com.manager.master.dto;
 
 import java.util.Date;
 
-public class ScheduleInDao {
+public class ScheduleOutDto {
     String scheduleName;         //事件名
     String scheduleDetial;       //事件详情
     int scheduleIssuer;       //发布人
@@ -12,11 +12,19 @@ public class ScheduleInDao {
     Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
     Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    String GroupId;          //组群idGROUP_ID
+    int GroupId;          //组群idGROUP_ID
     String scheduledMap;     //位置SCHEDULE_MAP
     String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+
+    public int getGroupId() {
+        return GroupId;
+    }
+
+    public void setGroupId(int groupId) {
+        GroupId = groupId;
+    }
 
     public String getScheduleName() {
         return scheduleName;
@@ -90,13 +98,6 @@ public class ScheduleInDao {
         this.scheduledState = scheduledState;
     }
 
-    public String getGroupId() {
-        return GroupId;
-    }
-
-    public void setGroupId(String groupId) {
-        GroupId = groupId;
-    }
 
     public String getScheduledMap() {
         return scheduledMap;
