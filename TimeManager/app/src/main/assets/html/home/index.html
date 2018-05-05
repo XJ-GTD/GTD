@@ -11,10 +11,12 @@
 <body>
     <header></header>
     <div id="main">
-        <div id="main_header">
-            <input id="btn_group" type="button" value="群组" /><input id="btn_calendar" type="button" value="日历"/>
+        <div id="main_header" style="position: fixed;top:0">
+            <input id="btn_group" type="button" value="群组" onClick="javascript:load_group();"/><input id="btn_calendar" type="button" value="日历" onClick="javascript:load_calendar();"/>
         </div>
-        <div id="main_html"></div>
+        <div id="main_html" style="height: 650px;margin-top: 20px">
+            <object type="text/html" data="index_group.html" width="100%" height="100%"></object>
+        </div>
         <!--<div id="main_html" ></div>-->
         <!--<div class="tab">-->
             <!--<iframe src="../login/login.html" id="index_login"></iframe>-->
@@ -25,16 +27,12 @@
     </div>
     <footer></footer>
 <script>
-    $(document).ready(function(){
-        $("#btn_calendar").click(function(){
-            $('#main_html').load("index_calendar.html");
-        })
-    })
-    $(document).ready(function(){
-        $("#btn_group").click(function(){
-            $('#main_html').load('index_group.html');
-        })
-    })
+    function load_group() {
+        document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_group.html" width="100%" height="100%"></object>';
+    }
+    function load_calendar() {
+        document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_calendar.html" width="100%" height="100%"></object>';
+    }
 </script>
 </body>
 </html>
