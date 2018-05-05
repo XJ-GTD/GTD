@@ -8,24 +8,38 @@
         android:orientation="vertical"
         tools:context="com.master.timemanager.MainActivity">
 
-    <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:id="@+id/btnGroup"
-            android:text="群组" tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="105dp"/>
-    <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:id="@+id/btnCalendar"
-            android:text="日历" tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="193dp"/>
+    <!--<Button-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:id="@+id/btnGroup"-->
+            <!--android:text="群组"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="@+id/btnCalendar"/>-->
+
+    <!--<Button-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:id="@+id/btnCalendar"-->
+            <!--android:text="日历"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="@+id/btnGroup"-->
+            <!--app:layout_constraintRight_toRightOf="parent"/>-->
+
+    <!--<Button-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:id="@+id/btnAddCalendar"-->
+            <!--android:text="+"-->
+            <!--app:layout_constraintRight_toRightOf="parent"/>-->
 
     <WebView
-            android:id="@+id/wv_webview"
+            android:id="@+id/tm_index"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="9" />
+            android:layout_height="fill_parent"/>
 
 
 </android.support.constraint.ConstraintLayout>
