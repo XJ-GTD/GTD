@@ -13,6 +13,7 @@
     <div id="main">
         <div id="main_header" style="position: fixed;top:0">
             <input id="btn_group" type="button" value="群组" onClick="javascript:load_group();"/><input id="btn_calendar" type="button" value="日历" onClick="javascript:load_calendar();"/>
+            <input id="btn_add" type="button" value="+" onclick="javescript:load_add()">
         </div>
         <div id="main_html" style="height: 650px;margin-top: 20px">
             <object type="text/html" data="index_group.html" width="100%" height="100%"></object>
@@ -32,6 +33,9 @@
     }
     function load_calendar() {
         document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_calendar.html" width="100%" height="100%"></object>';
+    }
+    function load_add() {
+        document.getElementById("main_html").innerHTML = '<object type="text/html" data="../schedule/add_schedule.html" width="100%" height="100%"></object>';
     }
 </script>
 </body>

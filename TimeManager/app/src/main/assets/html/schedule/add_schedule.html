@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <title>添加日程页面1</title>
     <link rel="stylesheet" href="../../css/schedule.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../../css/datedropper.css">
+    <link rel="stylesheet" type="text/css" href="../../css/timedropper.min.css">
     <script src="../../js/schedule/add_schedule.js"></script>
     <script src="../../js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../js/schedule/jquery-1.12.3.min.js"></script>
+    <script src="../../js/schedule/datedropper.min.js"></script>
+    <script src="../../js/schedule/timedropper.min.js"></script>
 </head>
 <body>
     <header></header>
     <div id="main_schedule" class="">
         <form class="schedule-form">
             <input id="schedule_name" type="text" placeholder="请输入事件标题..."/><br>
-            <input type="text" placeholder="请添加联系人..."/><br>
+            <input id="schedule_person" type="text" placeholder="请添加联系人..."/><br>
             <!--<select type="text" multiple="multiple">
                 <option>请添加联系人...</option>
                 <option>联系人1</option>
@@ -24,7 +30,10 @@
                 <option>联系人7</option>
                 <option>联系人8</option>
             </select>-->
-            <span>设置时间控件</span><br>
+            <div class="demo">
+            <input type="text" class="input" id="pickdate" placeholder="开始时间" /><input type="text" class="input" id="picktime" />
+            <input type="text" class="input" id="pickdate2" placeholder="结束时间"/><input type="text" class="input" id="picktime2" /><br>
+            </div>
             <select name="remind_time">
                 <option value="time_1">不提醒</option>
                 <option value="time_2">事件开始时</option>
@@ -45,9 +54,30 @@
                 <option value="type_7">自定义</option>
             </select><br>
             <input id="" onclick="" value="创建" type="submit"/><input type="reset"/>
+
         </form>
     </div>
     <footer></footer>
 
+    <script>
+        $("#pickdate").dateDropper({
+            animate: false,
+            format: 'Y-m-d',
+            maxYear: '2020'
+        });
+        $("#picktime").timeDropper({
+            meridians: false,
+            format: 'HH:mm',
+        });
+        $("#pickdate2").dateDropper({
+            animate: false,
+            format: 'Y-m-d',
+            maxYear: '2020'
+        });
+        $("#picktime2").timeDropper({
+            meridians: false,
+            format: 'HH:mm',
+        });
+    </script>
 </body>
 </html>
