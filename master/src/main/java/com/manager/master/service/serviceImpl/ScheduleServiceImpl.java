@@ -6,10 +6,10 @@ import com.manager.master.dao.ScheduleDao;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.ScheduleService;
-import org.apache.ibatis.annotations.Param;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
@@ -22,6 +22,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService{
 
     private Logger logger = LogManager.getLogger(this.getClass());
