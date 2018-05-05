@@ -52,17 +52,17 @@ public interface ScheduleDao {
      * 添加执行事件表
      * @return
      */
-    @Insert("INSERT INTO gtd.gtd_schedule (" +
+    @Insert("INSERT INTO gtd.GTD_EXECUTOR_SCHEDULE (" +
             "`USER_ID`, `SCHEDULE_ID`, `EXECUTOR_FINISH_DATE`," +
             "`EXECUTOR_STATE`,`EXECUTOR_REMIND_DATE`,`EXECUTOR_REMIND_REPEAT`," +
             "`EXECUTOR_REMIND_REPEAT_TYPE`) " +
             "VALUES (" +
-            " #{scheduledId}, #{userid}, #{executorFinshDate}," +
+            " #{userid}, #{scheduledId}, #{executorFinshDate}," +
             "#{scheduledState}, #{executorRenindDate},#{executorRenindRepeat}," +
             "#{executorRenindRepeatType})")
 
 
-    void creatyExecutorScheduleId(@Param("scheduledId") int scheduledId,@Param("userid") int  userid,@Param("executorFinshDate") Date executorFinshDate,
+    void creatyExecutorScheduleId(@Param("userid") int userid,@Param("scheduledId") int  scheduledId,@Param("executorFinshDate") Date executorFinshDate,
                                   @Param("scheduledState") String scheduledState,@Param("executorRenindDate") Date executorRenindDate,@Param("executorRenindRepeat") String executorRenindRepeat,
                                   @Param("executorRenindRepeatType") String executorRenindRepeatType);
 

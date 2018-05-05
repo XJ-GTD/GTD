@@ -103,7 +103,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         if(userMobile==null){
             //执行人为空时发布人变为执行人
             userid=inDto.getScheduleIssuer();
-            scheduleDao.creatyExecutorScheduleId(scheduledId,userid,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
+            scheduleDao.creatyExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
         }else{
             //分割电话号码
             String[] mobile = userMobile.split(", ");
@@ -111,7 +111,7 @@ public class ScheduleServiceImpl implements ScheduleService{
                 //获取用户id
                 UserInfoBean userInfo= userDao.findUser(mobile[i]);
                 userid=userInfo.getUserId();
-                scheduleDao.creatyExecutorScheduleId(scheduledId,userid,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
+                scheduleDao.creatyExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
             }
         }
     }
