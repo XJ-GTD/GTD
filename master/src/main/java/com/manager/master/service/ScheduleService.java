@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 /**
- * create by wzy on 2018/04/24.
- * 用户管理
+ * create by zy on 2018/05/05.
+ *  * 日程管理
  */
 public interface ScheduleService {
 
@@ -22,4 +22,16 @@ public interface ScheduleService {
      * @param
      */
     ScheduleOutDto creatySchedule(@RequestBody ScheduleInDto inDto);
+
+    /**
+     * 获取上次添加日程id
+     * @param
+     */
+    int selectScheduleId();
+
+    /**
+     * 日程关联创建（执行事件表）
+     * @param
+     */
+    void  creatyExecutorSchedule(@RequestBody ScheduleInDto inDto);
 }
