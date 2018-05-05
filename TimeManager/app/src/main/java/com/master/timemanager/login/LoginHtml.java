@@ -1,8 +1,6 @@
 package com.master.timemanager.login;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -13,14 +11,18 @@ import java.net.URLEncoder;
  */
 public class LoginHtml {
 
-    public static String LOGIN_URL = "localhost:8080/gtd/user/login";
+    public static String LOGIN_URL = "http://192.168.99.39:8080/gtd/user/login";
 
-    public static String LoginByPost(String accountName, String password) {
+    public static String LoginByPost(String mobile, String password) {
         String msg = "";
         try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(LOGIN_URL).openConnection();
+            URL url = new URL(LOGIN_URL);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             //设置请求方式，请示超时
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod("GET");
+//            conn.setRequestProperty("Accept","*/*");
+//            conn.setRequestProperty("Cache-control","no-cacahe");
+            conn.setRequestProperty("Content-Type","application/json");
             conn.setReadTimeout(3000);
             conn.setConnectTimeout(3000);
             //设置运行输入输出
@@ -29,36 +31,27 @@ public class LoginHtml {
             //Post方式不能缓存,需手动设置为false
             conn.setUseCaches(false);
             //我们请求的数据:
-            String data = "accountName="+ URLEncoder.encode(accountName, "UTF-8")+
-                    "&password="+ URLEncoder.encode(password, "UTF-8");
+            String data2 = "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
             //这里可以写一些请求头的东西...
-            conn.connect();
             //获取输出流
-            OutputStream out = conn.getOutputStream();
-            out.write(data.getBytes());
-            out.flush();
-            if (conn.getResponseCode() == 200) {
-                // 获取响应的输入流对象
-                InputStream is = conn.getInputStream();
-                // 创建字节输出流对象
-                ByteArrayOutputStream message = new ByteArrayOutputStream();
-                // 定义读取的长度
-                int len = 0;
-                // 定义缓冲区
-                byte buffer[] = new byte[1024];
-                // 按照缓冲区的大小，循环读取
-                while ((len = is.read(buffer)) != -1) {
-                    // 根据读取的长度写入到os对象中
-                    message.write(buffer, 0, len);
+//            OutputStream out = conn.getOutputStream();
+            DataOutputStream out = new DataOutputStream(conn.getOutputStream()); // 获取输出流
+            out.write(data2.getBytes()); //将要传递的数据写入数据输出流
+            out.flush();    //输出缓存
+            out.close();    //关闭数据输出流
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStreamReader in = new InputStreamReader(
+                        conn.getInputStream()); // 获得读取的内容
+                BufferedReader buffer = new BufferedReader(in); // 获取输入流对象
+                String inputLine = null;
+                String result ="";
+                while ((inputLine = buffer.readLine()) != null) {
+                    result += inputLine + "\n";
                 }
-                // 释放资源
-                is.close();
-                message.close();
-                // 返回字符串
-                msg = new String(message.toByteArray());
-
-                return msg;
+                in.close(); //关闭字符输入流
+                return result;
             }
+            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
