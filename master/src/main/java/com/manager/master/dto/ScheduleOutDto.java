@@ -3,20 +3,77 @@ package com.manager.master.dto;
 import java.util.Date;
 
 public class ScheduleOutDto {
-    String scheduleName;         //事件名
-    String scheduleDetial;       //事件详情
-    int scheduleIssuer;       //发布人
-    int scheduleExecutor;       //执行人EXECUTOR
-    Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
-    Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
-    Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
-    String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    int GroupId;          //组群idGROUP_ID
-    String scheduledMap;     //位置SCHEDULE_MAP
-    String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
-    String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
-    String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+    private String scheduleName;         //事件名
+    private String scheduleDetial;       //事件详情
+    private int scheduleIssuer;       //发布人
+    private int scheduleExecutor;       //执行人EXECUTOR
+    private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
+    private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
+    private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
+    private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
+    private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
+    private int GroupId;          //组群idGROUP_ID
+    private String scheduledMap;     //位置SCHEDULE_MAP
+    private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
+    private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
+    private String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+
+
+    //执行事件表(日程关联表)
+    private int scheduledId;          //执行事件IDSCHEDULE_ID
+    private String  userMobile;         //执行人电话（执行人id）
+    private Date ExecutorFinshDate;     //完成时间-执行事件表
+    private Date ExecutorRenindDate;    //提醒时间-执行事件表
+    private String ExecutorRenindRepeat;     //重复提醒-执行事件表
+    private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+
+    public int getScheduledId() {
+        return scheduledId;
+    }
+
+    public void setScheduledId(int scheduledId) {
+        this.scheduledId = scheduledId;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+
+    public Date getExecutorFinshDate() {
+        return ExecutorFinshDate;
+    }
+
+    public void setExecutorFinshDate(Date executorFinshDate) {
+        ExecutorFinshDate = executorFinshDate;
+    }
+
+    public Date getExecutorRenindDate() {
+        return ExecutorRenindDate;
+    }
+
+    public void setExecutorRenindDate(Date executorRenindDate) {
+        ExecutorRenindDate = executorRenindDate;
+    }
+
+    public String getExecutorRenindRepeat() {
+        return ExecutorRenindRepeat;
+    }
+
+    public void setExecutorRenindRepeat(String executorRenindRepeat) {
+        ExecutorRenindRepeat = executorRenindRepeat;
+    }
+
+    public String getExecutorRenindRepeatType() {
+        return ExecutorRenindRepeatType;
+    }
+
+    public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
+        ExecutorRenindRepeatType = executorRenindRepeatType;
+    }
 
     public int getGroupId() {
         return GroupId;
