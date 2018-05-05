@@ -13,12 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/** 语音处理
+/**
+ * 语音处理
+ *
  * @Author: tzx ;
  * @Date: Created in 14:26 2018/4/28
  */
 @Service
-public class ReadAudioServiceImpl implements IReadAudioService{
+public class ReadAudioServiceImpl implements IReadAudioService {
 
 
     ReadAudioOnline rao = new ReadAudioOnline();
@@ -27,6 +29,7 @@ public class ReadAudioServiceImpl implements IReadAudioService{
 
     /**
      * 获取音频文件路径
+     *
      * @param request
      * @return
      * @throws IOException
@@ -64,6 +67,7 @@ public class ReadAudioServiceImpl implements IReadAudioService{
 
     /**
      * 语音识别+语音解析
+     *
      * @param fileName    音频文件路径
      * @param path_timem  FNLP时间解析库路径
      * @param path_models FNLP解析模型库路径
@@ -73,8 +77,8 @@ public class ReadAudioServiceImpl implements IReadAudioService{
     public Map<String, Object> readAudio(String fileName, String path_timem, String path_models) {
         Map<String, Object> map = new HashMap<String, Object>();
         String result = rao.getResult(fileName);
-        map.put("result",result);//音频文件在线识别结果
-        if(!"".equals(result)){
+        map.put("result", result);//音频文件在线识别结果
+        if (!"".equals(result)) {
             String date = fnlp.getTime(result, path_timem);
             map.put("date", date);//时间
             String title = fnlp.getTitle(result, path_timem);
@@ -82,11 +86,11 @@ public class ReadAudioServiceImpl implements IReadAudioService{
             List<String> nameList = new ArrayList<String>();
             List<String> addressList = new ArrayList<String>();
             Map<String, String> names = fnlp.analytical(result, path_models);//获取文本中的人名和地名
-            for(Map.Entry<String, String> entry : names.entrySet()){
-                if("人名".equals(entry.getValue())){
+            for (Map.Entry<String, String> entry : names.entrySet()) {
+                if ("人名".equals(entry.getValue())) {
                     nameList.add(entry.getKey());
                 }
-                if("地名".equals(entry.getValue())){
+                if ("地名".equals(entry.getValue())) {
                     addressList.add(entry.getKey());
                 }
             }
