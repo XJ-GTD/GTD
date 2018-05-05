@@ -1,78 +1,126 @@
 package com.master.timemanager;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Toast;
+import com.master.timemanager.login.LoginHtml;
 
+/**
+ * create by wzy on 2018/05/02.
+ * 首页群组activity
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn1;
-    private Button btn2;
-    private WebView wv;
     private WebSettings settings;
+    private Button btnAddCalendar;
+    private Button btnCalendar;
+    private Button btnGroup;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //将屏幕设置为全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //去掉标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        webView = (WebView) findViewById(R.id.tm_index);
+//        btnAddCalendar = (Button) findViewById(R.id.btnAddCalendar);
+//        btnGroup = (Button) findViewById(R.id.btnGroup);
+//        btnCalendar = (Button) findViewById(R.id.btnCalendar);
         init();
     }
 
-    private void init(){
-        //初始化控件
-        btn1 = (Button) findViewById(R.id.btn1);
+    private void init() {
 
-        btn1.setOnClickListener(btn1_clickListener);
-
-        btn2 = (Button) findViewById(R.id.btn2);
-
-        btn2.setOnClickListener(btn2_clickListener);
-
-        wv = (WebView) findViewById(R.id.wv);
-        //获取webSettings
-        settings = wv.getSettings();
-        //让webView支持JS
-        settings.setJavaScriptEnabled(true);
-        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
-        wv.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if(url.startsWith("http:") || url.startsWith("https:") ) {
-                    view.loadUrl(url);
-                    return false;
-                }else{
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent);
-                    return true;
-                }
-//                view.loadUrl(url);
-//                return true;
-            }
-        });
-        wv.loadUrl("file:///android_asset/index.html");
+        setWebView();
+//        btnAddCalendar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //调用js方法，要以javascript:开头 方法名注意要加括号
+//                webView.loadUrl("javascript:addSchedule()");
+//            }
+//        });
+//        btnGroup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //调用js方法，要以javascript:开头 方法名注意要加括号
+//                webView.loadUrl("javascript:calendarClick()");
+//            }
+//        });
+//        btnCalendar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //调用js方法，要以javascript:开头 方法名注意要加括号
+//                webView.loadUrl("javascript:calendarClick()");
+//            }
+//        });
     }
 
-    private Button.OnClickListener btn1_clickListener = new Button.OnClickListener(){
 
-        @Override
-        public void onClick(View view) {
-//            wv.loadUrl("file:///android_asset/index.html");
-//            wv.loadUrl("https://www.baidu.com/");
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //重写onKeyDown，当浏览网页，WebView可以后退时执行后退操作。
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            webView.goBack();
+            return true;
         }
-    };
-    private Button.OnClickListener btn2_clickListener = new Button.OnClickListener(){
+        return super.onKeyDown(keyCode, event);
+    }
 
-        @Override
-        public void onClick(View view) {
-//            wv.loadUrl("https://www.sina.com/");
-        }
-    };
+    private void setWebView() {
+        settings = webView.getSettings();
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient() {
+            //加载进度获取title
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    //网页加载完成
+                } else {
+                    //网页加载中
+                }
+            }
+        });
+        webView.loadUrl("file:///android_asset/html/home/index.html");
+
+        /**
+         * 设置可以被js调用的方法逻辑;
+         * 添加调用接口,并给接口设置名字;
+         */
+        webView.addJavascriptInterface(new Object() {
+
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void toast1() {
+                Toast.makeText(MainActivity.this, "提示一下", 0).show();
+            }
+
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void toast2(String str) {
+                Toast.makeText(MainActivity.this, "输入框中输入的内容是：" + str, 0)
+                        .show();
+            }
+        }, "test");
+
+        webView.addJavascriptInterface(new Object() {
+            @android.webkit.JavascriptInterface
+            public void loginSuccess(String accountName, String password) {
+                LoginHtml.LoginByPost(accountName, password);
+            }
+        }, "login");
+    }
 
 
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="../../css/index.css">
+    <script src="../../js/home/index.js"></script>
+    <script src="../../js/jquery-1.11.0.js"></script>
+
+</head>
+<body>
+    <header></header>
+    <div id="main">
+        <div id="main_header">
+            <input id="btn_group" type="button" value="群组" /><input id="btn_calendar" type="button" value="日历"/>
+        </div>
+        <div id="main_html"></div>
+        <!--<div id="main_html" ></div>-->
+        <!--<div class="tab">-->
+            <!--<iframe src="../login/login.html" id="index_login"></iframe>-->
+        <!--</div>-->
+       <!-- <div id="main_calendar" class="" style="display: none">
+            <iframe src="index_calendar.html" id="index_calendar"></iframe>
+        </div>-->
+    </div>
+    <footer></footer>
+<script>
+    $(document).ready(function(){
+        $("#btn_calendar").click(function(){
+            $('#main_html').load("index_calendar.html");
+        })
+    })
+    $(document).ready(function(){
+        $("#btn_group").click(function(){
+            $('#main_html').load('index_group.html');
+        })
+    })
+</script>
+</body>
+</html>

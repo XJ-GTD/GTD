@@ -13,6 +13,7 @@
 ### IntelliJ IDEA ###
 .idea
 .mvn
+*.bak
 *.iws
 *.iml
 *.ipr
@@ -24,3 +25,6 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/dep.m
+/pos.m
+/seg.m

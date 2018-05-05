@@ -1,6 +1,8 @@
 package com.manager.master.service;
 
+import com.manager.master.bean.UserAccountBean;
 import com.manager.master.bean.UserInfoBean;
+import com.manager.master.dto.BaseOutDto;
 
 /**
  * create by wzy on 2018/04/24.
@@ -12,5 +14,11 @@ public interface IUserService {
      * 查询用户信息
      * @return
      */
-    public UserInfoBean findUser(String mobile);
+     UserInfoBean findUser(String mobile);
+    /**
+     * 用户登录
+     * @param mobile  登录账号
+     * @param passWord    登录密码
+     */
+    UserAccountBean loginUser(String mobile, String passWord);
 }
