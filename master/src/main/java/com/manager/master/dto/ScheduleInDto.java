@@ -27,54 +27,6 @@ public class ScheduleInDto {
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
     private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
-    public int getScheduledId() {
-        return scheduledId;
-    }
-
-    public void setScheduledId(int scheduledId) {
-        this.scheduledId = scheduledId;
-    }
-
-    public String getUserMobile() {
-        return userMobile;
-    }
-
-    public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile;
-    }
-
-    public Date getExecutorFinshDate() {
-        return ExecutorFinshDate;
-    }
-
-    public void setExecutorFinshDate(Date executorFinshDate) {
-        ExecutorFinshDate = executorFinshDate;
-    }
-
-    public Date getExecutorRenindDate() {
-        return ExecutorRenindDate;
-    }
-
-    public void setExecutorRenindDate(Date executorRenindDate) {
-        ExecutorRenindDate = executorRenindDate;
-    }
-
-    public String getExecutorRenindRepeat() {
-        return ExecutorRenindRepeat;
-    }
-
-    public void setExecutorRenindRepeat(String executorRenindRepeat) {
-        ExecutorRenindRepeat = executorRenindRepeat;
-    }
-
-    public String getExecutorRenindRepeatType() {
-        return ExecutorRenindRepeatType;
-    }
-
-    public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
-        ExecutorRenindRepeatType = executorRenindRepeatType;
-    }
-
     public String getScheduleName() {
         return scheduleName;
     }
@@ -185,5 +137,53 @@ public class ScheduleInDto {
 
     public void setScheduledRenindRepeatType(String scheduledRenindRepeatType) {
         this.scheduledRenindRepeatType = scheduledRenindRepeatType;
+    }
+
+    public int getScheduledId() {
+        return scheduledId;
+    }
+
+    public void setScheduledId(int scheduledId) {
+        this.scheduledId = scheduledId;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+
+    public Date getExecutorFinshDate() {
+        return ExecutorFinshDate;
+    }
+
+    public void setExecutorFinshDate(Date executorFinshDate) {
+        ExecutorFinshDate = executorFinshDate;
+    }
+
+    public Date getExecutorRenindDate() {
+        return ExecutorRenindDate;
+    }
+
+    public void setExecutorRenindDate(Date executorRenindDate) {
+        ExecutorRenindDate = executorRenindDate;
+    }
+
+    public String getExecutorRenindRepeat() {
+        return ExecutorRenindRepeat;
+    }
+
+    public void setExecutorRenindRepeat(String executorRenindRepeat) {
+        ExecutorRenindRepeat = executorRenindRepeat;
+    }
+
+    public String getExecutorRenindRepeatType() {
+        return ExecutorRenindRepeatType;
+    }
+
+    public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
+        ExecutorRenindRepeatType = executorRenindRepeatType;
     }
 }
