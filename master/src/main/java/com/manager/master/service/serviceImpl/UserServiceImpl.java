@@ -7,6 +7,7 @@ import com.manager.master.service.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
  */
 
 @Service
+@Transactional
 public class UserServiceImpl implements IUserService {
 
     private Logger logger = LogManager.getLogger(this.getClass());

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * create by zy on 2018/05/04.
- * 用户管理
+ * 日程管理
  */
 @Mapper
 public interface ScheduleDao {

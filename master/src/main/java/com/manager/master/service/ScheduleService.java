@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * create by zy on 2018/05/05.
- * 用户管理
+ *  * 日程管理
  */
 public interface ScheduleService {
 
