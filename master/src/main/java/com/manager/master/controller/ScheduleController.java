@@ -1,17 +1,14 @@
 package com.manager.master.controller;
 
-import com.manager.master.bean.UserAccountBean;
 import com.manager.master.dto.BaseOutDto;
-import com.manager.master.dto.ScheduleInDao;
-import com.manager.master.dto.ScheduleOutDao;
-import com.manager.master.service.IUserService;
+import com.manager.master.dto.ScheduleInDto;
+import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.ScheduleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +31,33 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/creaty", method = RequestMethod.POST)
     @ResponseBody
-    public BaseOutDto creaty(@RequestBody ScheduleInDao inDto) {
+    public BaseOutDto creaty(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
-        ScheduleOutDao ScheduleData= scheduleService.creatySchedule(inDto);
+        Map<String, ScheduleOutDto> data = new HashMap<>();
+        if(inDto.getScheduleName()==null  &&  "".equals(inDto.getScheduleName())){
+            outBean.setCode("1");
+            outBean.setMessage("[事件名为空]");
+            logger.info("[事件名为空！]");
+        }
+        if(inDto.getScheduleIssuer()==0 ){
+            outBean.setCode("1");
+            outBean.setMessage("[发布人为空]");
+            logger.info("[发布人为空！]");
+        }
+        if(inDto.getScheduleIssuer()==0 ){
+            outBean.setCode("1");
+            outBean.setMessage("[发布人为空]");
+            logger.info("[发布人为空！]");
+        }
+        if(inDto.getGroupId()==0 ){
+            outBean.setCode("1");
+            outBean.setMessage("[群组ID为空]");
+            logger.info("[群组ID为空！]");
+        }
+        ScheduleOutDto ScheduleData= scheduleService.creatySchedule(inDto);
+        data.put("scheduleinfo", ScheduleData);
+        outBean.setData(data);
+        logger.info("[创建成功]");
         return outBean;
     }
     /**
@@ -52,10 +73,11 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     @ResponseBody
-    public BaseOutDto find(@RequestBody ScheduleInDao inDto) {
+    public BaseOutDto find(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
-        Map<String, List<ScheduleOutDao>> data = new HashMap<>();
-        List<ScheduleOutDao> ScheduleData= scheduleService.findSchedule(inDto.getScheduleExecutor());
+        Map<String, List<ScheduleOutDto>> data = new HashMap<>();
+        List<ScheduleOutDto> ScheduleData= scheduleService.findSchedule(inDto.getScheduleExecutor());
+
         if(ScheduleData!=null){
             data.put("scheduleinfo", ScheduleData);
             outBean.setData(data);
