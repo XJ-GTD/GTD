@@ -1,17 +1,18 @@
 package com.master.timemanager.login;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 /**
  * create by wzy on 2018/05/03.
  * 登陆连接类
  */
-public class LoginHtml {
+class LoginHml {
 
-    public static String LOGIN_URL = "http://192.168.99.39:8080/gtd/user/login";
+    public static String LOGIN_URL = "http://localhost:8080/gtd/user/login";
 
     public static String LoginByPost(String mobile, String password) {
         String msg = "";

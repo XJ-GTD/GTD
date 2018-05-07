@@ -11,7 +11,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
-import com.master.timemanager.login.LoginHtml;
 
 /**
  * create by wzy on 2018/05/02.
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        webView.loadUrl("file:///android_asset/html/home/index.html");
+        webView.loadUrl("file:///android_asset/html/login/login.html");
 
         /**
          * 设置可以被js调用的方法逻辑;
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         webView.addJavascriptInterface(new Object() {
             @android.webkit.JavascriptInterface
             public void loginSuccess(String accountName, String password) {
-                LoginHtml.LoginByPost(accountName, password);
+//                LoginHtml.LoginByPost(accountName, password);
             }
         }, "login");
     }

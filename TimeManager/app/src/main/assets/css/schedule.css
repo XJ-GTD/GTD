@@ -1,5 +1,12 @@
+body,th,td,button,input,select,textarea{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";color: #333;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased}
+input,select,textarea{color:#555;background-color:#fff; border:solid 1px #ddd;}
+body{line-height:1.6;}
+.schedule {
+    width: auto;
+    height: auto;
+}
 .schedule-form {
-    min-height: 750px;
+    min-height: auto;
     width: 33.3333%;
     margin-bottom: 0;
     margin: 4% auto 0;
