@@ -7,21 +7,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * create by wzy on 2018/05/02.
- * 首页日历activity
+ * create by wzy on 2018/05/07.
+ * 首页群组activity
  */
-public class CalendarHtml extends Activity {
+public class GroupHtml extends Activity {
 
-    public static String SCHEDULE_URL = "http://192.168.99.35:8080/gtd/schedul";
+    public static String GROUP_URL = "http://192.168.99.35:8080/gtd/schedul";
 
     public static String addSchedule(String mobile, String password) {
-        String url = SCHEDULE_URL + "/create";
+        String url = GROUP_URL + "/";
         String data = "";
         return HttpRequestUtil.requestPost(url,data);
     }
 
     public static String findSchedule(String mobile, String password) {
-        String url = SCHEDULE_URL + "/find";
+        String url = GROUP_URL + "/";
         String data = "";
         return HttpRequestUtil.requestPost(url,data);
     }
@@ -53,4 +53,5 @@ public class CalendarHtml extends Activity {
 
         return userInfoJson;
     }
+
 }

@@ -19,7 +19,7 @@ import com.master.timemanager.login.LoginHtml;
 
 /**
  * create by wzy on 2018/05/02.
- * 首页群组activity
+ * main
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +32,12 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle data = msg.getData();
-            user = LoginHtml.jsonToJavaString(data.getString("message"));
+            String val = data.getString("message");
+            if (!val.equals("")) {
+                user = LoginHtml.jsonToUserString(val);
+            } else {
+                user = null;
+            }
             Log.i("user","请求结果为--->"+ user);
         }
     };
@@ -143,8 +148,6 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("WrongConstant")
     private void loginDeal() {
         if (user != null && user.getCode().equals("0")) {
-            Toast.makeText(MainActivity.this, user.getMessage() , 0)
-                    .show();
             webView.post(new Runnable() {
                 @Override
                 public void run() {
