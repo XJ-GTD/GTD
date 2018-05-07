@@ -34,7 +34,7 @@ public interface ScheduleDao {
             "VALUES (" +
             " #{scheduleName}, #{scheduleDetial}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinshDate},#{scheduledEndDate},#{scheduledState}," +
             "#{groupId},#{scheduledMap},#{scheduledRenindDate},#{scheduledRenindRepeat},#{scheduledRenindRepeatType})")
-    ScheduleOutDto creatySchedule(@Param("scheduleName") String scheduleNamwe,@Param("scheduleDetial") String scheduleDetial,@Param("scheduleIssuer") int scheduleIssuer,
+    ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleNamwe,@Param("scheduleDetial") String scheduleDetial,@Param("scheduleIssuer") int scheduleIssuer,
                                   @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinshDate")  Date scheduleFinshDate,
                                   @Param("scheduledEndDate")   Date scheduledEndDate,@Param("scheduledState")  String scheduledState,@Param("groupId")  int  groupId,
                                   @Param("scheduledMap")  String scheduledMap,@Param("scheduledRenindDate")  String scheduledRenindDate,@Param("scheduledRenindRepeat")  String scheduledRenindRepeat,
@@ -62,7 +62,7 @@ public interface ScheduleDao {
             "#{executorRenindRepeatType})")
 
 
-    void creatyExecutorScheduleId(@Param("userid") int userid,@Param("scheduledId") int  scheduledId,@Param("executorFinshDate") Date executorFinshDate,
+    void createExecutorScheduleId(@Param("userid") int userid,@Param("scheduledId") int  scheduledId,@Param("executorFinshDate") Date executorFinshDate,
                                   @Param("scheduledState") String scheduledState,@Param("executorRenindDate") Date executorRenindDate,@Param("executorRenindRepeat") String executorRenindRepeat,
                                   @Param("executorRenindRepeatType") String executorRenindRepeatType);
 

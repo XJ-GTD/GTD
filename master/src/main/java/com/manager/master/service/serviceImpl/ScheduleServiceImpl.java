@@ -49,7 +49,7 @@ public class ScheduleServiceImpl implements ScheduleService{
      * @return
      */
     @Override
-    public ScheduleOutDto creatySchedule(@RequestBody ScheduleInDto inDto) {
+    public ScheduleOutDto createSchedule(@RequestBody ScheduleInDto inDto) {
         inDto.setScheduledState("-1"); //事件状态SCHEDULE_STATE(-1 未完成 1完成)
         inDto.setScheduleCreateDate(new Date());// new Date()为获取当前系统时间
 
@@ -67,7 +67,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         String scheduledRenindRepeat=inDto.getScheduledRenindRepeat();//重复提醒
         String  scheduledRenindRepeatType=inDto.getScheduledRenindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
 
-        return scheduleDao.creatySchedule(scheduleName,scheduleDetial,scheduleIssuer,
+        return scheduleDao.createSchedule(scheduleName,scheduleDetial,scheduleIssuer,
         scheduleCreateDate,scheduleStartDate,scheduleFinshDate,
         scheduledEndDate,scheduledState,groupId,
         scheduledMap,scheduledRenindDate,scheduledRenindRepeat,
@@ -90,7 +90,7 @@ public class ScheduleServiceImpl implements ScheduleService{
      * 日程关联创建（执行事件表）
      * @param
      */
-    public  void   creatyExecutorSchedule(@RequestBody ScheduleInDto inDto){
+    public  void   createExecutorSchedule(@RequestBody ScheduleInDto inDto){
         int  userid=0;
         int scheduledId=inDto.getScheduledId();         //执行事件IDSCHEDULE_ID
         String  userMobile=inDto.getUserMobile();         //执行人电话（执行人id）
@@ -103,15 +103,15 @@ public class ScheduleServiceImpl implements ScheduleService{
         if(userMobile==null){
             //执行人为空时发布人变为执行人
             userid=inDto.getScheduleIssuer();
-            scheduleDao.creatyExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
+            scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
         }else{
             //分割电话号码
-            String[] mobile = userMobile.split(", ");
+            String[] mobile = userMobile.split(",");
             for (int i = 0; i < mobile.length; i++) {
                 //获取用户id
                 UserInfoBean userInfo= userDao.findUser(mobile[i]);
                 userid=userInfo.getUserId();
-                scheduleDao.creatyExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
+                scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
             }
         }
     }

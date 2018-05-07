@@ -54,12 +54,12 @@ public class ScheduleController {
             outBean.setMessage("[群组ID为空]");
             logger.info("[群组ID为空！]");
         }
-        scheduleService.creatySchedule(inDto);
+        scheduleService.createSchedule(inDto);
         //查询日程id
         int  ScheduleId=scheduleService.selectScheduleId();
         inDto.setScheduledId(ScheduleId);
         //添加日程关联
-        scheduleService.creatyExecutorSchedule(inDto);
+        scheduleService.createExecutorSchedule(inDto);
 
 
         data.put("scheduleinfo", ScheduleId);

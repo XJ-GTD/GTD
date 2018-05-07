@@ -1,7 +1,10 @@
 package com.manager.master.dto;
 
 import java.util.Date;
-
+/**
+ * 日程
+ * creaty  zy
+ */
 public class ScheduleOutDto {
     private String scheduleName;         //事件名
     private String scheduleDetial;       //事件详情
