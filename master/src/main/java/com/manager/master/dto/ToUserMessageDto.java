@@ -4,7 +4,7 @@ package com.manager.master.dto;
  * @Author: tzx ;
  * @Date: Created in 17:54 2018/5/3
  */
-public class ToUserMessage {
+public class ToUserMessageDto {
     private String userId;
     private String message;
 

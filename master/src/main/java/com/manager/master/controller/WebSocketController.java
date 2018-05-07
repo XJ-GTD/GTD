@@ -1,8 +1,8 @@
 package com.manager.master.controller;
 
-import com.manager.master.dto.ClientMessage;
-import com.manager.master.dto.ServerMessage;
-import com.manager.master.dto.ToUserMessage;
+import com.manager.master.dto.ClientMessageDto;
+import com.manager.master.dto.ServerMessageDto;
+import com.manager.master.dto.ToUserMessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -23,18 +23,18 @@ public class WebSocketController {
 
     @MessageMapping("/send")
     @SendTo("/topic/getResponse")//SendTo 发送至 Broker 下的指定订阅路径
-    public ServerMessage sendTo(ClientMessage clientMessage){
+    public ServerMessageDto sendTo(ClientMessageDto clientMessage){
         //方法用于广播测试
         System.out.println("clientMessage.getName() = " + clientMessage.getName());
-        return new ServerMessage("Welcome , "+clientMessage.getName()+" !");
+        return new ServerMessageDto("Welcome , "+clientMessage.getName()+" !");
     }
 
-    @MessageMapping("/cheat")
     // 发送的订阅路径为/user/{userId}/message
-    // /user/路径是默认的一个，如果想要改变，必须在config 中setUserDestinationPrefix
-    public void cheatTo(ToUserMessage toUserMessage){
+    @MessageMapping("/cheat")
+    public void cheatTo(ToUserMessageDto toUserMessage){
         //方法用于点对点测试
         System.out.println("toUserMessage.getMessage() = " + toUserMessage.getMessage());
-        System.out.println("toUserMessage.getUserId() = " + toUserMessage.getUserId());                                        messagingTemplate.convertAndSendToUser(toUserMessage.getUserId(),"/message",toUserMessage.getMessage());
+        System.out.println("toUserMessage.getUserId() = " + toUserMessage.getUserId());
+        messagingTemplate.convertAndSendToUser(toUserMessage.getUserId(),"/message",toUserMessage.getMessage());
     }
 }

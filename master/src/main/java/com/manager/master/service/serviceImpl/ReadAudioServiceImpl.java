@@ -24,10 +24,6 @@ import java.util.*;
 @Transactional
 public class ReadAudioServiceImpl implements IReadAudioService {
 
-
-    ReadAudioOnlineUtil rao = new ReadAudioOnlineUtil();
-
-
     /**
      * 获取音频文件路径
      *
@@ -77,7 +73,7 @@ public class ReadAudioServiceImpl implements IReadAudioService {
     @Override
     public Map<String, Object> readAudio(String fileName, String path_timem, String path_models) {
         Map<String, Object> map = new HashMap<String, Object>();
-        String result = rao.getResult(fileName);
+        String result = ReadAudioOnlineUtil.getResult(fileName);
         map.put("result", result);//音频文件在线识别结果
         if (!"".equals(result)) {
             String date = FNLPUtil.getTime(result, path_timem);

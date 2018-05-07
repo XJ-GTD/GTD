@@ -4,7 +4,7 @@ package com.manager.master.dto;
  * @Author: tzx ;
  * @Date: Created in 17:52 2018/5/3
  */
-public class ServerMessage {
+public class ServerMessageDto {
     private String responseMessage;
 
     public String getResponseMessage() {
@@ -15,7 +15,7 @@ public class ServerMessage {
         this.responseMessage = responseMessage;
     }
 
-    public ServerMessage(String responseMessage) {
+    public ServerMessageDto(String responseMessage) {
         this.responseMessage = responseMessage;
     }
 }
