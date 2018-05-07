@@ -21,7 +21,7 @@ public interface ScheduleService {
      * 日程创建
      * @param
      */
-    ScheduleOutDto creatySchedule(@RequestBody ScheduleInDto inDto);
+    ScheduleOutDto createSchedule(@RequestBody ScheduleInDto inDto);
 
     /**
      * 获取上次添加日程id
@@ -33,5 +33,5 @@ public interface ScheduleService {
      * 日程关联创建（执行事件表）
      * @param
      */
-    void  creatyExecutorSchedule(@RequestBody ScheduleInDto inDto);
+    void  createExecutorSchedule(@RequestBody ScheduleInDto inDto);
 }
