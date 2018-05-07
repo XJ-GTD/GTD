@@ -1,8 +1,8 @@
 package com.manager.master.controller;
 
-import com.manager.master.bean.ClientMessage;
-import com.manager.master.bean.ServerMessage;
-import com.manager.master.bean.ToUserMessage;
+import com.manager.master.dto.ClientMessage;
+import com.manager.master.dto.ServerMessage;
+import com.manager.master.dto.ToUserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
