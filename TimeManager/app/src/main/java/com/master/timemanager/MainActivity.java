@@ -2,15 +2,20 @@ package com.master.timemanager;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.Toast;
+import com.master.json.UserInfoJson;
+import com.master.timemanager.login.LoginHtml;
 
 /**
  * create by wzy on 2018/05/02.
@@ -19,10 +24,20 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private WebSettings settings;
-    private Button btnAddCalendar;
-    private Button btnCalendar;
-    private Button btnGroup;
     private WebView webView;
+    private UserInfoJson user;
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            user = LoginHtml.jsonToJavaString(data.getString("message"));
+            Log.i("user","请求结果为--->"+ user);
+        }
+    };
+    private Runnable mRunnable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 //        btnAddCalendar = (Button) findViewById(R.id.btnAddCalendar);
 //        btnGroup = (Button) findViewById(R.id.btnGroup);
 //        btnCalendar = (Button) findViewById(R.id.btnCalendar);
+
         init();
     }
 
@@ -63,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 //                webView.loadUrl("javascript:calendarClick()");
 //            }
 //        });
+
     }
 
 
@@ -111,15 +128,42 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "输入框中输入的内容是：" + str, 0)
                         .show();
             }
-        }, "test");
 
-        webView.addJavascriptInterface(new Object() {
+            @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void loginSuccess(String accountName, String password) {
-//                LoginHtml.LoginByPost(accountName, password);
+            public void loginSuccess(final String accountName, final String password) {
+                mRunnable = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        try{
+                            Looper.prepare();
+                            String post = LoginHtml.LoginByPost(accountName, password);
+                            Message msg = new Message();
+                            Bundle data = new Bundle();
+                            data.putString("message", post);
+                            msg.setData(data);
+                            mHandler.handleMessage(msg);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                new Thread(mRunnable).start();
+                Toast.makeText(MainActivity.this, "正在登陆中..." , 0)
+                        .show();
+
             }
         }, "login");
+
     }
 
+    @Override
+    protected void onDestroy() {
+        //将线程销毁掉
+        mHandler.removeCallbacks(mRunnable);
+        super.onDestroy();
+    }
 
 }

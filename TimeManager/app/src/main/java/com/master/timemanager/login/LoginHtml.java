@@ -1,5 +1,9 @@
 package com.master.timemanager.login;
 
+import com.master.json.UserInfoJson;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -10,9 +14,9 @@ import java.net.URL;
  * create by wzy on 2018/05/03.
  * 登陆连接类
  */
-class LoginHml {
+public class LoginHtml {
 
-    public static String LOGIN_URL = "http://localhost:8080/gtd/user/login";
+    public static String LOGIN_URL = "http://192.168.99.35:8080/gtd/user/login";
 
     public static String LoginByPost(String mobile, String password) {
         String msg = "";
@@ -20,12 +24,12 @@ class LoginHml {
             URL url = new URL(LOGIN_URL);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             //设置请求方式，请示超时
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("POST");
 //            conn.setRequestProperty("Accept","*/*");
 //            conn.setRequestProperty("Cache-control","no-cacahe");
             conn.setRequestProperty("Content-Type","application/json");
-            conn.setReadTimeout(3000);
-            conn.setConnectTimeout(3000);
+            conn.setReadTimeout(30000);
+            conn.setConnectTimeout(30000);
             //设置运行输入输出
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -57,5 +61,37 @@ class LoginHml {
             e.printStackTrace();
         }
         return msg;
+    }
+
+    public static UserInfoJson jsonToJavaString(String json) {
+        UserInfoJson userInfoJson = new UserInfoJson();
+        //解析json
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+
+            //第一层解析
+            JSONObject data = jsonObject.optJSONObject("data");
+            userInfoJson.setCode(jsonObject.optString("code"));
+            userInfoJson.setMessage(jsonObject.optString("message"));
+
+            //第二层解析
+            JSONObject userinfo = data.optJSONObject("userinfo");
+            userInfoJson.setAccountId(userinfo.optInt("accountId"));
+            userInfoJson.setAccountMobile(userinfo.optString("accountMobile"));
+            userInfoJson.setAccountName(userinfo.optString("accountName"));
+            userInfoJson.setUserId(userinfo.optInt("userId"));
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //显示数据
+//        tv_native_orignal.setText(json);
+//        tv_native_last.setText(shopInfo.toString());
+
+        return userInfoJson;
     }
 }

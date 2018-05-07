@@ -28,7 +28,7 @@ body{
 }
 .wrap{
     margin: 0 auto;
-    width: 80%;
+    width: auto;
 }
 body a,form li,input[type="submit"],input[type="text"],.sixth-login input[type="submit"],.third-login input[type="submit"]{
     transition: 0.1s all;
@@ -91,7 +91,7 @@ a.social-account h3 {
 form{
     list-style: none;
     margin-bottom: 25px;
-    width: 90%;
+    width: auto;
     background: none;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {

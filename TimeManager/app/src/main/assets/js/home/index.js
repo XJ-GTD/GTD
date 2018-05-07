@@ -16,9 +16,9 @@ function addSchedule() {
 function suiji(){
     var v = document.getElementById("nm").value;
     if(v==""){
-        window.test.toast1();
+        window.login.toast1();
     }else{
-        window.test.toast2(v);
+        window.login.toast2(v);
     }
 }
 
