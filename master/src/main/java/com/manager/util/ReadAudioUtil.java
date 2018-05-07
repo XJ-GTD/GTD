@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @Author: tzx ;
  * @Date: Created in 13:54 2018/4/26
  */
-public class ReadAudio {
+public class ReadAudioUtil {
 
     private static final String APPID = "5abdfa52";
 

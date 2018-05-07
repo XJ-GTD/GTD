@@ -15,10 +15,10 @@ import java.util.Map;
  * @Author: tzx ;
  * @Date: Created in 18:29 2018/4/26
  */
-public class FNLP {
-    CWSTagger cws;
-    POSTagger tag;
-    TimeNormalizer normalizer;
+public class FNLPUtil {
+    static CWSTagger cws;
+    static POSTagger tag;
+    static TimeNormalizer normalizer;
 
     /**
      * @Title: seg
@@ -27,7 +27,7 @@ public class FNLP {
      * @return: String
      * @throws
      */
-    public String seg(String target, String path_segm){
+    public static String seg(String target, String path_segm){
         String result = "";
         try {
             cws = new CWSTagger(path_segm);
@@ -48,7 +48,7 @@ public class FNLP {
      * @return: String
      * @throws
      */
-    public String seg2Dict(String target, String path_segm, String path_dict){
+    public static String seg2Dict(String target, String path_segm, String path_dict){
         String result = "";
         try {
             cws = new CWSTagger(path_segm, new Dictionary(path_dict));
@@ -69,7 +69,7 @@ public class FNLP {
      * @return: String
      * @throws
      */
-    public String pos(String target, String path_segm, String path_posm){
+    public static String pos(String target, String path_segm, String path_posm){
         String result = "";
         try {
             cws = new CWSTagger(path_segm);
@@ -91,7 +91,7 @@ public class FNLP {
      * @return: String
      * @throws
      */
-    public String pos2Dict(String target, String path_segm, String path_posm, String path_dict){
+    public static String pos2Dict(String target, String path_segm, String path_posm, String path_dict){
         String result = "";
         try {
             //分词使用字典
@@ -116,7 +116,7 @@ public class FNLP {
      * @throws
      */
     @SuppressWarnings("static-access")
-    public Map<String, String> analytical(String result, String path_models){
+    public static Map<String, String> analytical(String result, String path_models){
         Map<String, String> map = null;
         try {
             CNFactory factory = CNFactory.getInstance(path_models);
@@ -135,7 +135,7 @@ public class FNLP {
      * @return: Map<String,Object>
      * @throws
      */
-    public String getTime(String target, String path_timem){
+    public static String getTime(String target, String path_timem){
         String result = "";
         normalizer = new TimeNormalizer(path_timem);
         normalizer.parse(target);
@@ -154,7 +154,7 @@ public class FNLP {
      * @return: String
      * @throws
      */
-    public String getTitle(String target, String path_timem){
+    public static String getTitle(String target, String path_timem){
         String result = "";
         normalizer = new TimeNormalizer(path_timem);
         normalizer.parse(target);
