@@ -48,40 +48,14 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         webView = (WebView) findViewById(R.id.tm_index);
-//        btnAddCalendar = (Button) findViewById(R.id.btnAddCalendar);
-//        btnGroup = (Button) findViewById(R.id.btnGroup);
-//        btnCalendar = (Button) findViewById(R.id.btnCalendar);
 
         init();
     }
 
     private void init() {
-
         setWebView();
-//        btnAddCalendar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //调用js方法，要以javascript:开头 方法名注意要加括号
-//                webView.loadUrl("javascript:addSchedule()");
-//            }
-//        });
-//        btnGroup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //调用js方法，要以javascript:开头 方法名注意要加括号
-//                webView.loadUrl("javascript:calendarClick()");
-//            }
-//        });
-//        btnCalendar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //调用js方法，要以javascript:开头 方法名注意要加括号
-//                webView.loadUrl("javascript:calendarClick()");
-//            }
-//        });
 
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -144,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                             data.putString("message", post);
                             msg.setData(data);
                             mHandler.handleMessage(msg);
-
+                            loginDeal();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -166,4 +140,20 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @SuppressLint("WrongConstant")
+    private void loginDeal() {
+        if (user != null && user.getCode().equals("0")) {
+            Toast.makeText(MainActivity.this, user.getMessage() , 0)
+                    .show();
+            webView.post(new Runnable() {
+                @Override
+                public void run() {
+                    webView.loadUrl("file:///android_asset/html/home/index.html");
+                }
+            });
+        } else {
+            Toast.makeText(MainActivity.this, user.getMessage() , 0)
+                    .show();
+        }
+    }
 }
