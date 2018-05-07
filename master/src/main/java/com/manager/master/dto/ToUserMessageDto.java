@@ -1,10 +1,10 @@
-package com.manager.master.bean;
+package com.manager.master.dto;
 
 /**发送给用户的消息
  * @Author: tzx ;
  * @Date: Created in 17:54 2018/5/3
  */
-public class ToUserMessage {
+public class ToUserMessageDto {
     private String userId;
     private String message;
 

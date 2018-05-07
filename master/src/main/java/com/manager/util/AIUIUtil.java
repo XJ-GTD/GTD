@@ -14,8 +14,8 @@ import java.security.MessageDigest;
  * @Author: tzx ;
  * @Date: Created in 14:49 2018/4/26
  */
-public class AIUI {
-    private static Logger logger = LoggerFactory.getLogger(AIUI.class);
+public class AIUIUtil {
+    private static Logger logger = LoggerFactory.getLogger(AIUIUtil.class);
 
     private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5",
             "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
