@@ -3,7 +3,6 @@ package com.manager.master.controller;
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
-import com.manager.master.service.GroupService;
 import com.manager.master.service.ScheduleService;
 import com.manager.util.UUIDUtil;
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +31,7 @@ public class ScheduleController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/creaty", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public BaseOutDto creaty(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
