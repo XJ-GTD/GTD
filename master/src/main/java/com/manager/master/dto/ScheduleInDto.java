@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 日程
- * creaty  zy
+ * create  zy
  */
 public class ScheduleInDto {
     private String scheduleName;         //事件名
@@ -16,7 +16,7 @@ public class ScheduleInDto {
     private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
     private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    private int GroupId;          //组群idGROUP_ID
+    private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
     private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
@@ -103,11 +103,11 @@ public class ScheduleInDto {
         this.scheduledState = scheduledState;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return GroupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         GroupId = groupId;
     }
 

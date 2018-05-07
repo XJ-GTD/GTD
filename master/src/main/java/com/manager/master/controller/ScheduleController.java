@@ -3,7 +3,9 @@ package com.manager.master.controller;
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
+import com.manager.master.service.GroupService;
 import com.manager.master.service.ScheduleService;
+import com.manager.util.UUIDUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class ScheduleController {
     private Logger logger = LogManager.getLogger(this.getClass());
     @Autowired
     ScheduleService scheduleService;
+
     /**
      * 日程创建
      * @param
@@ -34,6 +37,10 @@ public class ScheduleController {
     public BaseOutDto creaty(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, Object> data = new HashMap<>();
+        //获取群编号
+        String uuid =UUIDUtil.getUUID();
+        inDto.setGroupId(uuid);//给群组id加上关联号
+
         if(inDto.getScheduleName()==null  &&  "".equals(inDto.getScheduleName())){
             outBean.setCode("1");
             outBean.setMessage("[事件名为空]");
@@ -49,14 +56,16 @@ public class ScheduleController {
             outBean.setMessage("[发布人为空]");
             logger.info("[发布人为空！]");
         }
-        if(inDto.getGroupId()==0 ){
+        if(inDto.getGroupId()==null  &&  "".equals(inDto.getGroupId())){
             outBean.setCode("1");
             outBean.setMessage("[群组ID为空]");
             logger.info("[群组ID为空！]");
         }
-        scheduleService.createSchedule(inDto);
+//        scheduleService.createSchedule(inDto);
+
         //查询日程id
-        int  ScheduleId=scheduleService.selectScheduleId();
+//        int  ScheduleId=scheduleService.selectScheduleId();
+        int  ScheduleId=scheduleService.createSchedule(inDto);
         inDto.setScheduledId(ScheduleId);
         //添加日程关联
         scheduleService.createExecutorSchedule(inDto);
