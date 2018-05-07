@@ -1,4 +1,4 @@
-package com.manager.master.bean;
+package com.manager.master.dto;
 
 /**发送给用户的消息
  * @Author: tzx ;

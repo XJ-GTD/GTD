@@ -1,4 +1,4 @@
-package com.manager.master.bean;
+package com.manager.master.dto;
 
 /**服务器端消息
  * @Author: tzx ;
