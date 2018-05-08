@@ -109,13 +109,14 @@ public class ScheduleServiceImpl implements ScheduleService{
         //执行人为空时发布人变为执行人
         userid=inDto.getScheduleIssuer();
         scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
-        //添加群组
-        String groupId=inDto.getGroupId();
-        int userId=inDto.getScheduleIssuer();//获取用户id
-        int roleId=1;//1群主 2成员 3发布人 4执行人
-        String groupName=inDto.getScheduleName();
-        groupService.createGroup(groupId,groupName,userId, roleId);
+
         if(userMobile!=null){
+            //添加群组
+            String groupId=inDto.getGroupId();
+            int userId=inDto.getScheduleIssuer();//获取用户id
+            int roleId=1;//1群主 2成员 3发布人 4执行人
+            String groupName=inDto.getScheduleName();
+            groupService.createGroup(groupId,groupName,userId, roleId);
             //分割电话号码
             String[] mobile = userMobile.split(",");
             for (int i = 0; i < mobile.length; i++) {
