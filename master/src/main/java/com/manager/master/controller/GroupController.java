@@ -2,9 +2,7 @@ package com.manager.master.controller;
 
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.GroupDto;
-import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.GroupService;
-import com.manager.master.service.ScheduleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +29,13 @@ public class GroupController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/find", method = RequestMethod.POST)
+    @RequestMapping(value = "/find/{userId}", method = RequestMethod.GET)
     @ResponseBody
-    public BaseOutDto find(@RequestBody GroupDto inDto) {
+    public BaseOutDto find(@PathVariable int userId) {
 
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<GroupDto>> data = new HashMap<>();
-        List<GroupDto> GroupData=groupService.findGroup(inDto);
+        List<GroupDto> GroupData=groupService.findGroup(userId);
 
         data.put("Groupinfo", GroupData);
         outBean.setData(data);

@@ -28,18 +28,20 @@ public class GroupHtml extends Activity {
     }
 
     /**
-     * 查询群组请求 POST
-     * @param mobile
-     * @param password
+     * 查询群组请求 GET
+     * @param userId
      * @return
      */
-    public static String findGroup(String mobile, String password) {
-        String url = GROUP_URL + "/";
-        String data = "";
-        return HttpRequestUtil.requestPOST(url,data);
+    public static String findGroup(String userId) {
+        String url = GROUP_URL + "/find/" + userId;
+        return HttpRequestUtil.requestGET(url);
     }
 
-
+    /**
+     *
+     * @param json
+     * @return
+     */
     public static UserInfoJson jsonToUserString(String json) {
         UserInfoJson userInfoJson = new UserInfoJson();
         //解析json
