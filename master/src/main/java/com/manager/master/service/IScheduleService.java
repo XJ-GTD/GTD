@@ -10,7 +10,7 @@ import java.util.List;
  * create by zy on 2018/05/05.
  *  * 日程管理
  */
-public interface ScheduleService {
+public interface IScheduleService {
 
     /**
      * 查询个人日程信息

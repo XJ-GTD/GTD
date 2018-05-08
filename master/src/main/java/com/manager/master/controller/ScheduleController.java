@@ -3,7 +3,7 @@ package com.manager.master.controller;
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
-import com.manager.master.service.ScheduleService;
+import com.manager.master.service.IScheduleService;
 import com.manager.util.UUIDUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ import java.util.Map;
 public class ScheduleController {
     private Logger logger = LogManager.getLogger(this.getClass());
     @Autowired
-    ScheduleService scheduleService;
+    IScheduleService scheduleService;
 
     /**
      * 日程创建

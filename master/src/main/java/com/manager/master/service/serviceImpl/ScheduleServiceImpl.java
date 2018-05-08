@@ -6,7 +6,7 @@ import com.manager.master.dao.IScheduleDao;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.GroupService;
-import com.manager.master.service.ScheduleService;
+import com.manager.master.service.IScheduleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ScheduleServiceImpl implements ScheduleService{
+public class ScheduleServiceImpl implements IScheduleService {
 
     private Logger logger = LogManager.getLogger(this.getClass());
 
