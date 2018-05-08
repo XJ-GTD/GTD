@@ -25,7 +25,7 @@ public class ScheduleInDto {
 
     //执行事件表(日程关联表)
     private int scheduledId;          //执行事件IDSCHEDULE_ID
-    private String  userId;         //执行人电话（执行人id）
+    private String  userId;         //执行人电话（执行人id）  String  ,拼写字符串
     private Date ExecutorFinshDate;     //完成时间-执行事件表
     private Date ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表

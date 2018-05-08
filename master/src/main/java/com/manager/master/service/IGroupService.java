@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 组群
  */
-public interface GroupService {
+public interface IGroupService {
 
 
     /**

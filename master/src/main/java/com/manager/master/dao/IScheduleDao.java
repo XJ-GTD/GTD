@@ -14,7 +14,7 @@ import java.util.List;
  * 日程管理
  */
 @Mapper
-public interface ScheduleDao {
+public interface IScheduleDao {
 
     /**
      * 查询个人日程信息
