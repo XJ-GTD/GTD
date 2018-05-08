@@ -5,7 +5,7 @@ import com.manager.master.dao.IUserDao;
 import com.manager.master.dao.IScheduleDao;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
-import com.manager.master.service.GroupService;
+import com.manager.master.service.IGroupService;
 import com.manager.master.service.IScheduleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +34,7 @@ public class ScheduleServiceImpl implements IScheduleService {
     @Resource
     private IUserDao userDao;
     @Autowired
-    GroupService groupService;
+    IGroupService IGroupService;
     /**
      * 查询个人日程
      * @param scheduleExecutor
@@ -116,7 +116,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             int userId=inDto.getScheduleIssuer();//获取用户id
             int roleId=1;//1群主 2成员 3发布人 4执行人
             String groupName=inDto.getScheduleName();
-            groupService.createGroup(groupId,groupName,userId, roleId);
+            IGroupService.createGroup(groupId,groupName,userId, roleId);
             //分割电话号码
             String[] mobile = userMobile.split(",");
             for (int i = 0; i < mobile.length; i++) {
@@ -130,7 +130,7 @@ public class ScheduleServiceImpl implements IScheduleService {
                 userId=inDto.getScheduleIssuer();//获取用户id
                 roleId=2;
                 groupName=inDto.getScheduleName();
-                groupService.createGroup(groupId,groupName,userId, roleId);
+                IGroupService.createGroup(groupId,groupName,userId, roleId);
             }
         }
     }

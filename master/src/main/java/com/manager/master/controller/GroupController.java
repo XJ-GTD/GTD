@@ -2,7 +2,7 @@ package com.manager.master.controller;
 
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.GroupDto;
-import com.manager.master.service.GroupService;
+import com.manager.master.service.IGroupService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class GroupController {
     private Logger logger = LogManager.getLogger(this.getClass());
 
     @Autowired
-    GroupService groupService;
+    IGroupService IGroupService;
     /**
      * 组群查询
      * @param
@@ -35,7 +35,7 @@ public class GroupController {
 
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<GroupDto>> data = new HashMap<>();
-        List<GroupDto> GroupData=groupService.findGroup(userId);
+        List<GroupDto> GroupData= IGroupService.findGroup(userId);
 
         data.put("Groupinfo", GroupData);
         outBean.setData(data);
