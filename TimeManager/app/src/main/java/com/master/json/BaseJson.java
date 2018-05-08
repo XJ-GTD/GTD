@@ -1,6 +1,6 @@
 package com.master.json;
 
-public class BaseInJson {
+public class BaseJson {
     private String message;
     private String code;
 

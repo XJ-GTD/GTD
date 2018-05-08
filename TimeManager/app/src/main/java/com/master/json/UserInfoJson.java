@@ -1,6 +1,6 @@
 package com.master.json;
 
-public class UserInfoJson extends BaseInJson {
+public class UserInfoJson extends BaseJson {
 
     private int accountId;             //账户ID
     private String accountName;        //账户名
