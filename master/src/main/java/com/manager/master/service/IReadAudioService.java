@@ -13,7 +13,7 @@ public interface IReadAudioService {
      * @param request
      * @return
      */
-    public String getFilePath(HttpServletRequest request);
+    String getFilePath(HttpServletRequest request);
 
     /**
      * 语音识别+语音解析
@@ -22,6 +22,6 @@ public interface IReadAudioService {
      * @param path_models   FNLP解析模型库路径
      * @return
      */
-    public Map<String, Object> readAudio(String fileName, String path_timem, String path_models);
+    Map<String, Object> readAudio(String fileName, String path_timem, String path_models);
 
 }
