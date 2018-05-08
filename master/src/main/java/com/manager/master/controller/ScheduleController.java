@@ -93,16 +93,16 @@ public class ScheduleController {
     public BaseOutDto find(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<ScheduleOutDto>> data = new HashMap<>();
-        List<ScheduleOutDto> ScheduleData= scheduleService.findSchedule(inDto.getScheduleExecutor());
+        List<ScheduleOutDto> ScheduleDataList = scheduleService.findSchedule(inDto.getScheduleExecutor());
 
-        if(ScheduleData!=null){
-            data.put("scheduleinfo", ScheduleData);
+        if(ScheduleDataList != null){
+            data.put("scheduleInfoList", ScheduleDataList);
             outBean.setData(data);
             outBean.setCode("0");
             outBean.setMessage("[查询成功]");
             logger.info("[查询成功]"+ data);
         }else{
-            data.put("scheduleinfo", ScheduleData);
+            data.put("scheduleInfoList", ScheduleDataList);
             outBean.setData(data);
             outBean.setCode("1");
             outBean.setMessage("[查询失败]");
