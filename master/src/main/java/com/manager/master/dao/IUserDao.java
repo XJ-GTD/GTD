@@ -19,6 +19,15 @@ public interface IUserDao {
      */
     @Select("select * from GTD_USER where USER_ID = ( select USER_ID from GTD_ACCOUNT where ACCOUNT_MOBILE = #{mobile})")
     UserInfoBean findUser(@Param("mobile") String mobile);
+
+    /**
+     * 根据发布人ID查询用户号码
+     * @param userId
+     * @return
+     */
+    @Select("select ACCOUNT_MOBILE from GTD_ACCOUNT where USER_ID = #{userId}")
+    String findMobileById(@Param("userId") int userId);
+
 //    /**
 //     * 查询用户信息
 //     * @return

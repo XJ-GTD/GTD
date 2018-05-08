@@ -7,7 +7,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 
-/**
+/**配置websocket
  * @Author: tzx ;
  * @Date: Created in 18:08 2018/5/3
  */
@@ -20,7 +20,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // 允许使用socketJs方式访问，访问点为webSocketServer，允许跨域
-        // 在网页上我们就可以通过这个链接
         // http://localhost:8080/webSocketServer
         registry.addEndpoint("/webSocketServer").setAllowedOrigins("*").withSockJS();
     }
@@ -32,9 +31,9 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         // 订阅Broker名称
         registry.enableSimpleBroker("/topic","/user");
-        // 全局使用的消息前缀（客户端订阅路径上会体现出来）
+        // 全局使用的消息前缀
         registry.setApplicationDestinationPrefixes("/app");
-        // 点对点使用的订阅前缀（客户端订阅路径上会体现出来），不设置的话，默认也是/user/
+        // 点对点使用的订阅前缀，默认是/user/
         registry.setUserDestinationPrefix("/user");
 
     }

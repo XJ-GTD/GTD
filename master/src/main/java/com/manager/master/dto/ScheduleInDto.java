@@ -31,6 +31,18 @@ public class ScheduleInDto {
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
     private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
+
+
+    private String scheduleFinshDateString;//完成时间(String)
+
+    public String getScheduleFinshDateString() {
+        return scheduleFinshDateString;
+    }
+
+    public void setScheduleFinshDateString(String scheduleFinshDateString) {
+        this.scheduleFinshDateString = scheduleFinshDateString;
+    }
+
     public String getScheduleName() {
         return scheduleName;
     }

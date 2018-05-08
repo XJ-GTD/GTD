@@ -1,19 +1,22 @@
 package com.manager.master.dto;
 
+import java.util.List;
+
 /**发送给用户的消息
  * @Author: tzx ;
  * @Date: Created in 17:54 2018/5/3
  */
 public class ToUserMessageDto {
-    private String userId;
+    private List<String> users;
     private String message;
 
-    public String getUserId() {
-        return userId;
+
+    public List<String> getUsers() {
+        return users;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsers(List<String> users) {
+        this.users = users;
     }
 
     public String getMessage() {
