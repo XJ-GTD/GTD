@@ -1,9 +1,12 @@
-function calendarClick() {
-    // window.location.href = "file:///android_asset/html/home/index_calendar.html";
-
-    // document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_calendar.html" width="100%" height="100%"></object>';
+function load_group() {
+    document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_group.html" width="100%" height="100%"></object>';
 }
-
+function load_calendar() {
+    document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_calendar.html" width="100%" height="100%"></object>';
+}
+function load_add() {
+    document.getElementById("main_html").innerHTML = '<object type="text/html" data="../schedule/add_schedule.html" width="100%" height="100%"></object>';
+}
 function groupClick() {
     window.location.href = "file:///android_asset/html/home/index_group.html";
 

@@ -1,6 +1,17 @@
 package com.master.timemanager.login;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Toast;
 import com.master.json.UserInfoJson;
 import com.master.util.HttpRequestUtil;
 import org.json.JSONException;
@@ -12,13 +23,27 @@ import org.json.JSONObject;
  */
 public class LoginHtml extends Activity {
 
-    public static String LOGIN_URL = "http://192.168.99.35:8080/gtd/user/login";
+    //登陆接口路径
+    public static String LOGIN_URL = "http://192.168.99.35:8080/gtd/user";
 
-    public static String LoginByPost(String mobile, String password) {
+    /**
+     * 登陆请求 POST
+     * @param mobile
+     * @param password
+     * @return
+     */
+    public static String loginByPost(String mobile, String password) {
+        String url = LOGIN_URL + "/login";
         String data = "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
-        return HttpRequestUtil.requestPost(LOGIN_URL,data);
+        return HttpRequestUtil.requestPOST(url,data);
     }
 
+
+    /**
+     * 登陆获取用户信息json处理
+     * @param json
+     * @return
+     */
     public static UserInfoJson jsonToUserString(String json) {
         UserInfoJson userInfoJson = new UserInfoJson();
         //解析json
@@ -51,4 +76,113 @@ public class LoginHtml extends Activity {
         return userInfoJson;
     }
 
+    /* 登陆相关操作*/
+
+    private static UserInfoJson user;
+    @SuppressLint("HandlerLeak")
+    private static Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String val = data.getString("message");
+            if (!val.equals("")) {
+                user = LoginHtml.jsonToUserString(val);
+            } else {
+                user = null;
+            }
+            Log.i("user","请求结果为--->"+ user);
+        }
+    };
+    private static Runnable mRunnable;
+
+    public static void setWebView(final WebView webView, WebSettings settings, final Context context) {
+        settings = webView.getSettings();
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient() {
+            //加载进度获取title
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    //网页加载完成
+                } else {
+                    //网页加载中
+                }
+            }
+        });
+        webView.loadUrl("file:///android_asset/html/login/login.html");
+
+        /**
+         * 设置可以被js调用的方法逻辑;
+         * 添加调用接口,并给接口设置名字;
+         */
+        webView.addJavascriptInterface(new Object() {
+
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void toast1() {
+                Toast.makeText(context, "提示一下", 0).show();
+            }
+
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void toast2(String str) {
+                Toast.makeText(context, "输入框中输入的内容是：" + str, 0)
+                        .show();
+            }
+
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void loginSuccess(final String accountName, final String password) {
+                mRunnable = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        try{
+                            Looper.prepare();
+                            String post = LoginHtml.loginByPost(accountName, password);
+                            Message msg = new Message();
+                            Bundle data = new Bundle();
+                            data.putString("message", post);
+                            msg.setData(data);
+                            mHandler.handleMessage(msg);
+                            loginDeal(webView, context);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                new Thread(mRunnable).start();
+                Toast.makeText(context, "正在登陆中..." , 0)
+                        .show();
+
+            }
+        }, "login");
+
+    }
+
+    @Override
+    protected  void onDestroy() {
+        //将线程销毁掉
+        mHandler.removeCallbacks(mRunnable);
+        super.onDestroy();
+    }
+
+    @SuppressLint("WrongConstant")
+    private static void loginDeal(final WebView webView, final Context context) {
+        if (user != null && user.getCode().equals("0")) {
+            Toast.makeText(context, user.getMessage() , 0)
+                    .show();
+            webView.post(new Runnable() {
+                @Override
+                public void run() {
+                    webView.loadUrl("file:///android_asset/html/home/index.html");
+                }
+            });
+        } else {
+            Toast.makeText(context, user.getMessage() , 0)
+                    .show();
+        }
+    }
 }

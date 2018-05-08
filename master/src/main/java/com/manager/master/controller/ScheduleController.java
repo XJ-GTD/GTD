@@ -4,6 +4,7 @@ import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.ScheduleService;
+import com.manager.util.UUIDUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,21 @@ public class ScheduleController {
     private Logger logger = LogManager.getLogger(this.getClass());
     @Autowired
     ScheduleService scheduleService;
+
     /**
      * 日程创建
-     * @param
+     * @parame
      * @return
      */
-    @RequestMapping(value = "/creaty", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public BaseOutDto creaty(@RequestBody ScheduleInDto inDto) {
+    public BaseOutDto create(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, Object> data = new HashMap<>();
+        //获取群编号
+        String uuid =UUIDUtil.getUUID();
+        inDto.setGroupId(uuid);//给群组id加上关联号
+
         if(inDto.getScheduleName()==null  &&  "".equals(inDto.getScheduleName())){
             outBean.setCode("1");
             outBean.setMessage("[事件名为空]");
@@ -49,14 +55,16 @@ public class ScheduleController {
             outBean.setMessage("[发布人为空]");
             logger.info("[发布人为空！]");
         }
-        if(inDto.getGroupId()==0 ){
+        if(inDto.getGroupId()==null  &&  "".equals(inDto.getGroupId())){
             outBean.setCode("1");
             outBean.setMessage("[群组ID为空]");
             logger.info("[群组ID为空！]");
         }
-        scheduleService.createSchedule(inDto);
+//        scheduleService.createSchedule(inDto);
+
         //查询日程id
-        int  ScheduleId=scheduleService.selectScheduleId();
+//        int  ScheduleId=scheduleService.selectScheduleId();
+        int  ScheduleId=scheduleService.createSchedule(inDto);
         inDto.setScheduledId(ScheduleId);
         //添加日程关联
         scheduleService.createExecutorSchedule(inDto);
@@ -85,16 +93,16 @@ public class ScheduleController {
     public BaseOutDto find(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<ScheduleOutDto>> data = new HashMap<>();
-        List<ScheduleOutDto> ScheduleData= scheduleService.findSchedule(inDto.getScheduleExecutor());
+        List<ScheduleOutDto> ScheduleDataList = scheduleService.findSchedule(inDto.getScheduleExecutor());
 
-        if(ScheduleData!=null){
-            data.put("scheduleinfo", ScheduleData);
+        if(ScheduleDataList != null){
+            data.put("scheduleInfoList", ScheduleDataList);
             outBean.setData(data);
             outBean.setCode("0");
             outBean.setMessage("[查询成功]");
             logger.info("[查询成功]"+ data);
         }else{
-            data.put("scheduleinfo", ScheduleData);
+            data.put("scheduleInfoList", ScheduleDataList);
             outBean.setData(data);
             outBean.setCode("1");
             outBean.setMessage("[查询失败]");

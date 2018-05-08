@@ -36,7 +36,7 @@ public interface ScheduleDao {
             "#{groupId},#{scheduledMap},#{scheduledRenindDate},#{scheduledRenindRepeat},#{scheduledRenindRepeatType})")
     ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleNamwe,@Param("scheduleDetial") String scheduleDetial,@Param("scheduleIssuer") int scheduleIssuer,
                                   @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinshDate")  Date scheduleFinshDate,
-                                  @Param("scheduledEndDate")   Date scheduledEndDate,@Param("scheduledState")  String scheduledState,@Param("groupId")  int  groupId,
+                                  @Param("scheduledEndDate")   Date scheduledEndDate,@Param("scheduledState")  String scheduledState,@Param("groupId")  String  groupId,
                                   @Param("scheduledMap")  String scheduledMap,@Param("scheduledRenindDate")  String scheduledRenindDate,@Param("scheduledRenindRepeat")  String scheduledRenindRepeat,
                                   @Param("scheduledRenindRepeatType")  String  scheduledRenindRepeatType);
 

@@ -1,33 +1,30 @@
-package com.manager.master.dto;
-
-import java.util.Date;
+package com.master.json;
 
 /**
- * 日程
- * create  zy
+ * create by wzy on 2018/05/07
+ * 日程类
  */
-public class ScheduleInDto {
+public class ScheduleJson extends BaseJson {
+
     private String scheduleName;         //事件名
     private String scheduleDetial;       //事件详情
     private int scheduleIssuer;       //发布人
-    private int scheduleExecutor;       //执行人EXECUTOR
-    private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
-    private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
-    private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
+    private String scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
+    private String scheduleStartDate;     //开始时间SCHEDULE_START_DATE
+    private String scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
+    private String scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    private String GroupId;          //组群idGROUP_ID
+    private int GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
     private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
 
-
     //执行事件表(日程关联表)
     private int scheduledId;          //执行事件IDSCHEDULE_ID
-    private String  userId;         //执行人电话（执行人id）
-    private Date ExecutorFinshDate;     //完成时间-执行事件表
-    private Date ExecutorRenindDate;    //提醒时间-执行事件表
+    private String userId;         //执行人电话（执行人id）
+    private String ExecutorFinshDate;     //完成时间-执行事件表
+    private String ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
     private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
@@ -55,43 +52,35 @@ public class ScheduleInDto {
         this.scheduleIssuer = scheduleIssuer;
     }
 
-    public int getScheduleExecutor() {
-        return scheduleExecutor;
-    }
-
-    public void setScheduleExecutor(int scheduleExecutor) {
-        this.scheduleExecutor = scheduleExecutor;
-    }
-
-    public Date getScheduleCreateDate() {
+    public String getScheduleCreateDate() {
         return scheduleCreateDate;
     }
 
-    public void setScheduleCreateDate(Date scheduleCreateDate) {
+    public void setScheduleCreateDate(String scheduleCreateDate) {
         this.scheduleCreateDate = scheduleCreateDate;
     }
 
-    public Date getScheduleStartDate() {
+    public String getScheduleStartDate() {
         return scheduleStartDate;
     }
 
-    public void setScheduleStartDate(Date scheduleStartDate) {
+    public void setScheduleStartDate(String scheduleStartDate) {
         this.scheduleStartDate = scheduleStartDate;
     }
 
-    public Date getScheduleFinshDate() {
+    public String getScheduleFinshDate() {
         return scheduleFinshDate;
     }
 
-    public void setScheduleFinshDate(Date scheduleFinshDate) {
+    public void setScheduleFinshDate(String scheduleFinshDate) {
         this.scheduleFinshDate = scheduleFinshDate;
     }
 
-    public Date getScheduledEndDate() {
+    public String getScheduledEndDate() {
         return scheduledEndDate;
     }
 
-    public void setScheduledEndDate(Date scheduledEndDate) {
+    public void setScheduledEndDate(String scheduledEndDate) {
         this.scheduledEndDate = scheduledEndDate;
     }
 
@@ -103,11 +92,11 @@ public class ScheduleInDto {
         this.scheduledState = scheduledState;
     }
 
-    public String getGroupId() {
+    public int getGroupId() {
         return GroupId;
     }
 
-    public void setGroupId(String groupId) {
+    public void setGroupId(int groupId) {
         GroupId = groupId;
     }
 
@@ -151,27 +140,19 @@ public class ScheduleInDto {
         this.scheduledId = scheduledId;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public Date getExecutorFinshDate() {
+    public String getExecutorFinshDate() {
         return ExecutorFinshDate;
     }
 
-    public void setExecutorFinshDate(Date executorFinshDate) {
+    public void setExecutorFinshDate(String executorFinshDate) {
         ExecutorFinshDate = executorFinshDate;
     }
 
-    public Date getExecutorRenindDate() {
+    public String getExecutorRenindDate() {
         return ExecutorRenindDate;
     }
 
-    public void setExecutorRenindDate(Date executorRenindDate) {
+    public void setExecutorRenindDate(String executorRenindDate) {
         ExecutorRenindDate = executorRenindDate;
     }
 
@@ -189,5 +170,13 @@ public class ScheduleInDto {
 
     public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
         ExecutorRenindRepeatType = executorRenindRepeatType;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

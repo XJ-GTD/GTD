@@ -21,7 +21,7 @@ public interface ScheduleService {
      * 日程创建
      * @param
      */
-    ScheduleOutDto createSchedule(@RequestBody ScheduleInDto inDto);
+    int createSchedule(@RequestBody ScheduleInDto inDto);
 
     /**
      * 获取上次添加日程id
