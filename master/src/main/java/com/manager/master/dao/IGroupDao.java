@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 @Mapper
-public interface GroupDao {
+public interface IGroupDao {
     /**
      * 查询个人群组信息
      * @return

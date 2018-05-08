@@ -1,6 +1,6 @@
 package com.manager.master.service.serviceImpl;
 
-import com.manager.master.dao.GroupDao;
+import com.manager.master.dao.IGroupDao;
 import com.manager.master.dto.GroupDto;
 import com.manager.master.service.GroupService;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupServicelmpl implements GroupService {
 
     @Resource
-    private GroupDao groupDao;
+    private IGroupDao groupDao;
 
     @Override
     public List<GroupDto> findGroup(int userId) {

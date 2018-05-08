@@ -2,7 +2,7 @@ package com.manager.master.service.serviceImpl;
 
 import com.manager.master.bean.UserInfoBean;
 import com.manager.master.dao.IUserDao;
-import com.manager.master.dao.ScheduleDao;
+import com.manager.master.dao.IScheduleDao;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.GroupService;
@@ -30,7 +30,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     private Logger logger = LogManager.getLogger(this.getClass());
 
     @Resource
-    private ScheduleDao scheduleDao;
+    private IScheduleDao scheduleDao;
     @Resource
     private IUserDao userDao;
     @Autowired
