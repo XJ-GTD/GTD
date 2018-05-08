@@ -98,7 +98,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     public  void   createExecutorSchedule(@RequestBody ScheduleInDto inDto){
         int  userid=0;
         int scheduledId=inDto.getScheduledId();         //执行事件IDSCHEDULE_ID
-        String  userMobile=inDto.getUserMobile();         //执行人电话（执行人id）
+        String  userMobile=inDto.getUserId();         //执行人电话（执行人id）
         Date executorFinshDate=inDto.getExecutorFinshDate();     //完成时间-执行事件表
         String scheduledState=inDto.getScheduledState();//事件状态(-1 未完成 1完成)
         Date executorRenindDate=inDto.getExecutorRenindDate();    //提醒时间-执行事件表

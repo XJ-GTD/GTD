@@ -21,7 +21,7 @@ public class ReadAudioOnlineUtil {
     private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5",
             "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
-    public String getResult(String path) {
+    public static String getResult(String path) {
         String xAppid = "5acdb89c";
         long time = System.currentTimeMillis() / 1000;
         // 得到当前UTC时间戳
