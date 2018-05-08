@@ -35,9 +35,9 @@ public class GroupController {
 
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<GroupDto>> data = new HashMap<>();
-        List<GroupDto> GroupData= IGroupService.findGroup(userId);
+        List<GroupDto> GroupDataList= IGroupService.findGroup(userId);
 
-        data.put("Groupinfo", GroupData);
+        data.put("GroupInfo", GroupDataList);
         outBean.setData(data);
         outBean.setCode("0");
         outBean.setMessage("[查询成功]");

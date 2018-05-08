@@ -70,7 +70,7 @@ public class ScheduleController {
         scheduleService.createExecutorSchedule(inDto);
 
 
-        data.put("scheduleinfo", ScheduleId);
+        data.put("scheduleInfo", ScheduleId);
         outBean.setData(data);
         outBean.setCode("0");
         outBean.setMessage("[创建成功]");
