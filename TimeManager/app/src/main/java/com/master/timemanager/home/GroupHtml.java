@@ -12,19 +12,33 @@ import org.json.JSONObject;
  */
 public class GroupHtml extends Activity {
 
-    public static String GROUP_URL = "http://192.168.99.35:8080/gtd/schedul";
+    //群组相关日程接口路径
+    public static String GROUP_URL = "http://192.168.99.35:8080/gtd/group";
 
-    public static String addSchedule(String mobile, String password) {
+    /**
+     * 添加群组请求 POST
+     * @param mobile
+     * @param password
+     * @return
+     */
+    public static String addGroup(String mobile, String password) {
         String url = GROUP_URL + "/";
         String data = "";
-        return HttpRequestUtil.requestPost(url,data);
+        return HttpRequestUtil.requestPOST(url,data);
     }
 
-    public static String findSchedule(String mobile, String password) {
+    /**
+     * 查询群组请求 POST
+     * @param mobile
+     * @param password
+     * @return
+     */
+    public static String findGroup(String mobile, String password) {
         String url = GROUP_URL + "/";
         String data = "";
-        return HttpRequestUtil.requestPost(url,data);
+        return HttpRequestUtil.requestPOST(url,data);
     }
+
 
     public static UserInfoJson jsonToUserString(String json) {
         UserInfoJson userInfoJson = new UserInfoJson();

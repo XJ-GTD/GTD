@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         try{
                             Looper.prepare();
-                            String post = LoginHtml.LoginByPost(accountName, password);
+                            String post = LoginHtml.loginByPost(accountName, password);
                             Message msg = new Message();
                             Bundle data = new Bundle();
                             data.putString("message", post);

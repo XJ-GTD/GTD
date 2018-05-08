@@ -28,12 +28,12 @@ public class ScheduleController {
 
     /**
      * 日程创建
-     * @param
+     * @parame
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public BaseOutDto creaty(@RequestBody ScheduleInDto inDto) {
+    public BaseOutDto create(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, Object> data = new HashMap<>();
         //获取群编号
