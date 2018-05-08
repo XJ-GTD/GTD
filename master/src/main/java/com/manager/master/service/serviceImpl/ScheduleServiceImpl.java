@@ -111,7 +111,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
 
         if(userMobile!=null){
-            //添加群组
+            //添加群组创建人
             String groupId=inDto.getGroupId();
             int userId=inDto.getScheduleIssuer();//获取用户id
             int roleId=1;//1群主 2成员 3发布人 4执行人
