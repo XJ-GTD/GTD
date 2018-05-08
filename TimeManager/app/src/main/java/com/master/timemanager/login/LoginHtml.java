@@ -12,13 +12,27 @@ import org.json.JSONObject;
  */
 public class LoginHtml extends Activity {
 
-    public static String LOGIN_URL = "http://192.168.99.35:8080/gtd/user/login";
+    //登陆接口路径
+    public static String LOGIN_URL = "http://192.168.99.35:8080/gtd/user";
 
-    public static String LoginByPost(String mobile, String password) {
+    /**
+     * 登陆请求 POST
+     * @param mobile
+     * @param password
+     * @return
+     */
+    public static String loginByPost(String mobile, String password) {
+        String url = LOGIN_URL + "/login";
         String data = "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
-        return HttpRequestUtil.requestPost(LOGIN_URL,data);
+        return HttpRequestUtil.requestPOST(url,data);
     }
 
+
+    /**
+     * 登陆获取用户信息json处理
+     * @param json
+     * @return
+     */
     public static UserInfoJson jsonToUserString(String json) {
         UserInfoJson userInfoJson = new UserInfoJson();
         //解析json
