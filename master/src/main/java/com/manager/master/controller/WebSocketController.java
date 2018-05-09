@@ -1,6 +1,5 @@
 package com.manager.master.controller;
 
-import com.manager.master.dto.ClientMessageDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ServerMessageDto;
 import com.manager.master.dto.ToUserMessageDto;
