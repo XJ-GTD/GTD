@@ -60,6 +60,9 @@ public class CalendarHtml extends Activity {
             JSONObject data = jsonObject.optJSONObject("data");
             scheduleBase.setCode(jsonObject.optString("code"));
             scheduleBase.setMessage(jsonObject.optString("message"));
+            if (data == null) {
+                return null;
+            }
 
             //第二层解析
             JSONArray jsonArray = data.optJSONArray("scheduleInfoList");

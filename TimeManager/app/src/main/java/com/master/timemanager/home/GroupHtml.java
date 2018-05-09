@@ -1,10 +1,20 @@
 package com.master.timemanager.home;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.webkit.WebView;
+import android.widget.Toast;
+import com.master.json.BaseJson;
+import com.master.json.GroupJson;
 import com.master.json.UserInfoJson;
 import com.master.util.HttpRequestUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * create by wzy on 2018/05/07.
@@ -32,7 +42,7 @@ public class GroupHtml extends Activity {
      * @param userId
      * @return
      */
-    public static String findGroup(String userId) {
+    public static String findGroup(int userId) {
         String url = GROUP_URL + "/find/" + userId;
         return HttpRequestUtil.requestGET(url);
     }
@@ -42,32 +52,63 @@ public class GroupHtml extends Activity {
      * @param json
      * @return
      */
-    public static UserInfoJson jsonToUserString(String json) {
-        UserInfoJson userInfoJson = new UserInfoJson();
+    public static BaseJson jsonToUserString(String json) {
+        BaseJson groupBase = new BaseJson();
+        List<GroupJson> groupJsonList = new ArrayList<>();
         //解析json
         try {
             JSONObject jsonObject = new JSONObject(json);
 
             //第一层解析
             JSONObject data = jsonObject.optJSONObject("data");
-            userInfoJson.setCode(jsonObject.optString("code"));
-            userInfoJson.setMessage(jsonObject.optString("message"));
+            groupBase.setCode(jsonObject.optString("code"));
+            groupBase.setMessage(jsonObject.optString("message"));
+            if (!groupBase.getCode().equals("0")) {
+                return groupBase;
+            }
 
             //第二层解析
-            JSONObject userinfo = data.optJSONObject("");
-//            userInfoJson.setAccountId(userinfo.optInt("accountId"));
-//            userInfoJson.setAccountMobile(userinfo.optString("accountMobile"));
-//            userInfoJson.setAccountName(userinfo.optString("accountName"));
-//            userInfoJson.setUserId(userinfo.optInt("userId"));
+            JSONArray jsonArray = data.optJSONArray("groupInfoList");
+
+            //第三层解析
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject1 = jsonArray.optJSONObject(i);
+                GroupJson json1 = new GroupJson();
+                if (jsonObject1 != null) {
+
+                    json1.setGroupId(jsonObject1.optString("groupId"));
+                    json1.setGroupName(jsonObject1.optString("groupName"));
+                    json1.setRoleName(jsonObject1.optString("roleName"));
+
+                    groupJsonList.add(json1);
+                }
+            }
 
 
 
-
-        } catch (JSONException e) {
+            } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return userInfoJson;
+        return groupBase;
     }
 
+    /*================ ====== 群组相关业务 ======= ==========*/
+
+    public static void initGroup(final WebView webView, final Context context, final UserInfoJson user) {
+
+        webView.addJavascriptInterface(new Object() {
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void getGroupList() {
+                    BaseJson groupJson = GroupHtml.jsonToUserString(GroupHtml.findGroup(user.getUserId()));
+                    Toast.makeText(context, "展示" , 0).show();
+                    webView.loadUrl("javascript:groupShow(" + groupJson + ")");
+                }
+        }, "index_group");
+
+        webView.loadUrl("file:///android_asset/html/home/index.html");
+
+
+    }
 }
