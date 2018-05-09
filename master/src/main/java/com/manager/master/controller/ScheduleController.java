@@ -84,11 +84,10 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/updateSchedule", method = RequestMethod.POST)
     @ResponseBody
-    public BaseOutDto update(@RequestBody ScheduleInDto inDto) {
+    public BaseOutDto updateSchedule(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, ScheduleOutDto> data = new HashMap<>();
         inDto.setScheduledState("-1");//事件状态(-1 未完成 1完成)
-        int scheduledId=inDto.getScheduleId();
         scheduleService.updateSchedule(inDto);
 
         outBean.setData(data);
