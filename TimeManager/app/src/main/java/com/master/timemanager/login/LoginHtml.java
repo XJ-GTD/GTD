@@ -13,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 import com.master.json.UserInfoJson;
+import com.master.timemanager.home.GroupHtml;
 import com.master.util.HttpRequestUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +55,9 @@ public class LoginHtml extends Activity {
             JSONObject data = jsonObject.optJSONObject("data");
             userInfoJson.setCode(jsonObject.optString("code"));
             userInfoJson.setMessage(jsonObject.optString("message"));
+            if (!userInfoJson.getCode().equals("0")) {
+                return userInfoJson;
+            }
 
             //第二层解析
             JSONObject userinfo = data.optJSONObject("userinfo");
@@ -76,7 +80,7 @@ public class LoginHtml extends Activity {
         return userInfoJson;
     }
 
-    /* 登陆相关操作*/
+    /* ====================== 登陆相关操作 ======================*/
 
     private static UserInfoJson user;
     @SuppressLint("HandlerLeak")
@@ -86,17 +90,14 @@ public class LoginHtml extends Activity {
             super.handleMessage(msg);
             Bundle data = msg.getData();
             String val = data.getString("message");
-            if (!val.equals("")) {
-                user = LoginHtml.jsonToUserString(val);
-            } else {
-                user = null;
-            }
+            user = LoginHtml.jsonToUserString(val);
+
             Log.i("user","请求结果为--->"+ user);
         }
     };
     private static Runnable mRunnable;
 
-    public static void setWebView(final WebView webView, WebSettings settings, final Context context) {
+    public static void loginWebView(final WebView webView, WebSettings settings, final Context context) {
         settings = webView.getSettings();
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setJavaScriptEnabled(true);
@@ -118,7 +119,6 @@ public class LoginHtml extends Activity {
          * 添加调用接口,并给接口设置名字;
          */
         webView.addJavascriptInterface(new Object() {
-
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void toast1() {
@@ -158,6 +158,7 @@ public class LoginHtml extends Activity {
                         .show();
 
             }
+
         }, "login");
 
     }
@@ -172,17 +173,20 @@ public class LoginHtml extends Activity {
     @SuppressLint("WrongConstant")
     private static void loginDeal(final WebView webView, final Context context) {
         if (user != null && user.getCode().equals("0")) {
-            Toast.makeText(context, user.getMessage() , 0)
-                    .show();
             webView.post(new Runnable() {
                 @Override
                 public void run() {
-                    webView.loadUrl("file:///android_asset/html/home/index.html");
+                    Toast.makeText(context, user.getMessage() , 0).show();
+                    GroupHtml.initGroup(webView, context, user);
                 }
             });
         } else {
-            Toast.makeText(context, user.getMessage() , 0)
-                    .show();
+            webView.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, user.getMessage(), 0).show();
+                }
+                });
         }
     }
 }

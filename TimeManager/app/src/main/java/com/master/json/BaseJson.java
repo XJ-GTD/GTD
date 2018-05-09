@@ -2,6 +2,10 @@ package com.master.json;
 
 import java.util.List;
 
+/**
+ * create by wzy on 2018/05/07
+ * 基础接收类
+ */
 public class BaseJson {
     private String message;
     private String code;
