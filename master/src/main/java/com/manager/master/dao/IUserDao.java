@@ -21,7 +21,7 @@ public interface IUserDao {
     UserInfoBean findUser(@Param("mobile") String mobile);
 
     /**
-     * 根据发布人ID查询用户号码
+     * 根据用户ID查询用户号码
      * @param userId
      * @return
      */
@@ -38,7 +38,7 @@ public interface IUserDao {
      *用户登录
      * @return
      */
-    @Select("SELECT * FROM GTD_ACCOUNT t WHERE t.ACCOUNT_MOBILE = #{mobile} AND t.ACCOUNT_PASSWORD = #{password}")
+    @Select("SELECT ACCOUNT_ID,ACCOUNT_NAME,ACCOUNT_MOBILE,USER_ID FROM GTD_ACCOUNT t WHERE t.ACCOUNT_MOBILE = #{mobile} AND t.ACCOUNT_PASSWORD = #{password}")
     UserAccountBean loginUser(@Param("mobile") String mobile, @Param("password")String password);
 
 }

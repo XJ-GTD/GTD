@@ -21,4 +21,11 @@ public interface IUserService {
      * @param passWord    登录密码
      */
     UserAccountBean loginUser(String mobile, String passWord);
+
+    /**
+     * 根据用户ID查询用户号码
+     * @param userId
+     * @return
+     */
+    String findMobileById(int userId);
 }
