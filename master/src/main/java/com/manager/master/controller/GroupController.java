@@ -35,13 +35,19 @@ public class GroupController {
 
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<GroupDto>> data = new HashMap<>();
-        List<GroupDto> GroupDataList= IGroupService.findGroup(userId);
+        List<GroupDto> groupDataList= IGroupService.findGroup(userId);
 
-        data.put("groupInfoList", GroupDataList);
-        outBean.setData(data);
-        outBean.setCode("0");
-        outBean.setMessage("[查询成功]");
-        logger.info("[查询成功]"+ data);
+        if (groupDataList.size() != 0) {
+            data.put("groupInfoList", groupDataList);
+            outBean.setData(data);
+            outBean.setCode("0");
+            outBean.setMessage("[查询成功]");
+            logger.info("[查询成功]"+ data.toString());
+        } else {
+            outBean.setCode("1");
+            outBean.setMessage("[查询失败]数据库无数据");
+            logger.info("[查询失败]"+ data.toString());
+        }
 
         return outBean;
     }
