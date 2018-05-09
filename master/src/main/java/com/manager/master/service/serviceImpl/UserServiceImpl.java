@@ -42,5 +42,16 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    /**
+     * 根据用户ID查询用户号码
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public String findMobileById(int userId) {
+        return userDao.findMobileById(userId);
+    }
+
 
 }

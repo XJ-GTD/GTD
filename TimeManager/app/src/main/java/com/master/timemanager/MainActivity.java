@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        LoginHtml.setWebView(webView, settings, MainActivity.this);
+        LoginHtml.loginWebView(webView, settings, MainActivity.this);
 
     }
 

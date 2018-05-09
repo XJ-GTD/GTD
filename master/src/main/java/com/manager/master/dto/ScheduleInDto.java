@@ -33,8 +33,16 @@ public class ScheduleInDto {
 
 
 
+    private String schedulePhoneNum;//发布人电话号码
     private String scheduleFinshDateString;//完成时间(String)
 
+    public String getSchedulePhoneNum() {
+        return schedulePhoneNum;
+    }
+
+    public void setSchedulePhoneNum(String schedulePhoneNum) {
+        this.schedulePhoneNum = schedulePhoneNum;
+    }
     public String getScheduleFinshDateString() {
         return scheduleFinshDateString;
     }

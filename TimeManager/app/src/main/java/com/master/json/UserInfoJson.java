@@ -1,5 +1,9 @@
 package com.master.json;
 
+/**
+ * create by wzy on 2018/05/07
+ * 用户信息类
+ */
 public class UserInfoJson extends BaseJson {
 
     private int accountId;             //账户ID

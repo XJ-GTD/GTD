@@ -26,8 +26,6 @@ public class WebSocketServiceImpl implements IWebSocketService {
     @Autowired
     private SimpMessagingTemplate template;
 
-    @Autowired
-    private IUserDao userDao;
 
     /**
      * 广播
@@ -56,7 +54,8 @@ public class WebSocketServiceImpl implements IWebSocketService {
                 userName.add(mobile);
             }
             toUserMsg.setUsers(userName);//执行人(手机号)
-            String userMobile = userDao.findMobileById(schedule.getScheduleIssuer());//发布人手机号
+//            String userMobile = userDao.findMobileById(schedule.getScheduleIssuer());//发布人手机号
+            String userMobile = schedule.getSchedulePhoneNum();//发布人手机号
             String title = schedule.getScheduleName();//事件名
             String finshDateString = schedule.getScheduleFinshDateString();//完成时间
             toUserMsg.setMessage("用户 " + userMobile + " 给您安排了" + title + "，希望您在" + finshDateString + "之前能完成！");
