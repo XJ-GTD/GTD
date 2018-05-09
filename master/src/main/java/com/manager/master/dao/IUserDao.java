@@ -21,7 +21,7 @@ public interface IUserDao {
     UserInfoBean findUser(@Param("mobile") String mobile);
 
     /**
-     * 根据发布人ID查询用户号码
+     * 根据用户ID查询用户号码
      * @param userId
      * @return
      */
