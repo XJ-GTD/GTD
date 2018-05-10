@@ -1,11 +1,14 @@
 package com.master.timemanager.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.webkit.WebView;
+import android.widget.Toast;
 import com.master.GlobalVar;
 import com.master.json.BaseJson;
 import com.master.json.ScheduleJson;
 import com.master.json.UserInfoJson;
+import com.master.util.BasicUtil;
 import com.master.util.HttpRequestUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,10 +27,12 @@ public class ScheduleHtml {
      * 添加日程请求 POST
      * @return
      */
-    public static String addSchedule() {
+    public static String addSchedule(String scheduleName, String scheduleDetial, String scheduleStartDate, String scheduledEndDate,
+                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor, int scheduleIssuer) {
         String url = GlobalVar.SCHEDULE_ADD_URL();
-        String data = "";
-//        "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
+        String data = "{\"scheduleIssuer\":\""+ scheduleIssuer +"\", \"userId\":\""+ executor +"\", \"scheduleName\":\""+ scheduleName +"\", \"scheduleDetial\":\""+ scheduleDetial +"\"," +
+                "\"scheduleStartDate\":\""+ scheduleStartDate + "\", \"scheduledEndDate\":\"" + scheduledEndDate + "\", \"scheduledRenindDate\":\""+ scheduledRenindDate + "\"," +
+                "\"scheduledRenindRepeatType\":\""+ scheduledRenindRepeatType + "\"}";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
@@ -107,6 +112,24 @@ public class ScheduleHtml {
 
     public static void initSchedule(final WebView webView, final Context context, final UserInfoJson user) {
         webView.loadUrl("file:///android_asset/html/schedule/add_schedule.html");
+
+        webView.addJavascriptInterface(new Object() {
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void add_Schedule(String scheduleName, String scheduleDetial, String scheduleStartDate, String scheduledEndDate,
+                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor) {
+                String dataJson = addSchedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor, user.getUserId());
+                BaseJson data = BasicUtil.jsonToString(dataJson);
+                if (data.getCode().equals("0")) {
+                    Toast.makeText(context, data.getMessage() , 0).show();
+                    webView.loadUrl("file:///android_asset/html/home/index.html");
+                } else {
+                    //失败应本地存储，预留
+                    Toast.makeText(context, data.getMessage() , 0).show();
+                }
+            }
+        }, "index_schedule");
     }
+
 
 }

@@ -22,7 +22,7 @@ public class GlobalVar extends Application {
     /* ==== Controller ==== */
     private static String USER_URL = requestURL + "/user";           //用户类
     private static String GROUP_URL = requestURL + "/group";        //群组类
-    private static String SCHEDULE_URL = requestURL + "/schedul";   //日程类
+    private static String SCHEDULE_URL = requestURL + "/schedule";   //日程类
 
     /* ==== Connect ==== */
     private static String USER_LOGIN_URL = USER_URL + "/login";

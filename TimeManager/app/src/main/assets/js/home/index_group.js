@@ -36,13 +36,17 @@
 // }
 
 function init() {
-    window.index_group.getGroupList();
+    // window.index_group.getGroupList();
 }
 
 function groupShow(groupJson) {
     // var data = JSON.parse(groupJson);
     alert(groupJson.length);
     alert(groupJson[0].roleName);
+    for (var i = 1; i < groupJson.length + 1; i++) {
+
+        document.getElementById("group_name" + i).innerText = groupJson[0].groupName;
+    }
         // var data = {
         //
         // }
