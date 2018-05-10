@@ -69,6 +69,7 @@ public class GroupHtml extends Activity {
 
             //第二层解析
             JSONArray jsonArray = data.optJSONArray("groupInfoList");
+            groupBase.setJsonArray(jsonArray.toString());
 
             //第三层解析
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -84,7 +85,7 @@ public class GroupHtml extends Activity {
                 }
             }
 
-
+            groupBase.setDataList(groupJsonList);
 
             } catch (JSONException e) {
             e.printStackTrace();
@@ -97,18 +98,36 @@ public class GroupHtml extends Activity {
 
     public static void initGroup(final WebView webView, final Context context, final UserInfoJson user) {
 
+        webView.loadUrl("file:///android_asset/html/home/index.html");
+
         webView.addJavascriptInterface(new Object() {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void getGroupList() {
-                    BaseJson groupJson = GroupHtml.jsonToUserString(GroupHtml.findGroup(user.getUserId()));
-                    Toast.makeText(context, "展示" , 0).show();
-                    webView.loadUrl("javascript:groupShow(" + groupJson + ")");
-                }
+                BaseJson groupJson = GroupHtml.jsonToUserString(GroupHtml.findGroup(user.getUserId()));
+                Toast.makeText(context, "展示" , 0).show();
+                showGroupList(webView, groupJson);
+//                if (groupJson.getDataList().size() != 0) {
+//
+//                }
+            }
+
+            @android.webkit.JavascriptInterface
+            public void addSchedule() {
+                ScheduleHtml.initSchedule(webView, context, user);
+            }
+
         }, "index_group");
 
-        webView.loadUrl("file:///android_asset/html/home/index.html");
+    }
 
+    private static void showGroupList(final WebView webView, final BaseJson groupJson) {
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.loadUrl("javascript:groupShow("+ groupJson.getJsonArray() +")");
+            }
+        });
 
     }
 }

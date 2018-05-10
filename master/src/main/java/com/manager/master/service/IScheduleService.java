@@ -34,4 +34,16 @@ public interface IScheduleService {
      * @param
      */
     void  createExecutorSchedule(@RequestBody ScheduleInDto inDto);
+
+
+    /**
+     * 查询个人单条日程信息
+     * @return
+     */
+    ScheduleOutDto  findScheduleByOne(int scheduledId);
+    /**
+     * 编辑个人单条日程信息
+     * @return
+     */
+    ScheduleOutDto  updateSchedule(ScheduleInDto inDto);
 }

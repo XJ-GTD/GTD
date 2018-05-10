@@ -9,15 +9,7 @@ public class GroupDto {
     private int roleId;//角色ID 1群主 2成员 3发布人 4执行人
     private int groupNumber;//自增主键
     private String groupName;//群组名
-    private int roleName;//角色
-
-    public int getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(int roleName) {
-        this.roleName = roleName;
-    }
+    private String roleName;//角色
 
     public String getGroupId() {
         return groupId;
@@ -57,5 +49,13 @@ public class GroupDto {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

@@ -6,6 +6,7 @@ import java.util.Date;
  * creaty  zy
  */
 public class ScheduleOutDto {
+    private int scheduleId;         //事件id
     private String scheduleName;         //事件名
     private String scheduleDetial;       //事件详情
     private int scheduleIssuer;       //发布人
@@ -29,6 +30,14 @@ public class ScheduleOutDto {
     private Date ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
     private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
 
     public String getScheduleName() {
         return scheduleName;

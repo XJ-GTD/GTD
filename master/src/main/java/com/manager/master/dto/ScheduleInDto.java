@@ -7,13 +7,14 @@ import java.util.Date;
  * create  zy
  */
 public class ScheduleInDto {
+
     private String scheduleName;         //事件名
     private String scheduleDetial;       //事件详情
     private int scheduleIssuer;       //发布人
     private int scheduleExecutor;       //执行人EXECUTOR
     private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
     private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
+    private Date  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
     private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
@@ -24,7 +25,7 @@ public class ScheduleInDto {
 
 
     //执行事件表(日程关联表)
-    private int scheduledId;          //执行事件IDSCHEDULE_ID
+    private int scheduleId;          //执行事件IDSCHEDULE_ID
     private String  userId;         //执行人电话（执行人id）  String  ,拼写字符串
     private Date ExecutorFinshDate;     //完成时间-执行事件表
     private Date ExecutorRenindDate;    //提醒时间-执行事件表
@@ -35,6 +36,7 @@ public class ScheduleInDto {
 
     private String schedulePhoneNum;//发布人电话号码
     private String scheduleFinshDateString;//完成时间(String)
+
 
     public String getSchedulePhoneNum() {
         return schedulePhoneNum;
@@ -99,12 +101,12 @@ public class ScheduleInDto {
         this.scheduleStartDate = scheduleStartDate;
     }
 
-    public Date getScheduleFinshDate() {
-        return scheduleFinshDate;
+    public Date getScheduleFinishDate() {
+        return scheduleFinishDate;
     }
 
-    public void setScheduleFinshDate(Date scheduleFinshDate) {
-        this.scheduleFinshDate = scheduleFinshDate;
+    public void setScheduleFinishDate(Date scheduleFinishDate) {
+        this.scheduleFinishDate = scheduleFinishDate;
     }
 
     public Date getScheduledEndDate() {
@@ -163,12 +165,12 @@ public class ScheduleInDto {
         this.scheduledRenindRepeatType = scheduledRenindRepeatType;
     }
 
-    public int getScheduledId() {
-        return scheduledId;
+    public int getScheduleId() {
+        return scheduleId;
     }
 
-    public void setScheduledId(int scheduledId) {
-        this.scheduledId = scheduledId;
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public String getUserId() {
