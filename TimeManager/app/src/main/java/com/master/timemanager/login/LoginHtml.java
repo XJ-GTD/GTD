@@ -12,6 +12,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
+import com.master.GlobalVar;
 import com.master.json.UserInfoJson;
 import com.master.timemanager.home.GroupHtml;
 import com.master.util.HttpRequestUtil;
@@ -24,9 +25,6 @@ import org.json.JSONObject;
  */
 public class LoginHtml extends Activity {
 
-    //登陆接口路径
-    public static String LOGIN_URL = "http://192.168.99.35:8080/gtd/user";
-
     /**
      * 登陆请求 POST
      * @param mobile
@@ -34,7 +32,7 @@ public class LoginHtml extends Activity {
      * @return
      */
     public static String loginByPost(String mobile, String password) {
-        String url = LOGIN_URL + "/login";
+        String url = GlobalVar.USER_LOGIN_URL();
         String data = "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
         return HttpRequestUtil.requestPOST(url,data);
     }

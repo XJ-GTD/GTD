@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.webkit.WebView;
 import android.widget.Toast;
+import com.master.GlobalVar;
 import com.master.json.BaseJson;
 import com.master.json.GroupJson;
 import com.master.json.UserInfoJson;
@@ -22,9 +23,6 @@ import java.util.List;
  */
 public class GroupHtml extends Activity {
 
-    //群组相关日程接口路径
-    public static String GROUP_URL = "http://192.168.99.35:8080/gtd/group";
-
     /**
      * 添加群组请求 POST
      * @param mobile
@@ -32,7 +30,7 @@ public class GroupHtml extends Activity {
      * @return
      */
     public static String addGroup(String mobile, String password) {
-        String url = GROUP_URL + "/";
+        String url = GlobalVar.GROUP_ADD_URL();
         String data = "";
         return HttpRequestUtil.requestPOST(url,data);
     }
@@ -43,7 +41,7 @@ public class GroupHtml extends Activity {
      * @return
      */
     public static String findGroup(int userId) {
-        String url = GROUP_URL + "/find/" + userId;
+        String url = GlobalVar.GROUP_FIND_URL() + "/" + userId;
         return HttpRequestUtil.requestGET(url);
     }
 
@@ -52,7 +50,7 @@ public class GroupHtml extends Activity {
      * @param json
      * @return
      */
-    public static BaseJson jsonToUserString(String json) {
+    public static BaseJson jsonToGroupString(String json) {
         BaseJson groupBase = new BaseJson();
         List<GroupJson> groupJsonList = new ArrayList<>();
         //解析json
@@ -104,7 +102,7 @@ public class GroupHtml extends Activity {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void getGroupList() {
-                BaseJson groupJson = GroupHtml.jsonToUserString(GroupHtml.findGroup(user.getUserId()));
+                BaseJson groupJson = GroupHtml.jsonToGroupString(GroupHtml.findGroup(user.getUserId()));
                 Toast.makeText(context, "展示" , 0).show();
                 showGroupList(webView, groupJson);
 //                if (groupJson.getDataList().size() != 0) {
