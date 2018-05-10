@@ -145,7 +145,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             int userId=inDto.getScheduleIssuer();//获取用户id
             int roleId=1;//1群主 2成员 3发布人 4执行人
             String groupName=inDto.getScheduleName();
-            if("1".equals(inDto.getFlagCreateGroup())){
+            if("0".equals(inDto.getFlagCreateGroup())){
                 IGroupService.createGroup(groupId,groupName,userId, roleId);
             }
             //分割电话号码
@@ -162,7 +162,7 @@ public class ScheduleServiceImpl implements IScheduleService {
                 userId=userInfo.getUserId();//获取用户id
                 roleId=2;
                 groupName=inDto.getScheduleName();
-                if("1".equals(inDto.getFlagCreateGroup())) {
+                if("0".equals(inDto.getFlagCreateGroup())) {
                     IGroupService.createGroup(groupId, groupName, userId, roleId);
                 }
             }

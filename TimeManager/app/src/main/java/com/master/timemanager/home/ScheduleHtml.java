@@ -28,11 +28,12 @@ public class ScheduleHtml {
      * @return
      */
     public static String addSchedule(String scheduleName, String scheduleDetial, String scheduleStartDate, String scheduledEndDate,
-                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor, int scheduleIssuer) {
+                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor, int scheduleIssuer,
+                                     String flagCreateGroup, String flagFocus) {
         String url = GlobalVar.SCHEDULE_ADD_URL();
         String data = "{\"scheduleIssuer\":\""+ scheduleIssuer +"\", \"userId\":\""+ executor +"\", \"scheduleName\":\""+ scheduleName +"\", \"scheduleDetial\":\""+ scheduleDetial +"\"," +
                 "\"scheduleStartDate\":\""+ scheduleStartDate + "\", \"scheduledEndDate\":\"" + scheduledEndDate + "\", \"scheduledRenindDate\":\""+ scheduledRenindDate + "\"," +
-                "\"scheduledRenindRepeatType\":\""+ scheduledRenindRepeatType + "\"}";
+                "\"scheduledRenindRepeatType\":\""+ scheduledRenindRepeatType + "\",\"flagCreateGroup\":\""+ flagCreateGroup + "\",\"flagFocus\":\""+ flagFocus + "\"}";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
@@ -117,12 +118,13 @@ public class ScheduleHtml {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void add_Schedule(String scheduleName, String scheduleDetial, String scheduleStartDate, String scheduledEndDate,
-                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor) {
-                String dataJson = addSchedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor, user.getUserId());
+                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor, String flagCreateGroup,
+                                     String flagFocus) {
+                String dataJson = addSchedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus);
                 BaseJson data = BasicUtil.jsonToString(dataJson);
                 if (data.getCode().equals("0")) {
                     Toast.makeText(context, data.getMessage() , 0).show();
-                    webView.loadUrl("file:///android_asset/html/home/index.html");
+                    goBackIndex(webView);
                 } else {
                     //失败应本地存储，预留
                     Toast.makeText(context, data.getMessage() , 0).show();
@@ -131,5 +133,13 @@ public class ScheduleHtml {
         }, "index_schedule");
     }
 
+    private static void goBackIndex(final WebView webView) {
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.loadUrl("file:///android_asset/html/home/index.html");
+            }
+        });
 
+    }
 }

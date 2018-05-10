@@ -104,9 +104,11 @@ public class GroupHtml extends Activity {
             public String getGroupList() {
                 BaseJson groupJson = GroupHtml.jsonToGroupString(GroupHtml.findGroup(user.getUserId()));
                 Toast.makeText(context, "展示" , 0).show();
-                return groupJson.getJsonArray();
-//                showGroupList(webView, groupJson);
-
+                if (groupJson.getCode().equals("0")){
+                    return groupJson.getJsonArray();
+                } else {
+                    return null;
+                }
             }
 
             @android.webkit.JavascriptInterface

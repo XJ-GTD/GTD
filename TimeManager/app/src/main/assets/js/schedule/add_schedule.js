@@ -19,7 +19,14 @@ function addClick() {
 
     var executor = document.getElementById("schedule_person").value;
 
-    window.index_schedule.add_Schedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor);
+    var createGroup = document.getElementById("createGroup");
+    var groupIndex = createGroup.selectedIndex;
+    var flagFocus = createGroup.options[groupIndex].value;
+    var focus = document.getElementById("focus");
+    var focusIndex = focus.selectedIndex;
+    var flagCreateGroup =focus.options[focusIndex].value;
+
+    window.index_schedule.add_Schedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor, flagFocus, flagCreateGroup);
 }
 
 function remindDate() {

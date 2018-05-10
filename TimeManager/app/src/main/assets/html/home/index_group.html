@@ -7,27 +7,28 @@
     <link rel="stylesheet" href="../../css/index_group.css">
     <script src="../../js/home/index_group.js"></script>
 </head>
-<body onload="init()">
+<body>
     <!--<input type="text" id="nm"/>
     <button onclick="window.test.toast1()">用第一个to1</button>
     <button onclick="suiji()">随机方法</button>-->
     <script type="text/javascript">
-        // function groupShow(groupJson) {
-        var groupJson = JSON.parse(window.index_group.getGroupList());
-        alert(groupJson.length);
-        alert(groupJson.toString())
-        alert(groupJson[0].roleName);
-            document.write("<div class=\"chatrecord\">\n" +
-                "        <!--消息记录搜索栏-->\n" +
-                "        <div class=\"contact\">\n" +
-                "            <div class=\"contact-search\">\n" +
-                "                <i class=\"icon-uniE90F\"></i>\n" +
-                "                <input type=\"search\" placeholder=\"搜索\">\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "        <!--消息记录搜索栏end-->\n" +
-                "        <!--会话记录-->\n" +
-                "        <ul class=\"chatrecord-content\">");
+        var stringJson = window.index_group.getGroupList()
+        var groupJson = null;
+        if (stringJson != null) {
+            groupJson = JSON.parse(stringJson);
+        }
+
+        document.write("<div class=\"chatrecord\">\n" +
+            "        <!--消息记录搜索栏-->\n" +
+            "        <div class=\"contact\">\n" +
+            "            <div class=\"contact-search\">\n" +
+            "                <i class=\"icon-uniE90F\"></i>\n" +
+            "                <input type=\"search\" placeholder=\"搜索\">\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <!--消息记录搜索栏end-->\n" +
+            "        <!--会话记录-->\n" +
+            "        <ul class=\"chatrecord-content\">");
             if (groupJson != null) {
                 for (var i = 0; i < groupJson.length; i++) {
                     document.write("<li>\n" +
@@ -51,7 +52,6 @@
             document.write("</ul>\n" +
                 "\n" +
                 "    </div>")
-        // }
     </script>
     <!--<div class="chatrecord">-->
         <!--&lt;!&ndash;消息记录搜索栏&ndash;&gt;-->
