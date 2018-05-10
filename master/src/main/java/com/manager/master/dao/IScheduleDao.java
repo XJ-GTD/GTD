@@ -102,4 +102,12 @@ public interface IScheduleDao {
                         @Param("scheduledState") String scheduledState,@Param("GroupId") String GroupId,@Param("scheduledMap") String scheduledMap,
                         @Param("scheduledRenindDate") String scheduledRenindDate,@Param("scheduledRenindRepeat") String scheduledRenindRepeat,@Param("scheduledRenindRepeatType") String scheduledRenindRepeatType);
 
+    //DELETE FROM `gtd`.`GTD_SCHEDULE` WHERE `SCHEDULE_ID`='1133';
+    /**
+     * 删除个人日程信息
+     * @return
+     */
+    @Delete("DELETE FROM gtd.GTD_SCHEDULE WHERE `SCHEDULE_ID`=#{userId}")
+    void deleteGroup(@Param("userId") int userId);
+
 }

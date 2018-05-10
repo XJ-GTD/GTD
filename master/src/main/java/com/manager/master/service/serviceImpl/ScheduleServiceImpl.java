@@ -126,7 +126,7 @@ public class ScheduleServiceImpl implements IScheduleService {
 
                 //添加群组
                 groupId=inDto.getGroupId();
-                userId=inDto.getScheduleIssuer();//获取用户id
+                userId=userInfo.getUserId();//获取用户id
                 roleId=2;
                 groupName=inDto.getScheduleName();
                 if("1".equals(inDto.getFlagCreateGroup())) {
