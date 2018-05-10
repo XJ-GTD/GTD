@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -54,15 +57,33 @@ public class ScheduleServiceImpl implements IScheduleService {
     @Override
     public int createSchedule(@RequestBody ScheduleInDto inDto) {
         inDto.setScheduledState("-1"); //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-        inDto.setScheduleCreateDate(new Date());// new Date()为获取当前系统时间
+//        inDto.setScheduleCreateDate(new Date());// new Date()为获取当前系统时间
+        DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date scheduleStartDate=null;
+        Date scheduleFinishDate=null;
+        Date scheduledEndDate=null;
+        try {
+            if(inDto.getScheduleStartDate()!=null){
+                scheduleStartDate=df2.parse(inDto.getScheduleStartDate());// 开始时间
+            }
+            if(inDto.getScheduleFinishDate()!=null) {
+                scheduleFinishDate = df2.parse(inDto.getScheduleFinishDate());// 完成时间
+            }
+            if(inDto.getScheduledEndDate()!=null) {
+                scheduledEndDate = df2.parse(inDto.getScheduledEndDate());// 截止时间
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        String scheduleStartDate=inDto.getScheduleStartDate();// 开始时间
+//        String scheduleFinishDate = inDto.getScheduleFinishDate();// 完成时间
+//        String scheduleCreateDate=df2.format(new Date());// new Date()为获取当前系统时间new Date()
+//        String scheduledEndDate = inDto.getScheduledEndDate();// 截止时间
 
         String scheduleName=inDto.getScheduleName();//事件名称
         String scheduleDetial=inDto.getScheduleDetial();//事件详情
         int scheduleIssuer=inDto.getScheduleIssuer();//发布人id
-        Date scheduleCreateDate=inDto.getScheduleCreateDate();// 创建时间
-        Date scheduleStartDate=inDto.getScheduleStartDate();// 开始时间
-        Date scheduleFinishDate=inDto.getScheduleFinishDate();// 完成时间
-        Date scheduledEndDate=inDto.getScheduledEndDate();// 截止时间
+        Date scheduleCreateDate=new Date();// 创建时间
         String scheduledState=inDto.getScheduledState();//事件状态(-1 未完成 1完成)
         String  groupId=inDto.getGroupId();//组群id
         String scheduledMap=inDto.getScheduledMap();//位置
@@ -97,11 +118,23 @@ public class ScheduleServiceImpl implements IScheduleService {
      */
     public  void   createExecutorSchedule(@RequestBody ScheduleInDto inDto){
         int  userid=0;
+        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
         int scheduledId=inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
-        String  userMobile=inDto.getUserId();         //执行人电话（执行人id）
-        Date executorFinshDate=inDto.getExecutorFinshDate();     //完成时间-执行事件表
+        String  userMobile=inDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
+        Date executorFinshDate= null;     //完成时间-执行事件表
+        Date executorRenindDate=null;       //提醒时间-执行事件表
+        try {
+            if(inDto.getExecutorFinshDate()!=null) {
+                executorFinshDate = df2.parse(inDto.getExecutorFinshDate());//完成时间-执行事件表
+            }
+            if(inDto.getExecutorRenindDate()!=null) {
+                executorRenindDate = df2.parse(inDto.getExecutorRenindDate());    //提醒时间-执行事件表
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String scheduledState=inDto.getScheduledState();//事件状态(-1 未完成 1完成)
-        Date executorRenindDate=inDto.getExecutorRenindDate();    //提醒时间-执行事件表
         String executorRenindRepeat=inDto.getExecutorRenindRepeat();     //重复提醒-执行事件表
         String executorRenindRepeatType=inDto.getExecutorRenindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
@@ -160,15 +193,35 @@ public class ScheduleServiceImpl implements IScheduleService {
      */
     @Override
     public ScheduleOutDto updateSchedule(ScheduleInDto inDto) {
+
+        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
         int scheduledId=inDto.getScheduleId();
         String scheduleName=inDto.getScheduleName();
         String scheduleDetial=inDto.getScheduleDetial();
         int scheduleIssuer=inDto.getScheduleIssuer();
-        Date scheduleCreateDate=inDto.getScheduleCreateDate();
-        Date  scheduleStartDate=inDto.getScheduleStartDate();
+        Date scheduleCreateDate= null;
+        Date  scheduleStartDate= null;
+        Date scheduleFinshDate=null;
+        Date scheduledEndDate=null;
+        try {
+            if(inDto.getScheduleCreateDate()!=null) {
+                scheduleCreateDate = df2.parse(inDto.getScheduleCreateDate());
+            }
+            if(inDto.getScheduleStartDate()!=null) {
+                scheduleStartDate = df2.parse(inDto.getScheduleStartDate());
+            }
+            if(inDto.getScheduleFinishDate()!=null) {
+                scheduleFinshDate = df2.parse(inDto.getScheduleFinishDate());
+            }
+            if(inDto.getScheduledEndDate()!=null) {
+                scheduledEndDate = df2.parse(inDto.getScheduledEndDate());
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         Date scheduleEditDate=new Date();
-        Date scheduleFinshDate=inDto.getScheduleFinishDate();
-        Date scheduledEndDate=inDto.getScheduledEndDate();
         String scheduledState=inDto.getScheduledState();
         String GroupId=inDto.getGroupId();
         String scheduledMap=inDto.getScheduledMap();
