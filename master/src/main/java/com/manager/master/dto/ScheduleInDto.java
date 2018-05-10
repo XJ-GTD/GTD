@@ -12,23 +12,24 @@ public class ScheduleInDto {
     private String scheduleDetial;       //事件详情
     private int scheduleIssuer;       //发布人
     private int scheduleExecutor;       //执行人EXECUTOR
-    private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
-    private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    private Date  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
-    private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
+    private String scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
+    private String  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
+    private String  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
+    private String scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
     private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
-
+    private String flagCreateGroup;     //是否创建群组（0否 1是）
+    private String flagFocus;     //是否关注（0否 1是）
 
     //执行事件表(日程关联表)
     private int scheduleId;          //执行事件IDSCHEDULE_ID
     private String  userId;         //执行人电话（执行人id）  String  ,拼写字符串
-    private Date ExecutorFinshDate;     //完成时间-执行事件表
-    private Date ExecutorRenindDate;    //提醒时间-执行事件表
+    private String ExecutorFinshDate;     //完成时间-执行事件表
+    private String  ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
     private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
@@ -37,6 +38,21 @@ public class ScheduleInDto {
     private String schedulePhoneNum;//发布人电话号码
     private String scheduleFinshDateString;//完成时间(String)
 
+    public String getFlagCreateGroup() {
+        return flagCreateGroup;
+    }
+
+    public void setFlagCreateGroup(String flagCreateGroup) {
+        this.flagCreateGroup = flagCreateGroup;
+    }
+
+    public String getFlagFocus() {
+        return flagFocus;
+    }
+
+    public void setFlagFocus(String flagFocus) {
+        this.flagFocus = flagFocus;
+    }
 
     public String getSchedulePhoneNum() {
         return schedulePhoneNum;
@@ -83,38 +99,6 @@ public class ScheduleInDto {
 
     public void setScheduleExecutor(int scheduleExecutor) {
         this.scheduleExecutor = scheduleExecutor;
-    }
-
-    public Date getScheduleCreateDate() {
-        return scheduleCreateDate;
-    }
-
-    public void setScheduleCreateDate(Date scheduleCreateDate) {
-        this.scheduleCreateDate = scheduleCreateDate;
-    }
-
-    public Date getScheduleStartDate() {
-        return scheduleStartDate;
-    }
-
-    public void setScheduleStartDate(Date scheduleStartDate) {
-        this.scheduleStartDate = scheduleStartDate;
-    }
-
-    public Date getScheduleFinishDate() {
-        return scheduleFinishDate;
-    }
-
-    public void setScheduleFinishDate(Date scheduleFinishDate) {
-        this.scheduleFinishDate = scheduleFinishDate;
-    }
-
-    public Date getScheduledEndDate() {
-        return scheduledEndDate;
-    }
-
-    public void setScheduledEndDate(Date scheduledEndDate) {
-        this.scheduledEndDate = scheduledEndDate;
     }
 
     public String getScheduledState() {
@@ -181,21 +165,6 @@ public class ScheduleInDto {
         this.userId = userId;
     }
 
-    public Date getExecutorFinshDate() {
-        return ExecutorFinshDate;
-    }
-
-    public void setExecutorFinshDate(Date executorFinshDate) {
-        ExecutorFinshDate = executorFinshDate;
-    }
-
-    public Date getExecutorRenindDate() {
-        return ExecutorRenindDate;
-    }
-
-    public void setExecutorRenindDate(Date executorRenindDate) {
-        ExecutorRenindDate = executorRenindDate;
-    }
 
     public String getExecutorRenindRepeat() {
         return ExecutorRenindRepeat;
@@ -211,5 +180,53 @@ public class ScheduleInDto {
 
     public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
         ExecutorRenindRepeatType = executorRenindRepeatType;
+    }
+
+    public String getScheduleCreateDate() {
+        return scheduleCreateDate;
+    }
+
+    public void setScheduleCreateDate(String scheduleCreateDate) {
+        this.scheduleCreateDate = scheduleCreateDate;
+    }
+
+    public String getScheduleStartDate() {
+        return scheduleStartDate;
+    }
+
+    public void setScheduleStartDate(String scheduleStartDate) {
+        this.scheduleStartDate = scheduleStartDate;
+    }
+
+    public String getScheduleFinishDate() {
+        return scheduleFinishDate;
+    }
+
+    public void setScheduleFinishDate(String scheduleFinishDate) {
+        this.scheduleFinishDate = scheduleFinishDate;
+    }
+
+    public String getScheduledEndDate() {
+        return scheduledEndDate;
+    }
+
+    public void setScheduledEndDate(String scheduledEndDate) {
+        this.scheduledEndDate = scheduledEndDate;
+    }
+
+    public String getExecutorFinshDate() {
+        return ExecutorFinshDate;
+    }
+
+    public void setExecutorFinshDate(String executorFinshDate) {
+        ExecutorFinshDate = executorFinshDate;
+    }
+
+    public String getExecutorRenindDate() {
+        return ExecutorRenindDate;
+    }
+
+    public void setExecutorRenindDate(String executorRenindDate) {
+        ExecutorRenindDate = executorRenindDate;
     }
 }
