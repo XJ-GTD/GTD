@@ -106,23 +106,22 @@ public class ScheduleServiceImpl implements IScheduleService {
         String executorRenindRepeatType=inDto.getExecutorRenindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
 
-        //执行人为空时发布人变为执行人
-        userid=inDto.getScheduleIssuer();
-        scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
-
         if(userMobile!=null){
             //添加群组创建人
             String groupId=inDto.getGroupId();
             int userId=inDto.getScheduleIssuer();//获取用户id
             int roleId=1;//1群主 2成员 3发布人 4执行人
             String groupName=inDto.getScheduleName();
-            IGroupService.createGroup(groupId,groupName,userId, roleId);
+            if("1".equals(inDto.getFlagCreateGroup())){
+                IGroupService.createGroup(groupId,groupName,userId, roleId);
+            }
             //分割电话号码
             String[] mobile = userMobile.split(",");
             for (int i = 0; i < mobile.length; i++) {
                 //获取用户id
                 UserInfoBean userInfo= userDao.findUser(mobile[i]);
                 userid=userInfo.getUserId();
+                //添加执行事件表
                 scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
 
                 //添加群组
@@ -130,8 +129,14 @@ public class ScheduleServiceImpl implements IScheduleService {
                 userId=inDto.getScheduleIssuer();//获取用户id
                 roleId=2;
                 groupName=inDto.getScheduleName();
-                IGroupService.createGroup(groupId,groupName,userId, roleId);
+                if("1".equals(inDto.getFlagCreateGroup())) {
+                    IGroupService.createGroup(groupId, groupName, userId, roleId);
+                }
             }
+        }else{
+            //执行人为空时发布人变为执行人
+            userid=inDto.getScheduleIssuer();
+            scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
         }
     }
 
