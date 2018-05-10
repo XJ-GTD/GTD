@@ -77,10 +77,10 @@ public class ReadAudioServiceImpl implements IReadAudioService {
         map.put("result", result);//音频文件在线识别结果
         if (!"".equals(result)) {
             String date = FNLPUtil.getTime(result, path_timem);
-            map.put("date", date);//时间
+            map.put("scheduleFinshDateString", date);//时间
             String title = FNLPUtil.getTitle(result, path_timem);
-            map.put("title", title);//主题
-            List<String> nameList = new ArrayList<String>();
+            map.put("scheduleName", title);//日程主题
+            /*List<String> nameList = new ArrayList<String>();
             List<String> addressList = new ArrayList<String>();
             Map<String, String> names = FNLPUtil.analytical(result, path_models);//获取文本中的人名和地名
             for (Map.Entry<String, String> entry : names.entrySet()) {
@@ -92,7 +92,7 @@ public class ReadAudioServiceImpl implements IReadAudioService {
                 }
             }
             map.put("name", nameList);//人名
-            map.put("address", addressList);//地点
+            map.put("address", addressList);//地点*/
         }
         System.out.println(map);
         return map;

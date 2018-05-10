@@ -1,5 +1,6 @@
 function load_group() {
     document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_group.html" width="100%" height="100%"></object>';
+
 }
 function load_calendar() {
     document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_calendar.html" width="100%" height="100%"></object>';
@@ -15,15 +16,6 @@ function addSchedule() {
     window.location.href = "file:///android_asset/html/schedule/add_schedule.html";
 }
 
-
-function init() {
-    window.index_group.getGroupList();
-    alert("init...")
-}
-
-function groupShow(groupJson) {
-    alert("123");
-}
 /*============= ============ group相关 =========== =============*/
 function suiji(){
     var v = document.getElementById("nm").value;

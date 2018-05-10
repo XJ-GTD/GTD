@@ -10,6 +10,7 @@ public class BaseJson {
     private String message;
     private String code;
     private List<?> dataList;
+    private String jsonArray;
 
     public String getMessage() {
         return message;
@@ -33,5 +34,13 @@ public class BaseJson {
 
     public void setDataList(List<?> dataList) {
         this.dataList = dataList;
+    }
+
+    public String getJsonArray() {
+        return jsonArray;
+    }
+
+    public void setJsonArray(String jsonArray) {
+        this.jsonArray = jsonArray;
     }
 }
