@@ -1,6 +1,5 @@
 function load_group() {
     document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_group.html" width="100%" height="100%"></object>';
-
 }
 function load_calendar() {
     document.getElementById("main_html").innerHTML = '<object type="text/html" data="index_calendar.html" width="100%" height="100%"></object>';

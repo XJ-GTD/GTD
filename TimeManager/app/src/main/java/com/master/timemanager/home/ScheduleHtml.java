@@ -2,6 +2,7 @@ package com.master.timemanager.home;
 
 import android.content.Context;
 import android.webkit.WebView;
+import com.master.GlobalVar;
 import com.master.json.BaseJson;
 import com.master.json.ScheduleJson;
 import com.master.json.UserInfoJson;
@@ -15,47 +16,55 @@ import java.util.List;
 
 /**
  * create by wzy on 2018/05/09.
- * 首页添加相关业务
+ * 日程相关业务
  */
 public class ScheduleHtml {
 
-    //添加日程相关日程接口路径
-    public static String SCHEDULE_URL = "http://192.168.99.35:8080/gtd/schedul";
-
+    /**
+     * 添加日程请求 POST
+     * @return
+     */
     public static String addSchedule() {
-        String url = SCHEDULE_URL + "/create/";
+        String url = GlobalVar.SCHEDULE_ADD_URL();
         String data = "";
 //        "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
-    public static String findGroup() {
-        String url = SCHEDULE_URL + "/find";
-        return HttpRequestUtil.requestGET(url);
+    /**
+     * 查询日程请求 POST
+     * @param userid
+     * @return
+     */
+    public static String findSchedule(int userid) {
+        String url = GlobalVar.SCHEDULE_FIND_URL();
+        String data = "{\"userId\": \"" + userid + "\"}";
+        return HttpRequestUtil.requestPOST(url,data);
     }
 
     /**
-     *
+     * 接受日程list
      * @param json
      * @return
      */
-    public static BaseJson jsonToUserString(String json) {
-        BaseJson addScheduleBase = new BaseJson();
-        List<ScheduleJson> scheduleJsonList = new ArrayList<>();
+    public static BaseJson jsonToScheduleString(String json) {
+        BaseJson scheduleBase = new BaseJson();
+        List<ScheduleJson> scheduleList = new ArrayList<>();
         //解析json
         try {
             JSONObject jsonObject = new JSONObject(json);
 
+            //复杂json解析方法
             //第一层解析
             JSONObject data = jsonObject.optJSONObject("data");
-            addScheduleBase.setCode(jsonObject.optString("code"));
-            addScheduleBase.setMessage(jsonObject.optString("message"));
-            if (!addScheduleBase.getCode().equals("0")) {
-                return addScheduleBase;
+            scheduleBase.setCode(jsonObject.optString("code"));
+            scheduleBase.setMessage(jsonObject.optString("message"));
+            if (!scheduleBase.getCode().equals("0")) {
+                return scheduleBase;
             }
 
             //第二层解析
-            JSONArray jsonArray = data.optJSONArray("groupInfoList");
+            JSONArray jsonArray = data.optJSONArray("scheduleInfoList");
 
             //第三层解析
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -63,21 +72,35 @@ public class ScheduleHtml {
                 ScheduleJson json1 = new ScheduleJson();
                 if (jsonObject1 != null) {
 
-//                    json1.setGroupId(jsonObject1.optString("groupId"));
-//                    json1.setGroupName(jsonObject1.optString("groupName"));
-//                    json1.setRoleName(jsonObject1.optString("roleName"));
+                    json1.setScheduleName(jsonObject1.optString("scheduleName"));
+                    json1.setScheduledId(jsonObject1.optInt("scheduledId"));
+                    json1.setScheduleDetial(jsonObject1.optString("scheduleDetial"));
+                    json1.setScheduleIssuer(jsonObject1.optInt("scheduleIssuer"));
+                    json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
+                    json1.setScheduleStartDate(jsonObject1.optString("scheduleStartDate"));
+                    json1.setScheduleFinshDate(jsonObject1.optString("scheduleFinshDate"));
+                    json1.setScheduledEndDate(jsonObject1.optString("scheduledEndDate"));
+                    json1.setScheduledState(jsonObject1.optString("scheduledState"));
+                    json1.setGroupId(jsonObject1.optInt("GroupId"));
+                    json1.setScheduledId(jsonObject1.optInt("scheduledId"));
+                    json1.setExecutorFinshDate(jsonObject1.optString("ExecutorFinshDate"));
+                    json1.setExecutorRenindDate(jsonObject1.optString("ExecutorRenindDate"));
+                    json1.setExecutorRenindRepeat(jsonObject1.optString("ExecutorRenindRepeat"));
+                    json1.setExecutorRenindRepeatType(jsonObject1.optString("ExecutorRenindRepeatType"));
 
-                    scheduleJsonList.add(json1);
+                    scheduleList.add(json1);
                 }
+
             }
-
-
+            if (scheduleList != null && scheduleList.size() != 0) {
+                scheduleBase.setDataList(scheduleList);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return addScheduleBase;
+        return scheduleBase;
     }
 
     /*================== ======= =================*/

@@ -42,7 +42,7 @@ function init() {
 function groupShow(groupJson) {
     // var data = JSON.parse(groupJson);
     alert(groupJson.length);
-    alert(groupJson[1].roleName.value);
+    alert(groupJson[0].roleName);
         // var data = {
         //
         // }
