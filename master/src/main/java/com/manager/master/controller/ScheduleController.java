@@ -50,16 +50,16 @@ public class ScheduleController {
             outBean.setMessage("[发布人为空]");
             logger.info("[发布人为空！]");
         }
-        if(inDto.getScheduleIssuer()==0 ){
-            outBean.setCode("1");
-            outBean.setMessage("[发布人为空]");
-            logger.info("[发布人为空！]");
-        }
-        if(inDto.getGroupId()==null  &&  "".equals(inDto.getGroupId())){
-            outBean.setCode("1");
-            outBean.setMessage("[群组ID为空]");
-            logger.info("[群组ID为空！]");
-        }
+//        if(inDto.getScheduleIssuer()==0 ){
+//            outBean.setCode("1");
+//            outBean.setMessage("[发布人为空]");
+//            logger.info("[发布人为空！]");
+//        }
+//        if(inDto.getGroupId()==null  &&  "".equals(inDto.getGroupId())){
+//            outBean.setCode("1");
+//            outBean.setMessage("[群组ID为空]");
+//            logger.info("[群组ID为空！]");
+//        }
 //        scheduleService.createSchedule(inDto);
 
         //查询日程id
