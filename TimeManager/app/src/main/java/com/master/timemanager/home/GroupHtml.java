@@ -112,7 +112,7 @@ public class GroupHtml extends Activity {
             }
 
             @android.webkit.JavascriptInterface
-            public void groupScheduleDetail(final int groupId) {
+            public void groupScheduleDetail(final String groupId) {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {

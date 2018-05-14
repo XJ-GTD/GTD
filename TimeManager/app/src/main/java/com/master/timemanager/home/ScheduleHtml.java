@@ -49,14 +49,13 @@ public class ScheduleHtml {
     }
 
     /**
-     * 查询单群组日程请求 POST
+     * 查询单群组日程请求 GET
      * @param groupId
      * @return
      */
-    public static String findGroupSchedule(int groupId) {
-        String url = GlobalVar.SCHEDULE_FIND_URL();
-        String data = "{\"groupId\": \"" + groupId + "\"}";
-        return HttpRequestUtil.requestPOST(url,data);
+    public static String findGroupSchedule(String groupId) {
+        String url = GlobalVar.SCHEDULE_FIND_URL() + "/" + groupId;
+        return HttpRequestUtil.requestGET(url);
     }
 
     /**
@@ -133,7 +132,7 @@ public class ScheduleHtml {
 
     /*================== ======= =================*/
 
-    public static void groupSchedule(final WebView webView, final Context context, final UserInfoJson user, final int groupId) {
+    public static void groupSchedule(final WebView webView, final Context context, final UserInfoJson user, final String groupId) {
         webView.loadUrl("file:///android_asset/html/schedule/group_schedule.html");
 
 
@@ -154,7 +153,23 @@ public class ScheduleHtml {
             /*返回单个日程详情*/
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public String findSingleSchedule(int scheduleId) {
+            public void findSingleSchedule(int scheduleId) {
+                singleSchedule(webView, context,  user, scheduleId);
+
+            }
+        }, "schedule");
+    }
+
+    /* 单个事件详情*/
+    private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final int scheduleId) {
+        webView.loadUrl("file:///android_asset/html/schedule/scheduleDetail.html");
+
+        webView.addJavascriptInterface(new Object() {
+
+            /*返回单个日程详情*/
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public String singleScheduleDetail() {
                 String dataJson = findSchedule(scheduleId);
                 BaseJson data = BasicUtil.jsonToString(dataJson);
                 if (data.getCode().equals("0")) {
@@ -162,8 +177,10 @@ public class ScheduleHtml {
                 } else {
                     return null;
                 }
+
             }
-        }, "schedule");
+        }, "singleSchedule");
+
     }
 
     public static void addSchedule(final WebView webView, final Context context, final UserInfoJson user) {

@@ -5,9 +5,52 @@ body{
     text-align: center;
 
 }
-.tab{
+
+footer {
+    height: 5rem;
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
 
 }
-.tabview{
-
+footer ul {
+    text-align:center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 5rem;
+    width: 100%;
+    list-style-type: none;
+    margin: 0 auto;
+}
+footer li {
+    padding-top: 0.3rem;
+    width: 20%;
+    text-align: center;
+    float: left;
+}
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: #000;
+}
+.jia {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    margin-top: -2.2rem;
+    background: #fff;
+}
+p {
+    margin: 0 0 10px;
+}
+.jia img {
+    width: 4rem;
+    height: 4rem;
+    margin-top: 0.9rem;
+    transition: all 1.1s;
+}
+.faa {
+    color: #FF6FA2;
 }

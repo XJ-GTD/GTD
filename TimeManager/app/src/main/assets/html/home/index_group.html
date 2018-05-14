@@ -31,8 +31,9 @@
             "        <ul class=\"chatrecord-content\">");
             if (groupJson != null) {
                 for (var i = 0; i < groupJson.length; i++) {
+                    alert(groupJson[i].groupId );
                     document.write("<li>\n" +
-                        "                <a href=\"javascript:window.index_group.groupScheduleDetail(" + groupJson[i].groupId+ ")\">\n" +
+                        "                <a href=\"javascript:window.index_group.groupScheduleDetail(\"" + groupJson[i].groupId + "\");\">\n" +
                         "                    <div class=\"News-icon-box News-icon-box2\">\n" +
                         "                        <i class=\"icon-uniE924\"></i>\n" +
                         "                    </div>\n" +
