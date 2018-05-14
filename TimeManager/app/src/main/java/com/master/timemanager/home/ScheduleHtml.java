@@ -101,13 +101,13 @@ public class ScheduleHtml {
 
                     json1.setScheduleName(jsonObject1.optString("scheduleName"));
                     json1.setScheduledId(jsonObject1.optInt("scheduledId"));
-                    json1.setScheduleDetial(jsonObject1.optString("scheduleDetial"));
+                    json1.setScheduleDetial(jsonObject1.optString("scheduleDetail"));
                     json1.setScheduleIssuer(jsonObject1.optInt("scheduleIssuer"));
                     json1.setUserName(jsonObject1.optString("userName"));
                     json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
                     json1.setScheduleStartDate(jsonObject1.optString("scheduleStartDate"));
                     json1.setScheduleFinshDate(jsonObject1.optString("scheduleFinshDate"));
-                    json1.setScheduledEndDate(jsonObject1.optString("scheduledEndDate"));
+                    json1.setScheduledEndDate(jsonObject1.optString("scheduleEndDate"));
                     json1.setScheduledState(jsonObject1.optString("scheduledState"));
                     json1.setGroupId(jsonObject1.optInt("GroupId"));
                     json1.setScheduledId(jsonObject1.optInt("scheduledId"));

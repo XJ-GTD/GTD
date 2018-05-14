@@ -8,13 +8,13 @@ import java.util.Date;
 public class ScheduleOutDto {
     private int scheduleId;         //事件id
     private String scheduleName;         //事件名
-    private String scheduleDetial;       //事件详情
+    private String scheduleDetail;       //事件详情
     private int scheduleIssuer;       //发布人
     private int scheduleExecutor;       //执行人EXECUTOR
     private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
     private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
     private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
-    private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
+    private Date scheduleEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
@@ -56,14 +56,6 @@ public class ScheduleOutDto {
         this.scheduleName = scheduleName;
     }
 
-    public String getScheduleDetial() {
-        return scheduleDetial;
-    }
-
-    public void setScheduleDetial(String scheduleDetial) {
-        this.scheduleDetial = scheduleDetial;
-    }
-
     public int getScheduleIssuer() {
         return scheduleIssuer;
     }
@@ -102,14 +94,6 @@ public class ScheduleOutDto {
 
     public void setScheduleFinshDate(Date scheduleFinshDate) {
         this.scheduleFinshDate = scheduleFinshDate;
-    }
-
-    public Date getScheduledEndDate() {
-        return scheduledEndDate;
-    }
-
-    public void setScheduledEndDate(Date scheduledEndDate) {
-        this.scheduledEndDate = scheduledEndDate;
     }
 
     public String getScheduledState() {
@@ -199,5 +183,21 @@ public class ScheduleOutDto {
 
     public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
         ExecutorRenindRepeatType = executorRenindRepeatType;
+    }
+
+    public Date getScheduleEndDate() {
+        return scheduleEndDate;
+    }
+
+    public void setScheduleEndDate(Date scheduleEndDate) {
+        this.scheduleEndDate = scheduleEndDate;
+    }
+
+    public String getScheduleDetail() {
+        return scheduleDetail;
+    }
+
+    public void setScheduleDetail(String scheduleDetail) {
+        this.scheduleDetail = scheduleDetail;
     }
 }
