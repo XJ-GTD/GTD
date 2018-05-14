@@ -19,6 +19,8 @@ public class ScheduleJson extends BaseJson {
     private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+    private String flagCreateGroup;     //是否创建群组（1否 0是）
+    private String flagFocus;     //是否关注（1否 0是）
 
     //执行事件表(日程关联表)
     private int scheduledId;          //执行事件IDSCHEDULE_ID
@@ -178,5 +180,21 @@ public class ScheduleJson extends BaseJson {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getFlagCreateGroup() {
+        return flagCreateGroup;
+    }
+
+    public void setFlagCreateGroup(String flagCreateGroup) {
+        this.flagCreateGroup = flagCreateGroup;
+    }
+
+    public String getFlagFocus() {
+        return flagFocus;
+    }
+
+    public void setFlagFocus(String flagFocus) {
+        this.flagFocus = flagFocus;
     }
 }

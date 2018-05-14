@@ -101,18 +101,25 @@ public class GroupHtml extends Activity {
         webView.addJavascriptInterface(new Object() {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void getGroupList() {
+            public String getGroupList() {
                 BaseJson groupJson = GroupHtml.jsonToGroupString(GroupHtml.findGroup(user.getUserId()));
                 Toast.makeText(context, "展示" , 0).show();
-                showGroupList(webView, groupJson);
-//                if (groupJson.getDataList().size() != 0) {
-//
-//                }
+                if (groupJson.getCode().equals("0")){
+                    return groupJson.getJsonArray();
+                } else {
+                    return null;
+                }
             }
 
             @android.webkit.JavascriptInterface
             public void addSchedule() {
-                ScheduleHtml.initSchedule(webView, context, user);
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ScheduleHtml.initSchedule(webView, context, user);
+                    }
+                });
+
             }
 
         }, "index_group");

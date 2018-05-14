@@ -7,88 +7,130 @@
     <link rel="stylesheet" href="../../css/index_group.css">
     <script src="../../js/home/index_group.js"></script>
 </head>
-<body onload="init()">
+<body>
     <!--<input type="text" id="nm"/>
     <button onclick="window.test.toast1()">用第一个to1</button>
     <button onclick="suiji()">随机方法</button>-->
-    <div class="chatrecord">
-        <!--消息记录搜索栏-->
-        <div class="contact">
-            <div class="contact-search">
-                <i class="icon-uniE90F"></i>
-                <input type="search" placeholder="搜索">
-            </div>
-        </div>
-        <!--消息记录搜索栏end-->
-        <!--会话记录-->
-        <ul class="chatrecord-content">
-            <div id="groupList"></div>
+    <script type="text/javascript">
+        var stringJson = window.index_group.getGroupList()
+        var groupJson = null;
+        if (stringJson != null) {
+            groupJson = JSON.parse(stringJson);
+        }
 
-            <li>
-                <a href="circle.html">
-                    <div class="News-icon-box">
-                        <i class="icon-uniE901"></i>
-                    </div>
-                    <div class="chatrecord-txt">
-                        <span class="user-name">系统信息</span>
-                        <p>新版本发布通知</p>
-                    </div>
-                    <span>16:43</span>
-                </a>
-            </li>
-            <li>
-                <a href="cardexchange.html">
-                    <div class="News-icon-box News-icon-box2">
-                        <i class="icon-uniE920"></i>
-                    </div>
-                    <em class="nav-badge">1</em>
-                    <div class="chatrecord-txt">
-                        <span class="user-name">群组A</span>
-                        <p>最新消息1.。。。</p>
-                    </div>
-                    <span>16:43</span>
-                </a>
-            </li>
-            <li>
-                <a href="eventreminder.html">
-                    <div class="News-icon-box News-icon-box3">
-                        <i class="icon-uniE924"></i>
-                    </div>
-                    <div class="chatrecord-txt">
-                        <span class="user-name">群组B</span>
-                        <p>最新消息2.。。。</p>
-                    </div>
-                    <span>16:43</span>
-                </a>
-            </li>
-            <li>
-                <a href="notify.html">
-                    <div class="News-icon-box News-icon-box4">
-                        <i class="icon-13"></i>
-                    </div>
-                    <div class="chatrecord-txt">
-                        <span class="user-name">群组C</span>
-                        <p>最新消息3.。。。</p>
-                    </div>
-                    <span>16:43</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="News-icon-box News-icon-box5">
-                        <i class="icon-uniE929"></i>
-                    </div>
-                    <div class="chatrecord-txt">
-                        <span class="user-name">群组D</span>
-                        <p>最新消息4.。。</p>
-                    </div>
-                    <span>16:43</span>
-                </a>
-            </li>
+        document.write("<div class=\"chatrecord\">\n" +
+            "        <!--消息记录搜索栏-->\n" +
+            "        <div class=\"contact\">\n" +
+            "            <div class=\"contact-search\">\n" +
+            "                <i class=\"icon-uniE90F\"></i>\n" +
+            "                <input type=\"search\" placeholder=\"搜索\">\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <!--消息记录搜索栏end-->\n" +
+            "        <!--会话记录-->\n" +
+            "        <ul class=\"chatrecord-content\">");
+            if (groupJson != null) {
+                for (var i = 0; i < groupJson.length; i++) {
+                    document.write("<li>\n" +
+                        "                <a href=\"cardexchange.html\">\n" +
+                        "                    <div class=\"News-icon-box News-icon-box2\">\n" +
+                        "                        <i class=\"icon-uniE920\"></i>\n" +
+                        "                    </div>\n" +
+                        "                    <em class=\"nav-badge\">1</em>\n" +
+                        "                    <div class=\"chatrecord-txt\">\n" +
+                        "                        <span class=\"user-name\">" + groupJson[i].groupName + "</span>\n" +
+                        "                        <p>最新消息1.。。。</p>\n" +
+                        "                    </div>\n" +
+                        "                    <span>16:43</span>\n" +
+                        "                </a>\n" +
+                        "            </li>");
+                }
+            } else {
+                document.write("<span>暂无群组，去试试创建日程寻找时间之友吧</span>");
 
-        </ul>
+            }
+            document.write("</ul>\n" +
+                "\n" +
+                "    </div>")
+    </script>
+    <!--<div class="chatrecord">-->
+        <!--&lt;!&ndash;消息记录搜索栏&ndash;&gt;-->
+        <!--<div class="contact">-->
+            <!--<div class="contact-search">-->
+                <!--<i class="icon-uniE90F"></i>-->
+                <!--<input type="search" placeholder="搜索">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;消息记录搜索栏end&ndash;&gt;-->
+        <!--&lt;!&ndash;会话记录&ndash;&gt;-->
+        <!--<ul class="chatrecord-content">-->
+            <!--<div id="groupList"></div>-->
 
-    </div>
+            <!--<li>-->
+                <!--<a href="circle.html">-->
+                    <!--<div class="News-icon-box">-->
+                        <!--<i class="icon-uniE901"></i>-->
+                    <!--</div>-->
+                    <!--<div class="chatrecord-txt">-->
+                        <!--<span class="user-name">系统信息</span>-->
+                        <!--<p>新版本发布通知</p>-->
+                    <!--</div>-->
+                    <!--<span>16:43</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="cardexchange.html">-->
+                    <!--<div class="News-icon-box News-icon-box2">-->
+                        <!--<i class="icon-uniE920"></i>-->
+                    <!--</div>-->
+                    <!--<em class="nav-badge">1</em>-->
+                    <!--<div class="chatrecord-txt">-->
+                        <!--<span class="user-name" id="group_name1"></span>-->
+                        <!--<p>最新消息1.。。。</p>-->
+                    <!--</div>-->
+                    <!--<span>16:43</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="eventreminder.html">-->
+                    <!--<div class="News-icon-box News-icon-box3">-->
+                        <!--<i class="icon-uniE924"></i>-->
+                    <!--</div>-->
+                    <!--<div class="chatrecord-txt">-->
+                        <!--<span class="user-name" id="group_name2"></span>-->
+                        <!--<p>最新消息2.。。。</p>-->
+                    <!--</div>-->
+                    <!--<span>16:43</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="notify.html">-->
+                    <!--<div class="News-icon-box News-icon-box4">-->
+                        <!--<i class="icon-13"></i>-->
+                    <!--</div>-->
+                    <!--<div class="chatrecord-txt">-->
+                        <!--<span class="user-name">群组C</span>-->
+                        <!--<p>最新消息3.。。。</p>-->
+                    <!--</div>-->
+                    <!--<span>16:43</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--<div class="News-icon-box News-icon-box5">-->
+                        <!--<i class="icon-uniE929"></i>-->
+                    <!--</div>-->
+                    <!--<div class="chatrecord-txt">-->
+                        <!--<span class="user-name">群组D</span>-->
+                        <!--<p>最新消息4.。。</p>-->
+                    <!--</div>-->
+                    <!--<span>16:43</span>-->
+                <!--</a>-->
+            <!--</li>-->
+
+        <!--</ul>-->
+
+    <!--</div>-->
 
 </body>
 </html>
