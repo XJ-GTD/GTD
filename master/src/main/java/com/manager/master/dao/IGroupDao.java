@@ -10,10 +10,20 @@ public interface IGroupDao {
      * 查询个人群组信息
      * @return
      */
-    @Select("select gg.GROUP_ID,gg.USER_ID,gg.ROLE_ID,gg.GROUP_NAME,gr.ROLE_NAME from GTD_GROUP  gg " +
-            "inner join GTD_SCHEDULE gs on gs.GROUP_ID=gg.GROUP_ID " +
-            "inner join gtd_role gr on gr.ROLE_ID=gg.ROLE_ID " +
-            "where gg.USER_ID = #{userId}")
+    //<script>select * from user <if test=\"id !=null \">where id = #{id} </if></script>
+    @Select(" select  " +
+            " GG.GROUP_ID,gg.USER_ID,gg.ROLE_ID,gg.GROUP_NAME, " +
+            " gr.ROLE_NAME, " +
+            " GS.SCHEDULE_NAME,GS.SCHEDULE_CREATE_DATE " +
+            " FROM GTD_GROUP GG " +
+            " LEFT JOIN gtd_role GR ON gr.ROLE_ID=gg.ROLE_ID  " +
+            " LEFT JOIN  " +
+            " ( SELECT  " +
+            " GROUP_ID,SCHEDULE_NAME,SCHEDULE_CREATE_DATE " +
+            " FROM gtd_schedule  " +
+            " ORDER BY SCHEDULE_CREATE_DATE DESC LIMIT 0,1  ) GS  " +
+            " ON GS.GROUP_ID = GG.GROUP_ID  " +
+            " where gg.user_id = #{userId} ")
     List<GroupDto> findGroup(@Param("userId") int userId);
     /**
      * 查询个人群组信息
