@@ -16,6 +16,7 @@ import com.master.GlobalVar;
 import com.master.json.UserInfoJson;
 import com.master.timemanager.home.GroupHtml;
 import com.master.util.HttpRequestUtil;
+import com.master.util.StompUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -175,6 +176,9 @@ public class LoginHtml extends Activity {
                 @Override
                 public void run() {
                     Toast.makeText(context, user.getMessage() , 0).show();
+                    StompUtil.init(String.valueOf(user.getUserId()),context);
+                    StompUtil.registerStompTopic(context);
+                    StompUtil.registerStompByUserId(String.valueOf(user.getUserId()),context);
                     GroupHtml.initGroup(webView, context, user);
                 }
             });
