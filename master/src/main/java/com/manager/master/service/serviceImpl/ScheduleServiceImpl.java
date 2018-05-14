@@ -236,4 +236,45 @@ public class ScheduleServiceImpl implements IScheduleService {
                 scheduledRenindDate,scheduledRenindRepeat,scheduledRenindRepeatTyp);
         return null;
     }
+
+    /**
+     * 查询一个群组下的所有日程
+     *
+     * @param groupId
+     * @return
+     */
+    @Override
+    public List<ScheduleOutDto> findScheduleByGroup(String groupId) {
+        String result = "";
+        //查询群组下的日程
+        List<ScheduleOutDto> schList= scheduleDao.findScheduleByGroup(groupId);
+
+        for (ScheduleOutDto sod : schList ) {
+            List<ScheduleOutDto> sodAndUser =  scheduleDao.findScheduleAndUserName(groupId);
+            //拼接执行人姓名
+            for (ScheduleOutDto sodUser : sodAndUser) {
+                String userName = sodUser.getUserName();
+                if ("".equals(result) || result==null){
+                    result = userName;
+                }else {
+                    result = result+","+userName;
+                }
+
+            }
+            sod.setUserName(result);
+        }
+
+        return schList;
+    }
+
+    /**
+     * 查询一个群组下的所有日程（含有执行人姓名）
+     *
+     * @param groupId
+     * @return
+     */
+    @Override
+    public List<ScheduleOutDto> findScheduleAndUserName(String groupId) {
+        return scheduleDao.findScheduleAndUserName(groupId);
+    }
 }

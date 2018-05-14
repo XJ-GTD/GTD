@@ -110,4 +110,24 @@ public interface IScheduleDao {
     @Delete("DELETE FROM gtd.GTD_SCHEDULE WHERE `SCHEDULE_ID`=#{userId}")
     void deleteGroup(@Param("userId") int userId);
 
+    /**
+     * 查询一个群组下的所有日程
+     * @return
+     */
+    @Select("select * from gtd_schedule where GROUP_ID = #{groupId}" )
+    List<ScheduleOutDto> findScheduleByGroup(@Param("groupId") String groupId);
+
+    /**
+     * 查询一个群组下的所有日程(关联查询执行人姓名)
+     * @return
+     */
+    @Select(" select  " +
+            " GS.*,gu.user_name " +
+            " from gtd_schedule GS  " +
+            " LEFT JOIN GTD_EXECUTOR_SCHEDULE GES ON GS.SCHEDULE_ID = GES.SCHEDULE_ID " +
+            " LEFT JOIN GTD_USER GU ON GU.USER_ID = GES.USER_ID " +
+            " where group_id = #{groupId} "  )
+    List<ScheduleOutDto> findScheduleAndUserName(@Param("groupId") String groupId);
+
+
 }
