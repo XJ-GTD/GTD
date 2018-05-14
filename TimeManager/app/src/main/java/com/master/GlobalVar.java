@@ -17,7 +17,7 @@ public class GlobalVar extends Application {
     }
 
     /* ==== 请求地址 ==== */
-    private static String requestURL = "http://192.168.99.24:8080/gtd";
+    private static String requestURL = "http://192.168.99.31:8080/gtd";
 
     /* ==== Controller ==== */
     private static String USER_URL = requestURL + "/user";           //用户类
