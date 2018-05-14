@@ -78,6 +78,8 @@ public class GroupHtml extends Activity {
                     json1.setGroupId(jsonObject1.optString("groupId"));
                     json1.setGroupName(jsonObject1.optString("groupName"));
                     json1.setRoleName(jsonObject1.optString("roleName"));
+                    json1.setScheduleName(jsonObject1.optString("scheduleName"));
+                    json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
 
                     groupJsonList.add(json1);
                 }
@@ -112,11 +114,22 @@ public class GroupHtml extends Activity {
             }
 
             @android.webkit.JavascriptInterface
+            public void groupScheduleDetail(final String groupId) {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ScheduleHtml.groupSchedule(webView, context, user, groupId);
+                    }
+                });
+
+            }
+
+            @android.webkit.JavascriptInterface
             public void addSchedule() {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        ScheduleHtml.initSchedule(webView, context, user);
+                        ScheduleHtml.addSchedule(webView, context, user);
                     }
                 });
 

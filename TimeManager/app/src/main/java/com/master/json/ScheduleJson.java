@@ -25,6 +25,7 @@ public class ScheduleJson extends BaseJson {
     //执行事件表(日程关联表)
     private int scheduledId;          //执行事件IDSCHEDULE_ID
     private String userId;         //执行人电话（执行人id）
+    private String userName;     //执行人姓名（执行人id）
     private String ExecutorFinshDate;     //完成时间-执行事件表
     private String ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
@@ -196,5 +197,13 @@ public class ScheduleJson extends BaseJson {
 
     public void setFlagFocus(String flagFocus) {
         this.flagFocus = flagFocus;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -1,0 +1,94 @@
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-body {
+    padding: 15px;
+}
+.tabb .xx {
+    height: 6rem;
+}
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+a:focus, a:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
+a:active, a:hover {
+    outline: 0;
+}
+a {
+    background-color: transparent;
+}
+.content ul {
+    list-style-type: none;
+    padding: 0px;
+    height: 3rem;
+}
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.xx ul {
+    list-style-type: none;
+    padding: 0px;
+    height: 6rem;
+    margin-bottom: 0px;
+}
+.xx li {
+    float: left;
+    margin-right: 1rem;
+    overflow: hidden;
+}
+.xx span {
+    display: block;
+    height: 2.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.5rem;
+}
+.xx .xtx {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+img {
+    vertical-align: middle;
+    border: 0;
+}
+.content li {
+    float: left;
+    margin-right: 1rem;
+    overflow: hidden;
+}
+.content span {
+    font-size: 0.7rem;
+}
+
+
+
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}

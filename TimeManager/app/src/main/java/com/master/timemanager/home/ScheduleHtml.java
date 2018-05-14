@@ -42,10 +42,30 @@ public class ScheduleHtml {
      * @param userid
      * @return
      */
-    public static String findSchedule(int userid) {
+    public static String findAllSchedule(int userid) {
         String url = GlobalVar.SCHEDULE_FIND_URL();
         String data = "{\"userId\": \"" + userid + "\"}";
         return HttpRequestUtil.requestPOST(url,data);
+    }
+
+    /**
+     * 查询单群组日程请求 GET
+     * @param groupId
+     * @return
+     */
+    public static String findGroupSchedule(String groupId) {
+        String url = GlobalVar.SCHEDULE_FIND_URL() + "/" + groupId;
+        return HttpRequestUtil.requestGET(url);
+    }
+
+    /**
+     * 查询单日程请求 GET
+     * @param scheduleId
+     * @return
+     */
+    public static String findSchedule(int scheduleId) {
+        String url = GlobalVar.SCHEDULE_SINGLE_FIND_URL() + "/" + scheduleId;
+        return HttpRequestUtil.requestGET(url);
     }
 
     /**
@@ -82,6 +102,7 @@ public class ScheduleHtml {
                     json1.setScheduledId(jsonObject1.optInt("scheduledId"));
                     json1.setScheduleDetial(jsonObject1.optString("scheduleDetial"));
                     json1.setScheduleIssuer(jsonObject1.optInt("scheduleIssuer"));
+                    json1.setUserName(jsonObject1.optString("scheduleExecutor"));
                     json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
                     json1.setScheduleStartDate(jsonObject1.optString("scheduleStartDate"));
                     json1.setScheduleFinshDate(jsonObject1.optString("scheduleFinshDate"));
@@ -111,7 +132,58 @@ public class ScheduleHtml {
 
     /*================== ======= =================*/
 
-    public static void initSchedule(final WebView webView, final Context context, final UserInfoJson user) {
+    public static void groupSchedule(final WebView webView, final Context context, final UserInfoJson user, final String groupId) {
+        webView.loadUrl("file:///android_asset/html/schedule/group_schedule.html");
+
+
+        webView.addJavascriptInterface(new Object() {
+            /*返回单个群组的日程列表*/
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public String groupDetail() {
+                String dataJson = findGroupSchedule(groupId);
+                BaseJson data = BasicUtil.jsonToString(dataJson);
+                if (data.getCode().equals("0")) {
+                    return data.getJsonArray();
+                } else {
+                    return null;
+                }
+            }
+
+            /*返回单个日程详情*/
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void findSingleSchedule(int scheduleId) {
+                singleSchedule(webView, context,  user, scheduleId);
+
+            }
+        }, "schedule");
+    }
+
+    /* 单个事件详情*/
+    private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final int scheduleId) {
+        webView.loadUrl("file:///android_asset/html/schedule/scheduleDetail.html");
+
+        webView.addJavascriptInterface(new Object() {
+
+            /*返回单个日程详情*/
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public String singleScheduleDetail() {
+                String dataJson = findSchedule(scheduleId);
+                BaseJson data = BasicUtil.jsonToString(dataJson);
+                if (data.getCode().equals("0")) {
+                    return data.getJsonArray();
+                } else {
+                    return null;
+                }
+
+            }
+        }, "singleSchedule");
+
+    }
+
+    public static void addSchedule(final WebView webView, final Context context, final UserInfoJson user) {
         webView.loadUrl("file:///android_asset/html/schedule/add_schedule.html");
 
         webView.addJavascriptInterface(new Object() {
