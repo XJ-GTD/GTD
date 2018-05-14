@@ -155,4 +155,33 @@ public class ScheduleController {
 
         return outBean;
     }
+    /**
+     * 一个群组下的所有日程查询
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/findSchByGroup/{groupId}", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseOutDto findScheduleByGroupId(@PathVariable String groupId) {
+        BaseOutDto outBean = new BaseOutDto();
+        Map<String, List<ScheduleOutDto>> data = new HashMap<>();
+        List<ScheduleOutDto> ScheduleDataList = scheduleService.findScheduleByGroup(groupId);
+
+        if(ScheduleDataList != null){
+            data.put("ScheduleInfoList", ScheduleDataList);
+            outBean.setData(data);
+            outBean.setCode("0");
+            outBean.setMessage("[查询成功]");
+            logger.info("[查询成功]"+ data);
+        }else{
+            data.put("ScheduleInfoList", ScheduleDataList);
+            outBean.setData(data);
+            outBean.setCode("1");
+            outBean.setMessage("[查询失败]");
+            logger.info("[查询失败]" + data);
+        }
+
+        return outBean;
+    }
+
 }

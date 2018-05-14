@@ -46,4 +46,16 @@ public interface IScheduleService {
      * @return
      */
     ScheduleOutDto  updateSchedule(ScheduleInDto inDto);
+
+    /**
+     * 查询一个群组下的所有日程
+     * @return
+     */
+    List<ScheduleOutDto>  findScheduleByGroup(String groupId);
+
+    /**
+     * 查询一个群组下的所有日程（含有执行人姓名）
+     * @return
+     */
+    List<ScheduleOutDto>  findScheduleAndUserName(String groupId);
 }

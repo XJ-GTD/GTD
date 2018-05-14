@@ -16,7 +16,7 @@ public class ScheduleOutDto {
     private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
     private Date scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    private int GroupId;          //组群idGROUP_ID
+    private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
     private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
@@ -29,6 +29,16 @@ public class ScheduleOutDto {
     private Date ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
     private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+    //用户表
+    private String userName;//执行人姓名（用户表里的用户名）
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public int getScheduleId() {
         return scheduleId;
@@ -110,11 +120,11 @@ public class ScheduleOutDto {
         this.scheduledState = scheduledState;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return GroupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         GroupId = groupId;
     }
 

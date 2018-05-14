@@ -17,6 +17,7 @@ public class GroupServicelmpl implements IGroupService {
 
     @Override
     public List<GroupDto> findGroup(int userId) {
+
         return groupDao.findGroup(userId);
     }
 
