@@ -9,6 +9,7 @@ import com.master.GlobalVar;
 import com.master.json.BaseJson;
 import com.master.json.GroupJson;
 import com.master.json.UserInfoJson;
+import com.master.util.AudioRecordUtil;
 import com.master.util.HttpRequestUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -130,6 +131,30 @@ public class GroupHtml extends Activity {
                     @Override
                     public void run() {
                         ScheduleHtml.addSchedule(webView, context, user);
+                    }
+                });
+
+            }
+
+            @android.webkit.JavascriptInterface
+            public void recordStart() {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AudioRecordUtil recordUtil=AudioRecordUtil.getInstance();
+                        recordUtil.startRecordAndFile();
+                    }
+                });
+
+            }
+
+            @android.webkit.JavascriptInterface
+            public void recordEnd() {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AudioRecordUtil recordUtil=AudioRecordUtil.getInstance();
+                        recordUtil.stopRecordAndFile(context);
                     }
                 });
 
