@@ -10,6 +10,7 @@ public class GroupJson {
     private String roleName;//角色ID 1群主 2成员 3发布人 4执行人
     private String groupName;//群组名
 
+
     public String getGroupId() {
         return groupId;
     }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>群组详情</title>
+    <link rel="stylesheet" href="../../css/group_schedule.css">
+</head>
+<body>
+<div>
+    <script type="text/javascript">
+        var dataList = window.schedule.groupDetail();
+        var scheduleList = null;
+        if (dataList != null) {
+            scheduleList = JSON.parse(dataList);
+        }
+        
+        if (scheduleList != null) {
+            for (var i = 0; i < dataList.length; i++) {
+
+                document.write("<div class=\"panel\" style=\"margin-bottom: 0.2rem;\">\n" +
+                    "<div class=\"panel-body\" style=\"margin-bottom: 0px;\">\n" +
+                    "   <div class=\"xx\">\n" +
+                    "      <a href=\"javascript:window.schedule.findSingleSchedule(" + scheduleList[i].scheduleId + ")\">\n" +
+                    "         <ul>\n" +
+                    "           <li>\n" +
+                    "             <img src=\"../../images/abig.png\" class=\"xtx\">\n" +
+                    "           </li>\n" +
+                    "           <li style=\"margin-right: 0px; width: 70%;\">\n" +
+                    "              <span style=\"margin-top: 1rem;\">" + scheduleList[i].scheduleName + "</span>\n" +
+                    "              <span>执行人：" + scheduleList[i].scheduleExecutor + "</span>\n" +
+                    "           </li>\n" +
+                    "           <li class=\"clear\"></li>\n" +
+                    "         </ul>\n" +
+                    "      </a>\n" +
+                    "    </div>\n" +
+                    "  </div>\n" +
+                    "</div>")
+
+            }
+        } else {
+            document.write("<div>暂无日程，请为执行者安排日程吧</div>")
+        }
+
+
+
+    </script>
+</div>
+</body>
+</html>

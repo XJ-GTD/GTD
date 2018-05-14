@@ -12,7 +12,7 @@
     <button onclick="window.test.toast1()">用第一个to1</button>
     <button onclick="suiji()">随机方法</button>-->
     <script type="text/javascript">
-        var stringJson = window.index_group.getGroupList()
+        var stringJson = window.index_group.getGroupList();
         var groupJson = null;
         if (stringJson != null) {
             groupJson = JSON.parse(stringJson);
@@ -32,14 +32,14 @@
             if (groupJson != null) {
                 for (var i = 0; i < groupJson.length; i++) {
                     document.write("<li>\n" +
-                        "                <a href=\"cardexchange.html\">\n" +
+                        "                <a href=\"javascript:window.index_group.groupScheduleDetail(" + groupJson[i].groupId+ ")\">\n" +
                         "                    <div class=\"News-icon-box News-icon-box2\">\n" +
-                        "                        <i class=\"icon-uniE920\"></i>\n" +
+                        "                        <i class=\"icon-uniE924\"></i>\n" +
                         "                    </div>\n" +
                         "                    <em class=\"nav-badge\">1</em>\n" +
                         "                    <div class=\"chatrecord-txt\">\n" +
                         "                        <span class=\"user-name\">" + groupJson[i].groupName + "</span>\n" +
-                        "                        <p>最新消息1.。。。</p>\n" +
+                        "                        <p>" + groupJson[i].groupName + "</p>\n" +
                         "                    </div>\n" +
                         "                    <span>16:43</span>\n" +
                         "                </a>\n" +

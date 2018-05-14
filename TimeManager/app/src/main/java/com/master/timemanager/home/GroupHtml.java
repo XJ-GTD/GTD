@@ -112,11 +112,22 @@ public class GroupHtml extends Activity {
             }
 
             @android.webkit.JavascriptInterface
+            public void groupScheduleDetail(final int groupId) {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ScheduleHtml.groupSchedule(webView, context, user, groupId);
+                    }
+                });
+
+            }
+
+            @android.webkit.JavascriptInterface
             public void addSchedule() {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        ScheduleHtml.initSchedule(webView, context, user);
+                        ScheduleHtml.addSchedule(webView, context, user);
                     }
                 });
 
