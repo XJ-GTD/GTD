@@ -102,7 +102,7 @@ public class AudioRecordUtil {
     public void uploadFile(final Context context)
     {
         //服务器端地址
-        String url = "http://192.168.99.31:8080/SpeekDemo/UploadFileServlet";
+        String url = "http://192.168.99.31:8080/gtd/readAudio/read";
         //手机端要上传的文件，首先要保存你手机上存在该文件
         String filePath = AudioFileFunc.getWavFilePath();
 
@@ -147,15 +147,31 @@ public class AudioRecordUtil {
                         try {
                             String result = new String(responseBody,"utf-8");
                             JSONObject json =new JSONObject(result);
-                            String[] strs =new String[4];
+                            String[] strs =new String[2];
 //                            strs[0] = json.getString("result");
                             JSONObject res=json.getJSONObject("data");
-                            strs[0] = res.getString("title");
-                            strs[1] ="日期:" +res.getString("date");
-                            strs[2] ="地址:" +res.getString("address");
-                            strs[3] = "参与人:" +res.getString("name");
+                            if(res.getString("scheduleName")!=""||res.getString("scheduleName")!=null){
+                                strs[0] = res.getString("scheduleName");
+                            }
+                            if(res.getString("scheduleFinshDateString")!=""||res.getString("scheduleFinshDateString")!=null){
+                                strs[1] = "日期:" +res.getString("scheduleFinshDateString");
+                            }
+//                            if(res.getString("address")!=""||res.getString("address")!=null){
+//                                strs[2] = "地址:" +res.getString("address");
+//                            }
+//                            if(res.getString("name")!=""||res.getString("name")!=null){
+//                                strs[3] = "参与人:" +res.getString("name");
+//                            }
+//                            strs[1] ="日期:" +res.getString("scheduleFinshDateString");
+//
+//                            strs[2] ="地址:" +res.getString("address");
+//
+//                            strs[3] = "参与人:" +res.getString("name");
                             showExitDialog(strs,context);
-                            String speektext = "您的日程为"+res.getString("result");
+                            String speektext="";
+                            if(res.getString("result")!=""||res.getString("result")!=null) {
+                                speektext = "您的日程为"+res.getString("result");
+                            }
                             speekText(speektext,context);
                         } catch (Exception e) {
                             // TODO Auto-generated catch block
