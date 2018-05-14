@@ -54,7 +54,7 @@ public class ScheduleHtml {
      * @return
      */
     public static String findGroupSchedule(String groupId) {
-        String url = GlobalVar.SCHEDULE_FIND_URL() + "/" + groupId;
+        String url = GlobalVar.SCHEDULE_GROUP_URL() + "/" + groupId;
         return HttpRequestUtil.requestGET(url);
     }
 
@@ -91,6 +91,7 @@ public class ScheduleHtml {
 
             //第二层解析
             JSONArray jsonArray = data.optJSONArray("scheduleInfoList");
+            scheduleBase.setJsonArray(jsonArray.toString());
 
             //第三层解析
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -102,7 +103,7 @@ public class ScheduleHtml {
                     json1.setScheduledId(jsonObject1.optInt("scheduledId"));
                     json1.setScheduleDetial(jsonObject1.optString("scheduleDetial"));
                     json1.setScheduleIssuer(jsonObject1.optInt("scheduleIssuer"));
-                    json1.setUserName(jsonObject1.optString("scheduleExecutor"));
+                    json1.setUserName(jsonObject1.optString("userName"));
                     json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
                     json1.setScheduleStartDate(jsonObject1.optString("scheduleStartDate"));
                     json1.setScheduleFinshDate(jsonObject1.optString("scheduleFinshDate"));
@@ -142,7 +143,7 @@ public class ScheduleHtml {
             @android.webkit.JavascriptInterface
             public String groupDetail() {
                 String dataJson = findGroupSchedule(groupId);
-                BaseJson data = BasicUtil.jsonToString(dataJson);
+                BaseJson data = jsonToScheduleString(dataJson);
                 if (data.getCode().equals("0")) {
                     return data.getJsonArray();
                 } else {

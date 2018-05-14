@@ -47,7 +47,7 @@ public class ReadAudioServiceImpl implements IReadAudioService {
                 //一次遍历所有文件
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
                 if (file != null) {
-                    path = "D:/" + file.getOriginalFilename();
+                    path = "C:/SOUND/" + file.getOriginalFilename();
                     //上传
                     try {
                         file.transferTo(new File(path));
