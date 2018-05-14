@@ -1,4 +1,7 @@
 package com.manager.master.dto;
+
+import java.util.Date;
+
 /**
  * 群组
  * create  zy
@@ -10,6 +13,8 @@ public class GroupDto {
     private int groupNumber;//自增主键
     private String groupName;//群组名
     private String roleName;//角色
+    private String scheduleName;//事件名
+    private Date scheduleCreateDate;//创建时间
 
     public String getGroupId() {
         return groupId;
@@ -57,5 +62,21 @@ public class GroupDto {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getScheduleName() {
+        return scheduleName;
+    }
+
+    public void setScheduleName(String scheduleName) {
+        this.scheduleName = scheduleName;
+    }
+
+    public Date getScheduleCreateDate() {
+        return scheduleCreateDate;
+    }
+
+    public void setScheduleCreateDate(Date scheduleCreateDate) {
+        this.scheduleCreateDate = scheduleCreateDate;
     }
 }
