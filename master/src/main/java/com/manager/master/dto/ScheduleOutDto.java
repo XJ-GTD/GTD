@@ -24,7 +24,6 @@ public class ScheduleOutDto {
 
 
     //执行事件表(日程关联表)
-    private int scheduledId;          //执行事件IDSCHEDULE_ID
     private Date ExecutorFinshDate;     //完成时间-执行事件表
     private Date ExecutorRenindDate;    //提醒时间-执行事件表
     private String ExecutorRenindRepeat;     //重复提醒-执行事件表
@@ -143,15 +142,6 @@ public class ScheduleOutDto {
     public void setScheduledRenindRepeatType(String scheduledRenindRepeatType) {
         this.scheduledRenindRepeatType = scheduledRenindRepeatType;
     }
-
-    public int getScheduledId() {
-        return scheduledId;
-    }
-
-    public void setScheduledId(int scheduledId) {
-        this.scheduledId = scheduledId;
-    }
-
 
     public Date getExecutorFinshDate() {
         return ExecutorFinshDate;

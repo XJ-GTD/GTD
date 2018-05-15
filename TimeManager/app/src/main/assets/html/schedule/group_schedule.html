@@ -16,11 +16,10 @@
         
         if (scheduleList != null) {
             for (var i = 0; i < dataList.length; i++) {
-
                 document.write("<div class=\"panel\" style=\"margin-bottom: 0.2rem;\">\n" +
                     "<div class=\"panel-body\" style=\"margin-bottom: 0px;\">\n" +
                     "   <div class=\"xx\">\n" +
-                    "      <a href=\"javascript:window.schedule.singleScheduleDetail(\'" + scheduleList[i].scheduledId + "\');\">\n" +
+                    "      <a href=\"javascript:window.schedule.findSingleSchedule(\'" + scheduleList[i].scheduleId + "\');\">\n" +
                     "         <ul>\n" +
                     "           <li>\n" +
                     "             <img src=\"../../images/abig.png\" class=\"xtx\">\n" +

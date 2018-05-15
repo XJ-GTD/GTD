@@ -63,7 +63,7 @@ public class ScheduleHtml {
      * @param scheduleId
      * @return
      */
-    public static String findSchedule(int scheduleId) {
+    public static String findSchedule(String scheduleId) {
         String url = GlobalVar.SCHEDULE_SINGLE_FIND_URL() + "/" + scheduleId;
         return HttpRequestUtil.requestGET(url);
     }
@@ -100,17 +100,16 @@ public class ScheduleHtml {
                 if (jsonObject1 != null) {
 
                     json1.setScheduleName(jsonObject1.optString("scheduleName"));
-                    json1.setScheduledId(jsonObject1.optInt("scheduledId"));
+                    json1.setScheduleId(jsonObject1.optString("scheduleId"));
                     json1.setScheduleDetial(jsonObject1.optString("scheduleDetail"));
-                    json1.setScheduleIssuer(jsonObject1.optInt("scheduleIssuer"));
+                    json1.setScheduleIssuer(jsonObject1.optString("scheduleIssuer"));
                     json1.setUserName(jsonObject1.optString("userName"));
                     json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
                     json1.setScheduleStartDate(jsonObject1.optString("scheduleStartDate"));
                     json1.setScheduleFinshDate(jsonObject1.optString("scheduleFinshDate"));
                     json1.setScheduledEndDate(jsonObject1.optString("scheduleEndDate"));
                     json1.setScheduledState(jsonObject1.optString("scheduledState"));
-                    json1.setGroupId(jsonObject1.optInt("GroupId"));
-                    json1.setScheduledId(jsonObject1.optInt("scheduledId"));
+                    json1.setGroupId(jsonObject1.optString("GroupId"));
                     json1.setExecutorFinshDate(jsonObject1.optString("ExecutorFinshDate"));
                     json1.setExecutorRenindDate(jsonObject1.optString("ExecutorRenindDate"));
                     json1.setExecutorRenindRepeat(jsonObject1.optString("ExecutorRenindRepeat"));
@@ -154,15 +153,20 @@ public class ScheduleHtml {
             /*返回单个日程详情*/
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void findSingleSchedule(int scheduleId) {
-                singleSchedule(webView, context,  user, scheduleId);
+            public void findSingleSchedule(final String scheduleId) {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        singleSchedule(webView, context, user, scheduleId);
+                    }
+                });
 
             }
         }, "schedule");
     }
 
     /* 单个事件详情*/
-    private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final int scheduleId) {
+    private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final String scheduleId) {
         webView.loadUrl("file:///android_asset/html/schedule/scheduleDetail.html");
 
         webView.addJavascriptInterface(new Object() {
