@@ -91,7 +91,7 @@ public class UserServiceImpl implements IUserService {
             return 1;
         }else {
             userDao.createAccount(accountName,accountPassword,accountMobile);
-            int accountId = userDao.selectPKId();
+            Integer accountId = userDao.selectPKId();
             userDao.createUser(accountId,userName,userSex,userBirthday,email,realName,idNumber,userHead);
         }
         return 0;

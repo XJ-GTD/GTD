@@ -98,7 +98,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     /* WebKit browsers */
     color: #fff;
 }
-#account_mobile {
+#accountMobile {
     font-family: 'Lato', sans-serif;
     width: 40%;
     padding: 16px 16px 16px 16px;
@@ -116,7 +116,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     margin-bottom: 1em;
     text-align: center;
 }
-#account_mobile_verify {
+#accountMobile_verify {
     font-family: 'Lato', sans-serif;
     width: 40%;
     /*padding: 16px 16px 16px 16px;*/

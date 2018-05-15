@@ -165,7 +165,11 @@ public class ScheduleHtml {
                     public void run() {
                         String dataJson = findSchedule(scheduleId);
                         BaseJson data = jsonToScheduleString(dataJson, 2);
-                        singleSchedule(webView, context, user, data);
+                        if (data.getCode().equals("0")) {
+                            singleSchedule(webView, context, user, data);
+                        } else {
+                            Toast.makeText(context, "小主不用执行此日程~" , 0).show();
+                        }
                     }
                 });
 
@@ -183,7 +187,6 @@ public class ScheduleHtml {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public String singleScheduleDetail() {
-
                 if (data.getCode().equals("0")) {
                     return data.getJsonArray();
                 } else {
