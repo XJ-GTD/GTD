@@ -3,6 +3,7 @@ package com.manager.master.service.serviceImpl;
 import com.manager.master.bean.UserAccountBean;
 import com.manager.master.bean.UserInfoBean;
 import com.manager.master.dao.IUserDao;
+import com.manager.master.dto.UserInfoInDto;
 import com.manager.master.service.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 
 /**
@@ -51,6 +53,48 @@ public class UserServiceImpl implements IUserService {
     @Override
     public String findMobileById(int userId) {
         return userDao.findMobileById(userId);
+    }
+
+    /**
+     * 获取上次添加日程id
+     * @param
+     */
+    @Override
+    public int selectPKId(){
+        int accountId=userDao.selectPKId();
+        return accountId;
+    }
+    /**
+     * 用户注册
+     *
+     * @param inDto
+     */
+    @Override
+    public int createUser(UserInfoInDto inDto) {
+        String accountName = inDto.getAccountName();
+        String accountPassword = inDto.getAccountPassword();
+        String accountMobile = inDto.getAccountMobile();
+
+        String userName = inDto.getUserName();
+        if (userName == null){
+            userName = accountMobile;
+        }
+        Integer userSex = inDto.getUserSex();
+        Date userBirthday = inDto.getUserBirthday();
+        String email = inDto.getEmail();
+        String realName = inDto.getRealName();
+        String idNumber = inDto.getIdNumber();
+        String userHead = inDto.getUserHead();
+
+        UserInfoBean uib = this.userDao.findUser(inDto.getAccountMobile());
+        if (uib != null){
+            return 1;
+        }else {
+            userDao.createAccount(accountName,accountPassword,accountMobile);
+            int accountId = userDao.selectPKId();
+            userDao.createUser(accountId,userName,userSex,userBirthday,email,realName,idNumber,userHead);
+        }
+        return 0;
     }
 
 
