@@ -8,13 +8,13 @@ public class ScheduleJson extends BaseJson {
 
     private String scheduleName;         //事件名
     private String scheduleDetial;       //事件详情
-    private int scheduleIssuer;       //发布人
+    private String scheduleIssuer;       //发布人
     private String scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
     private String scheduleStartDate;     //开始时间SCHEDULE_START_DATE
     private String scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
     private String scheduledEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    private int GroupId;          //组群idGROUP_ID
+    private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
     private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
@@ -23,7 +23,7 @@ public class ScheduleJson extends BaseJson {
     private String flagFocus;     //是否关注（1否 0是）
 
     //执行事件表(日程关联表)
-    private int scheduledId;          //执行事件IDSCHEDULE_ID
+    private String scheduleId;          //执行事件IDSCHEDULE_ID
     private String userId;         //执行人电话（执行人id）
     private String userName;     //执行人姓名（执行人id）
     private String ExecutorFinshDate;     //完成时间-执行事件表
@@ -45,14 +45,6 @@ public class ScheduleJson extends BaseJson {
 
     public void setScheduleDetial(String scheduleDetial) {
         this.scheduleDetial = scheduleDetial;
-    }
-
-    public int getScheduleIssuer() {
-        return scheduleIssuer;
-    }
-
-    public void setScheduleIssuer(int scheduleIssuer) {
-        this.scheduleIssuer = scheduleIssuer;
     }
 
     public String getScheduleCreateDate() {
@@ -95,14 +87,6 @@ public class ScheduleJson extends BaseJson {
         this.scheduledState = scheduledState;
     }
 
-    public int getGroupId() {
-        return GroupId;
-    }
-
-    public void setGroupId(int groupId) {
-        GroupId = groupId;
-    }
-
     public String getScheduledMap() {
         return scheduledMap;
     }
@@ -133,14 +117,6 @@ public class ScheduleJson extends BaseJson {
 
     public void setScheduledRenindRepeatType(String scheduledRenindRepeatType) {
         this.scheduledRenindRepeatType = scheduledRenindRepeatType;
-    }
-
-    public int getScheduledId() {
-        return scheduledId;
-    }
-
-    public void setScheduledId(int scheduledId) {
-        this.scheduledId = scheduledId;
     }
 
     public String getExecutorFinshDate() {
@@ -205,5 +181,29 @@ public class ScheduleJson extends BaseJson {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getScheduleIssuer() {
+        return scheduleIssuer;
+    }
+
+    public void setScheduleIssuer(String scheduleIssuer) {
+        this.scheduleIssuer = scheduleIssuer;
+    }
+
+    public String getGroupId() {
+        return GroupId;
+    }
+
+    public void setGroupId(String groupId) {
+        GroupId = groupId;
+    }
+
+    public String getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(String scheduleId) {
+        this.scheduleId = scheduleId;
     }
 }

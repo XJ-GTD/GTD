@@ -168,13 +168,13 @@ public class ScheduleController {
         List<ScheduleOutDto> ScheduleDataList = scheduleService.findScheduleByGroup(groupId);
 
         if(ScheduleDataList != null){
-            data.put("ScheduleInfoList", ScheduleDataList);
+            data.put("scheduleInfoList", ScheduleDataList);
             outBean.setData(data);
             outBean.setCode("0");
             outBean.setMessage("[查询成功]");
             logger.info("[查询成功]"+ data);
         }else{
-            data.put("ScheduleInfoList", ScheduleDataList);
+            data.put("scheduleInfoList", ScheduleDataList);
             outBean.setData(data);
             outBean.setCode("1");
             outBean.setMessage("[查询失败]");
