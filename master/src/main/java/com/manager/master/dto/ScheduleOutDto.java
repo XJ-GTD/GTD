@@ -18,16 +18,16 @@ public class ScheduleOutDto {
     private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
-    private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
-    private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
-    private String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+    private String scheduledRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
+    private String scheduledRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
+    private String scheduledRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
 
 
     //执行事件表(日程关联表)
     private Date ExecutorFinshDate;     //完成时间-执行事件表
-    private Date ExecutorRenindDate;    //提醒时间-执行事件表
-    private String ExecutorRenindRepeat;     //重复提醒-执行事件表
-    private String ExecutorRenindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+    private Date ExecutorRemindDate;    //提醒时间-执行事件表
+    private String ExecutorRemindRepeat;     //重复提醒-执行事件表
+    private String ExecutorRemindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
     //用户表
     private String userName;//执行人姓名（用户表里的用户名）
 
@@ -119,60 +119,12 @@ public class ScheduleOutDto {
         this.scheduledMap = scheduledMap;
     }
 
-    public String getScheduledRenindDate() {
-        return scheduledRenindDate;
-    }
-
-    public void setScheduledRenindDate(String scheduledRenindDate) {
-        this.scheduledRenindDate = scheduledRenindDate;
-    }
-
-    public String getScheduledRenindRepeat() {
-        return scheduledRenindRepeat;
-    }
-
-    public void setScheduledRenindRepeat(String scheduledRenindRepeat) {
-        this.scheduledRenindRepeat = scheduledRenindRepeat;
-    }
-
-    public String getScheduledRenindRepeatType() {
-        return scheduledRenindRepeatType;
-    }
-
-    public void setScheduledRenindRepeatType(String scheduledRenindRepeatType) {
-        this.scheduledRenindRepeatType = scheduledRenindRepeatType;
-    }
-
     public Date getExecutorFinshDate() {
         return ExecutorFinshDate;
     }
 
     public void setExecutorFinshDate(Date executorFinshDate) {
         ExecutorFinshDate = executorFinshDate;
-    }
-
-    public Date getExecutorRenindDate() {
-        return ExecutorRenindDate;
-    }
-
-    public void setExecutorRenindDate(Date executorRenindDate) {
-        ExecutorRenindDate = executorRenindDate;
-    }
-
-    public String getExecutorRenindRepeat() {
-        return ExecutorRenindRepeat;
-    }
-
-    public void setExecutorRenindRepeat(String executorRenindRepeat) {
-        ExecutorRenindRepeat = executorRenindRepeat;
-    }
-
-    public String getExecutorRenindRepeatType() {
-        return ExecutorRenindRepeatType;
-    }
-
-    public void setExecutorRenindRepeatType(String executorRenindRepeatType) {
-        ExecutorRenindRepeatType = executorRenindRepeatType;
     }
 
     public Date getScheduleEndDate() {
@@ -189,5 +141,53 @@ public class ScheduleOutDto {
 
     public void setScheduleDetail(String scheduleDetail) {
         this.scheduleDetail = scheduleDetail;
+    }
+
+    public String getScheduledRemindDate() {
+        return scheduledRemindDate;
+    }
+
+    public void setScheduledRemindDate(String scheduledRemindDate) {
+        this.scheduledRemindDate = scheduledRemindDate;
+    }
+
+    public String getScheduledRemindRepeat() {
+        return scheduledRemindRepeat;
+    }
+
+    public void setScheduledRemindRepeat(String scheduledRemindRepeat) {
+        this.scheduledRemindRepeat = scheduledRemindRepeat;
+    }
+
+    public String getScheduledRemindRepeatType() {
+        return scheduledRemindRepeatType;
+    }
+
+    public void setScheduledRemindRepeatType(String scheduledRemindRepeatType) {
+        this.scheduledRemindRepeatType = scheduledRemindRepeatType;
+    }
+
+    public Date getExecutorRemindDate() {
+        return ExecutorRemindDate;
+    }
+
+    public void setExecutorRemindDate(Date executorRemindDate) {
+        ExecutorRemindDate = executorRemindDate;
+    }
+
+    public String getExecutorRemindRepeat() {
+        return ExecutorRemindRepeat;
+    }
+
+    public void setExecutorRemindRepeat(String executorRemindRepeat) {
+        ExecutorRemindRepeat = executorRemindRepeat;
+    }
+
+    public String getExecutorRemindRepeatType() {
+        return ExecutorRemindRepeatType;
+    }
+
+    public void setExecutorRemindRepeatType(String executorRemindRepeatType) {
+        ExecutorRemindRepeatType = executorRemindRepeatType;
     }
 }

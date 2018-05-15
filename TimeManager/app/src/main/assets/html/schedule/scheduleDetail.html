@@ -12,16 +12,21 @@
         scheduleDetail = JSON.parse(dataList);
     }
 
-    document.write("<div>\n" +
-        "    <div id=\"schedule_header\"></div>\n" +
-        "    <div id=\"schedule_content\">" +
-        "       <div>事件名：" + scheduleDetail.scheduleName + "</div>" +
-        "       <div>事件详情：" + scheduleDetail.scheduleDetail + "</div>" +
-        "       <div>截止时间：" + scheduleDetail.scheduleEndDate + "</div>" +
-        "       <div>提醒时间：" + scheduleDetail.ExecutorRenindDate + "</div>" +
-        "       <div>执行人：" + scheduleDetail.userName + "</div>" +
-        "    </div>\n" +
-        "</div>")
+    if (scheduleDetail != null) {
+        document.write("<div>\n" +
+            "    <div id=\"schedule_header\"></div>\n" +
+            "    <div id=\"schedule_content\">" +
+            "       <div>事件名：" + scheduleDetail.scheduleName + "</div>" +
+            "       <div>事件详情：" + scheduleDetail.scheduleDetail + "</div>" +
+            "       <div>截止时间：" + scheduleDetail.scheduleEndDate + "</div>" +
+            "       <div>提醒时间：" + scheduleDetail.ExecutorRenindDate + "</div>" +
+            "       <div>执行人：" + scheduleDetail.userName + "</div>" +
+            "    </div>\n" +
+            "</div>")
+    } else {
+        document.write("<div>出了小小的错误，请重新刷新</div>")
+    }
+
 </script>
 <footer></footer>
 </body>

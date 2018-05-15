@@ -63,7 +63,7 @@ public class ScheduleHtml {
      * @param scheduleId
      * @return
      */
-    public static String findSchedule(String scheduleId) {
+    public static String findSchedule(int scheduleId) {
         String url = GlobalVar.SCHEDULE_SINGLE_FIND_URL() + "/" + scheduleId;
         return HttpRequestUtil.requestGET(url);
     }
@@ -73,7 +73,7 @@ public class ScheduleHtml {
      * @param json
      * @return
      */
-    public static BaseJson jsonToScheduleString(String json) {
+    public static BaseJson jsonToScheduleString(String json, int flag) {
         BaseJson scheduleBase = new BaseJson();
         List<ScheduleJson> scheduleList = new ArrayList<>();
         //解析json
@@ -90,8 +90,14 @@ public class ScheduleHtml {
             }
 
             //第二层解析
-            JSONArray jsonArray = data.optJSONArray("scheduleInfoList");
-            scheduleBase.setJsonArray(jsonArray.toString());
+            JSONArray jsonArray = null;
+            if (flag == 1) {
+                jsonArray = data.optJSONArray("scheduleInfoList");
+                scheduleBase.setJsonArray(jsonArray.toString());
+            } else if (flag == 2){
+                scheduleBase.setJsonArray(data.optString("scheduleInfo"));
+                return scheduleBase;
+            }
 
             //第三层解析
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -142,7 +148,7 @@ public class ScheduleHtml {
             @android.webkit.JavascriptInterface
             public String groupDetail() {
                 String dataJson = findGroupSchedule(groupId);
-                BaseJson data = jsonToScheduleString(dataJson);
+                BaseJson data = jsonToScheduleString(dataJson, 1);
                 if (data.getCode().equals("0")) {
                     return data.getJsonArray();
                 } else {
@@ -153,11 +159,13 @@ public class ScheduleHtml {
             /*返回单个日程详情*/
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void findSingleSchedule(final String scheduleId) {
+            public void findSingleSchedule(final int scheduleId) {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        singleSchedule(webView, context, user, scheduleId);
+                        String dataJson = findSchedule(scheduleId);
+                        BaseJson data = jsonToScheduleString(dataJson, 2);
+                        singleSchedule(webView, context, user, data);
                     }
                 });
 
@@ -166,7 +174,7 @@ public class ScheduleHtml {
     }
 
     /* 单个事件详情*/
-    private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final String scheduleId) {
+    private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final BaseJson data) {
         webView.loadUrl("file:///android_asset/html/schedule/scheduleDetail.html");
 
         webView.addJavascriptInterface(new Object() {
@@ -175,8 +183,7 @@ public class ScheduleHtml {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public String singleScheduleDetail() {
-                String dataJson = findSchedule(scheduleId);
-                BaseJson data = BasicUtil.jsonToString(dataJson);
+
                 if (data.getCode().equals("0")) {
                     return data.getJsonArray();
                 } else {

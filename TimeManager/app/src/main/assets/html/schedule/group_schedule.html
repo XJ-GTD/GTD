@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>群组详情</title>
     <link rel="stylesheet" href="../../css/group_schedule.css">
+    <link rel="stylesheet" href="../../css/index.css">
 </head>
 <body>
 <div>
@@ -13,16 +14,22 @@
         if (dataList != null) {
             scheduleList = JSON.parse(dataList);
         }
+
+        document.write("<header>\n" +
+            "        <div id=\"main_header\" style=\"position: fixed;top:0\">\n" +
+            "            <input id=\"btn_group\" type=\"button\" value=\"<返回\" onClick=\"javascript:window.history.back();\"/>\n" +
+            "        </div>\n" +
+            "    </header>");
         
         if (scheduleList != null) {
-            for (var i = 0; i < dataList.length; i++) {
+            for (var i = 0; i < scheduleList.length; i++) {
                 document.write("<div class=\"panel\" style=\"margin-bottom: 0.2rem;\">\n" +
                     "<div class=\"panel-body\" style=\"margin-bottom: 0px;\">\n" +
                     "   <div class=\"xx\">\n" +
-                    "      <a href=\"javascript:window.schedule.findSingleSchedule(\'" + scheduleList[i].scheduleId + "\');\">\n" +
+                    "      <a href=\"javascript:window.schedule.findSingleSchedule(" + scheduleList[i].scheduleId + ");\">\n" +
                     "         <ul>\n" +
                     "           <li>\n" +
-                    "             <img src=\"../../images/abig.png\" class=\"xtx\">\n" +
+                    "             <img src=\"../../images/schedule.jpg\" class=\"xtx\">\n" +
                     "           </li>\n" +
                     "           <li style=\"margin-right: 0px; width: 70%;\">\n" +
                     "              <span style=\"margin-top: 1rem;\">" + scheduleList[i].scheduleName + "</span>\n" +
@@ -34,13 +41,27 @@
                     "    </div>\n" +
                     "  </div>\n" +
                     "</div>")
-
             }
         } else {
             document.write("<div>暂无日程，请为执行者安排日程吧</div>")
         }
 
-
+        document.write("<footer>\n" +
+            "        <ul class=\"dh\">\n" +
+            "            <li>\n" +
+            "                <a href=\"index.html\"><span class=\"glyphicon glyphicon-fire xt\" style=\"display: block;\"></span>\n" +
+            "                    <span>首页</span></a>\n" +
+            "            </li>\n" +
+            "            <li class=\"add\">\n" +
+            "                <p class=\"jia\"><img src=\"../../images/timg.jpg\" class=\"tj\" onclick=\"javascript:audio_record();\" ></p>\n" +
+            "            </li>\n" +
+            "            <li>\n" +
+            "                <a href=\"#\"><span class=\"glyphicon glyphicon-leaf xt\" style=\"display: block;\"></span>\n" +
+            "                    <span>设置</span></a>\n" +
+            "            </li>\n" +
+            "            <li class=\"clear\"></li>\n" +
+            "        </ul>\n" +
+            "    </footer>")
 
     </script>
 </div>

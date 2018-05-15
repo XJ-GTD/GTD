@@ -13,8 +13,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 import com.master.GlobalVar;
+import com.master.json.BaseJson;
 import com.master.json.UserInfoJson;
 import com.master.timemanager.home.GroupHtml;
+import com.master.util.BasicUtil;
 import com.master.util.HttpRequestUtil;
 import com.master.util.StompUtil;
 import org.json.JSONException;
@@ -25,6 +27,17 @@ import org.json.JSONObject;
  * 登陆连接类
  */
 public class LoginHtml extends Activity {
+
+    /**
+     * 用户注册 POST
+     * @return
+     */
+    public static String signInByPost(String accountName, String mobile, String verificationCode, String password) {
+        String url = GlobalVar.USER_SIGNIN_URL();
+        String data = "{\"accountName\":\"" + accountName + "\",\"mobile\": \"" + mobile + "\", " +
+                "\"verificationCode\": \"" + verificationCode + "\", \"password\":\""+password+"\" }";
+        return HttpRequestUtil.requestPOST(url,data);
+    }
 
     /**
      * 登陆请求 POST
@@ -120,8 +133,8 @@ public class LoginHtml extends Activity {
         webView.addJavascriptInterface(new Object() {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void toast1() {
-                Toast.makeText(context, "提示一下", 0).show();
+            public void signIn() {
+                userSignIn(webView, context);
             }
 
             @SuppressLint("WrongConstant")
@@ -190,5 +203,45 @@ public class LoginHtml extends Activity {
                 }
                 });
         }
+    }
+
+    /* 注册 */
+    private static void userSignIn(final WebView webView, final Context context) {
+        webView.loadUrl("file:///android_asset/html/login/register.html");
+
+        webView.addJavascriptInterface(new Object() {
+
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void signIn(final String accountName, String mobile, String verificationCode, final String password) {
+                BaseJson post = BasicUtil.jsonToString(signInByPost(accountName, mobile, verificationCode, password));
+                if (post.getCode().equals("0")) {
+                    Toast.makeText(context, post.getMessage()+ "正在登陆中...", 0).show();
+                    mRunnable = new Runnable() {
+
+                        @Override
+                        public void run() {
+                            try{
+                                Looper.prepare();
+                                String post = LoginHtml.loginByPost(accountName, password);
+                                Message msg = new Message();
+                                Bundle data = new Bundle();
+                                data.putString("message", post);
+                                msg.setData(data);
+                                mHandler.handleMessage(msg);
+                                loginDeal(webView, context);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    new Thread(mRunnable).start();
+
+                } else {
+                    Toast.makeText(context, post.getMessage() + "请重新注册", 0).show();
+                }
+            }
+
+        }, "signIn");
     }
 }

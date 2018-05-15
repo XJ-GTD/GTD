@@ -59,7 +59,7 @@ function remindTimeSpilt(remindTime1, remindTime2, remindType) {
     } else if (remindType === "time_8") {
 
     } else if (remindType === "time_9") {
-
+        time = document.getElementById("pickdate3").value + " " + document.getElementById("picktime3").value;
     } else {
         return null;
     }

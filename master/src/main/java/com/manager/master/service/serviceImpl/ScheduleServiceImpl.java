@@ -194,7 +194,7 @@ public class ScheduleServiceImpl implements IScheduleService {
     @Override
     public ScheduleOutDto updateSchedule(ScheduleInDto inDto) {
 
-        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
         int scheduledId=inDto.getScheduleId();
         String scheduleName=inDto.getScheduleName();
         String scheduleDetial=inDto.getScheduleDetial();
