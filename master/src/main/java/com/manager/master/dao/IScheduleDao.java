@@ -114,7 +114,25 @@ public interface IScheduleDao {
      * 查询一个群组下的所有日程
      * @return
      */
-    @Select("select * from gtd_schedule where GROUP_ID = #{groupId}" )
+    @Select(" select  " +
+            " GS.SCHEDULE_ID, " +
+            " GS.SCHEDULE_NAME, " +
+            " GS.SCHEDULE_DETIAL, " +
+            " GS.SCHEDULE_ISSUER, " +
+            " date_format(GS.SCHEDULE_CREATE_DATE,'%Y-%m-%d %T') SCHEDULE_CREATE_DATE, " +
+            " GS.SCHEDULE_START_DATE, " +
+            " GS.SCHEDULE_EDIT_DATE, " +
+            " GS.SCHEDULE_FINISH_DATE, " +
+            " GS.SCHEDULE_END_DATE, " +
+            " GS.SCHEDULE_STATE, " +
+            " GS.GROUP_ID, " +
+            " GS.SCHEDULE_MAP, " +
+            " GS.SCHEDULE_REMIND_DATE, " +
+            " GS.SCHEDULE_REMIND_REPEAT, " +
+            " GS.SCHEDULE_REMIND_REPEAT_TYPE " +
+            " from gtd_schedule GS  " +
+            " where GS.group_id = #{groupId} "  )
+
     List<ScheduleOutDto> findScheduleByGroup(@Param("groupId") String groupId);
 
     /**
@@ -122,7 +140,22 @@ public interface IScheduleDao {
      * @return
      */
     @Select(" select  " +
-            " GS.*,gu.user_name " +
+            " GS.SCHEDULE_ID, " +
+            " GS.SCHEDULE_NAME, " +
+            " GS.SCHEDULE_DETIAL, " +
+            " GS.SCHEDULE_ISSUER, " +
+            " date_format(GS.SCHEDULE_CREATE_DATE,'%Y-%m-%d %T') SCHEDULE_CREATE_DATE, " +
+            " GS.SCHEDULE_START_DATE, " +
+            " GS.SCHEDULE_EDIT_DATE, " +
+            " GS.SCHEDULE_FINISH_DATE, " +
+            " GS.SCHEDULE_END_DATE, " +
+            " GS.SCHEDULE_STATE, " +
+            " GS.GROUP_ID, " +
+            " GS.SCHEDULE_MAP, " +
+            " GS.SCHEDULE_REMIND_DATE, " +
+            " GS.SCHEDULE_REMIND_REPEAT, " +
+            " GS.SCHEDULE_REMIND_REPEAT_TYPE, " +
+            " gu.user_name " +
             " from gtd_schedule GS  " +
             " LEFT JOIN GTD_EXECUTOR_SCHEDULE GES ON GS.SCHEDULE_ID = GES.SCHEDULE_ID " +
             " LEFT JOIN GTD_USER GU ON GU.USER_ID = GES.USER_ID " +

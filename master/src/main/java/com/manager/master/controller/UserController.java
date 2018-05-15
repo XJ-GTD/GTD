@@ -38,7 +38,7 @@ public class UserController {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, UserAccountBean> data = new HashMap<>();
 
-        UserAccountBean userAccountBean = userService.loginUser(inDto.getMobile(),inDto.getPassword());
+        UserAccountBean userAccountBean = userService.loginUser(inDto.getAccountMobile(),inDto.getAccountPassword());
 
         if (userAccountBean != null) {
             data.put("userinfo", userAccountBean);
@@ -79,6 +79,30 @@ public class UserController {
             outBean.setCode("1");
             outBean.setMessage("Find fail!");
             logger.info("[查询失败]" + data);
+        }
+
+        return outBean;
+    }
+    /**
+     * 用户注册
+     * @parame
+     * @return
+     */
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseOutDto create(@RequestBody UserInfoInDto inDto) {
+        BaseOutDto outBean = new BaseOutDto();
+
+        int flag = userService.createUser(inDto);
+
+        if(flag == 1){
+            outBean.setCode("1");
+            outBean.setMessage("[注册失败]:用户已存在！");
+            logger.info("[用户已存在！]");
+        }else if (flag == 0){
+            outBean.setCode("0");
+            outBean.setMessage("[注册成功]");
+            logger.info("[注册成功]");
         }
 
         return outBean;
