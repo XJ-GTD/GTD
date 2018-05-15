@@ -67,7 +67,7 @@ public interface IUserDao {
             "values(#{accountId},#{userName},#{userSex},#{userBirthday},#{email},#{realName},#{idNumber},#{userHead})")
     void createUser( @Param("accountId") Integer accountId,
                      @Param("userName") String userName,
-                     @Param("userSex") int userSex,
+                     @Param("userSex") Integer userSex,
                     @Param("userBirthday") Date userBirthday,
                     @Param("email") String email,
                     @Param("realName") String realName,

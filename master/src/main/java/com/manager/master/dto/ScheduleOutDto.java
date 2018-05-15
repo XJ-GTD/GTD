@@ -31,14 +31,6 @@ public class ScheduleOutDto {
     //用户表
     private String userName;//执行人姓名（用户表里的用户名）
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public int getScheduleId() {
         return scheduleId;
     }
@@ -53,6 +45,14 @@ public class ScheduleOutDto {
 
     public void setScheduleName(String scheduleName) {
         this.scheduleName = scheduleName;
+    }
+
+    public String getScheduleDetail() {
+        return scheduleDetail;
+    }
+
+    public void setScheduleDetail(String scheduleDetail) {
+        this.scheduleDetail = scheduleDetail;
     }
 
     public int getScheduleIssuer() {
@@ -95,6 +95,14 @@ public class ScheduleOutDto {
         this.scheduleFinshDate = scheduleFinshDate;
     }
 
+    public Date getScheduleEndDate() {
+        return scheduleEndDate;
+    }
+
+    public void setScheduleEndDate(Date scheduleEndDate) {
+        this.scheduleEndDate = scheduleEndDate;
+    }
+
     public String getScheduledState() {
         return scheduledState;
     }
@@ -117,30 +125,6 @@ public class ScheduleOutDto {
 
     public void setScheduledMap(String scheduledMap) {
         this.scheduledMap = scheduledMap;
-    }
-
-    public Date getExecutorFinshDate() {
-        return ExecutorFinshDate;
-    }
-
-    public void setExecutorFinshDate(Date executorFinshDate) {
-        ExecutorFinshDate = executorFinshDate;
-    }
-
-    public Date getScheduleEndDate() {
-        return scheduleEndDate;
-    }
-
-    public void setScheduleEndDate(Date scheduleEndDate) {
-        this.scheduleEndDate = scheduleEndDate;
-    }
-
-    public String getScheduleDetail() {
-        return scheduleDetail;
-    }
-
-    public void setScheduleDetail(String scheduleDetail) {
-        this.scheduleDetail = scheduleDetail;
     }
 
     public String getScheduledRemindDate() {
@@ -167,6 +151,14 @@ public class ScheduleOutDto {
         this.scheduledRemindRepeatType = scheduledRemindRepeatType;
     }
 
+    public Date getExecutorFinshDate() {
+        return ExecutorFinshDate;
+    }
+
+    public void setExecutorFinshDate(Date executorFinshDate) {
+        ExecutorFinshDate = executorFinshDate;
+    }
+
     public Date getExecutorRemindDate() {
         return ExecutorRemindDate;
     }
@@ -189,5 +181,13 @@ public class ScheduleOutDto {
 
     public void setExecutorRemindRepeatType(String executorRemindRepeatType) {
         ExecutorRemindRepeatType = executorRemindRepeatType;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
