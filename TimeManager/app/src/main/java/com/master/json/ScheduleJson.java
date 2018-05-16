@@ -12,8 +12,8 @@ public class ScheduleJson extends BaseJson {
     private String scheduleIssuer;       //发布人
     private String scheduleExecutor;       //执行人EXECUTOR
     private String scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
-    private String  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    private String  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
+    private String scheduleStartDate;     //开始时间SCHEDULE_START_DATE
+    private String scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
     private String scheduleEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
@@ -28,7 +28,7 @@ public class ScheduleJson extends BaseJson {
     private String ExecutorRemindDate;    //提醒时间-执行事件表
     private String ExecutorRemindRepeat;     //重复提醒-执行事件表
     private String ExecutorRemindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
-    private String userId;//执行人ID  USER_ID
+    private String userId;              //执行人ID  USER_ID
 
     public String getScheduleId() {
         return scheduleId;

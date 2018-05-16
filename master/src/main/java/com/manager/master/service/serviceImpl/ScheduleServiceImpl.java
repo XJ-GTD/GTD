@@ -45,7 +45,6 @@ public class ScheduleServiceImpl implements IScheduleService {
      */
     @Override
     public List<ScheduleOutDto> findSchedule(int scheduleExecutor) {
-        scheduleDao.findSchedule(scheduleExecutor);
         return scheduleDao.findSchedule(scheduleExecutor);
     }
 

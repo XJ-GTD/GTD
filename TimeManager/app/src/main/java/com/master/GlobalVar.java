@@ -35,6 +35,7 @@ public class GlobalVar extends Application {
     private static String SCHEDULE_FIND_URL = SCHEDULE_URL + "/find";       //查询日程列表
     private static String SCHEDULE_SINGLE_FIND_URL = SCHEDULE_URL + "/findScheduleByOne";       //查询单个日程
     private static String SCHEDULE_GROUP_URL = SCHEDULE_URL + "/findSchByGroup";        //查询群组全部日程
+    private static String SCHEDULE_MINE_GROUP_URL = SCHEDULE_URL + "/findSchAndExcu";       //查询群组内日程是否自己执行
 
     public String getRequestURL() {
         return requestURL;
@@ -110,5 +111,13 @@ public class GlobalVar extends Application {
 
     public static void setUserSigninUrl(String userSigninUrl) {
         USER_SIGNIN_URL = userSigninUrl;
+    }
+
+    public static String SCHEDULE_MINE_GROUP_URL() {
+        return SCHEDULE_MINE_GROUP_URL;
+    }
+
+    public static void setScheduleMineGroupUrl(String scheduleMineGroupUrl) {
+        SCHEDULE_MINE_GROUP_URL = scheduleMineGroupUrl;
     }
 }

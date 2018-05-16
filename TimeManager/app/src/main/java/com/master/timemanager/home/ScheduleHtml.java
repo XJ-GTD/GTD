@@ -39,7 +39,7 @@ public class ScheduleHtml {
     }
 
     /**
-     * 查询日程请求 POST
+     * 查询日程列表请求 POST
      * @param userid
      * @return
      */
@@ -66,6 +66,15 @@ public class ScheduleHtml {
      */
     public static String findSchedule(int scheduleId) {
         String url = GlobalVar.SCHEDULE_SINGLE_FIND_URL() + "/" + scheduleId;
+        return HttpRequestUtil.requestGET(url);
+    }
+
+    /**
+     * 查询群组内日程执行人是否有自己
+     * @return
+     */
+    public static String findGroupScheduleMine(int scheduleId, int userId) {
+        String url = GlobalVar.SCHEDULE_MINE_GROUP_URL() + "/" + scheduleId + "/" + userId;
         return HttpRequestUtil.requestGET(url);
     }
 
@@ -164,7 +173,7 @@ public class ScheduleHtml {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        String dataJson = findSchedule(scheduleId);
+                        String dataJson = findGroupScheduleMine(scheduleId, user.getUserId());
                         BaseJson data = jsonToScheduleString(dataJson, 2);
                         if (data.getCode().equals("0")) {
                             singleSchedule(webView, context, user, data);
