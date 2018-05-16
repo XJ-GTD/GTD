@@ -10,6 +10,9 @@ public class ScheduleOutDto {
     private String scheduleName;         //事件名
     private String scheduleDetail;       //事件详情
     private int scheduleIssuer;       //发布人
+
+    private String scheduleIssuerName;       //发布人姓名
+
     private int scheduleExecutor;       //执行人EXECUTOR
     private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
     private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
@@ -22,18 +25,17 @@ public class ScheduleOutDto {
     private String scheduleRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduleRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
     private Date scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
-
     //执行事件表(日程关联表)
+
     private Date ExecutorFinishDate;     //完成时间-执行事件表
     private Date ExecutorRemindDate;    //提醒时间-执行事件表
     private String ExecutorRemindRepeat;     //重复提醒-执行事件表
     private String ExecutorRemindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
-    private int userId;//执行人ID  USER_ID
+    private String userId;//执行人ID  USER_ID
     //事件ID
     private int executorState;//事件状态 EXECUTOR_STATE
     //用户表
     private String userName;//执行人姓名（用户表里的用户名）
-
     public int getScheduleId() {
         return scheduleId;
     }
@@ -64,6 +66,14 @@ public class ScheduleOutDto {
 
     public void setScheduleIssuer(int scheduleIssuer) {
         this.scheduleIssuer = scheduleIssuer;
+    }
+
+    public String getScheduleIssuerName() {
+        return scheduleIssuerName;
+    }
+
+    public void setScheduleIssuerName(String scheduleIssuerName) {
+        this.scheduleIssuerName = scheduleIssuerName;
     }
 
     public int getScheduleExecutor() {
@@ -193,11 +203,11 @@ public class ScheduleOutDto {
     public void setScheduleEditDate(Date scheduleEditDate) {
         this.scheduleEditDate = scheduleEditDate;
     }
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
