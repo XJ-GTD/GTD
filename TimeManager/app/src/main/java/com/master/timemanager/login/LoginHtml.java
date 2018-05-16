@@ -46,7 +46,7 @@ public class LoginHtml extends Activity {
      */
     public static String loginByPost(String mobile, String password) {
         String url = GlobalVar.USER_LOGIN_URL();
-        String data = "{\"mobile\":\""+mobile+"\",\"password\":\""+password+"\" }";
+        String data = "{\"accountMobile\":\""+mobile+"\",\"accountPassword\":\""+password+"\" }";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
@@ -218,7 +218,10 @@ public class LoginHtml extends Activity {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void signIn(final String accountName, String mobile, String verificationCode, final String password) {
-                BaseJson post = BasicUtil.jsonToString(signInByPost(accountName, mobile, password));
+                final String accountNm = accountName;
+                final String mb = mobile;
+                final String pw = password;
+                BaseJson post = BasicUtil.jsonToString(signInByPost(accountNm, mb, pw));
                 if (post.getCode().equals("0")) {
                     Toast.makeText(context, post.getMessage()+ "正在登陆中...", 0).show();
                     mRunnable = new Runnable() {
@@ -227,7 +230,7 @@ public class LoginHtml extends Activity {
                         public void run() {
                             try{
                                 Looper.prepare();
-                                String post = LoginHtml.loginByPost(accountName, password);
+                                String post = LoginHtml.loginByPost(mb, pw);
                                 Message msg = new Message();
                                 Bundle data = new Bundle();
                                 data.putString("message", post);

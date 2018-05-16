@@ -1,7 +1,7 @@
 package com.manager.master.dao;
 
 import com.manager.master.bean.UserAccountBean;
-import com.manager.master.bean.UserInfoBean;
+import com.manager.master.dto.UserInfoOutDto;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,8 +20,10 @@ public interface IUserDao {
      * 根据电话号码查询用户信息
      * @return
      */
-    @Select("select * from GTD_USER where USER_ID = ( select USER_ID from GTD_ACCOUNT where ACCOUNT_MOBILE = #{mobile})")
-    UserInfoBean findUser(@Param("mobile") String mobile);
+    @Select(" SELECT A.USER_ID,B.ACCOUNT_ID FROM GTD_USER A " +
+            " INNER JOIN GTD_ACCOUNT B ON A.ACCOUNT_ID = B.ACCOUNT_ID " +
+            " WHERE B.ACCOUNT_MOBILE = #{mobile}")
+    UserInfoOutDto findUser(@Param("mobile") String mobile);
 
     /**
      * 根据用户ID查询用户号码

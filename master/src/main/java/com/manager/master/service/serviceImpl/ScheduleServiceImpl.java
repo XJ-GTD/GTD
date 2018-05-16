@@ -1,10 +1,10 @@
 package com.manager.master.service.serviceImpl;
 
-import com.manager.master.bean.UserInfoBean;
-import com.manager.master.dao.IUserDao;
 import com.manager.master.dao.IScheduleDao;
+import com.manager.master.dao.IUserDao;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
+import com.manager.master.dto.UserInfoOutDto;
 import com.manager.master.service.IGroupService;
 import com.manager.master.service.IScheduleService;
 import org.apache.logging.log4j.LogManager;
@@ -152,7 +152,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             String[] mobile = userMobile.split(",");
             for (int i = 0; i < mobile.length; i++) {
                 //获取用户id
-                UserInfoBean userInfo= userDao.findUser(mobile[i]);
+                UserInfoOutDto userInfo= userDao.findUser(mobile[i]);
                 userid=userInfo.getUserId();
                 //添加执行事件表
                 scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);

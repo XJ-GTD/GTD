@@ -1,9 +1,9 @@
 package com.manager.master.service.serviceImpl;
 
 import com.manager.master.bean.UserAccountBean;
-import com.manager.master.bean.UserInfoBean;
 import com.manager.master.dao.IUserDao;
 import com.manager.master.dto.UserInfoInDto;
+import com.manager.master.dto.UserInfoOutDto;
 import com.manager.master.service.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao;
 
     @Override
-    public UserInfoBean findUser(String mobile) {
+    public UserInfoOutDto findUser(String mobile) {
         return userDao.findUser(mobile);
     }
 
@@ -61,7 +61,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public int selectPKId(){
-        int accountId=userDao.selectPKId();
+        int accountId = userDao.selectPKId();
         return accountId;
     }
     /**
@@ -86,7 +86,7 @@ public class UserServiceImpl implements IUserService {
         String idNumber = inDto.getIdNumber();
         String userHead = inDto.getUserHead();
 
-        UserInfoBean uib = this.userDao.findUser(inDto.getAccountMobile());
+        UserInfoOutDto uib = this.userDao.findUser(inDto.getAccountMobile());
         if (uib != null){
             return 1;
         }else {
