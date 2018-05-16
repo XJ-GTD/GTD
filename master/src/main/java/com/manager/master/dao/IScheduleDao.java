@@ -32,7 +32,7 @@ public interface IScheduleDao {
             " #{scheduleName}, #{scheduleDetail}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState}," +
             "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduleRemindRepeat},#{scheduleRemindRepeatType})")
     ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
-                                  @Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
+                                  @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
                                   @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
                                   @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  Date scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
                                   @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
@@ -172,10 +172,11 @@ public interface IScheduleDao {
             " GS.GROUP_ID,GS.SCHEDULE_MAP,GS.SCHEDULE_REMIND_DATE,GS.SCHEDULE_REMIND_REPEAT," +
             " GS.SCHEDULE_REMIND_REPEAT_TYPE,GES.USER_ID,GES.SCHEDULE_ID,GES.EXECUTOR_FINISH_DATE," +
             " GES.EXECUTOR_STATE,GES.EXECUTOR_REMIND_DATE,GES.EXECUTOR_REMIND_REPEAT,GES.EXECUTOR_REMIND_REPEAT_TYPE," +
-            " GES.EXECUTOR_SCHEDULE_NUMBER" +
+            " GES.EXECUTOR_SCHEDULE_NUMBER, GU2.USER_NAME userName" +
             " from gtd_schedule GS" +
             " left join GTD_EXECUTOR_SCHEDULE GES ON GS.SCHEDULE_ID = GES.SCHEDULE_ID" +
-            "  left join GTD_USER GU1 ON GU1.USER_ID = GS.SCHEDULE_ISSUER" +
+            " LEFT JOIN GTD_USER GU2 ON GU2.USER_ID = GES.USER_ID " +
+            " left join GTD_USER GU1 ON GU1.USER_ID = GS.SCHEDULE_ISSUER" +
             " WHERE GS.SCHEDULE_ID = #{scheduleId}" +
             " AND GES.USER_ID = #{userId}" )
     ScheduleOutDto findScheduleAndExeBySchIdAndUserId(@Param("scheduleId") int scheduleId,@Param("userId") int userId);
