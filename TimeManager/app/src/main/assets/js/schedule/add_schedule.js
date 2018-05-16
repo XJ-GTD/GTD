@@ -5,17 +5,17 @@ function init_add() {
 
 function addClick() {
     var scheduleName = document.getElementById("schedule_name").value;
-    var scheduleDetial = document.getElementById("schedule_detail").value;
+    var scheduleDetail = document.getElementById("schedule_detail").value;
     var scheduleStartDate = document.getElementById("pickdate").value + " " + document.getElementById("picktime").value;
-    var scheduledEndDate = document.getElementById("pickdate2").value + " " + document.getElementById("picktime2").value;
+    var scheduleEndDate = document.getElementById("pickdate2").value + " " + document.getElementById("picktime2").value;
 
     var remind = document.getElementById("remind_time");
     var index = remind.selectedIndex;
-    var scheduledRenindDate = remindTimeSpilt(document.getElementById("pickdate").value, document.getElementById("picktime").value, remind.options[index].value);
+    var scheduleRemindDate = remindTimeSpilt(document.getElementById("pickdate").value, document.getElementById("picktime").value, remind.options[index].value);
 
     var remind_repeat = document.getElementById("remind_repeat");
     var index_repeat = remind_repeat.selectedIndex;
-    var scheduledRenindRepeatType = remind_repeat.options[index_repeat].value;
+    var scheduleRemindRepeatType = remind_repeat.options[index_repeat].value;
 
     var executor = document.getElementById("schedule_person").value;
 
@@ -26,16 +26,16 @@ function addClick() {
     var focusIndex = focus.selectedIndex;
     var flagCreateGroup =focus.options[focusIndex].value;
 
-    window.index_schedule.add_Schedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor, flagFocus, flagCreateGroup);
+    window.index_schedule.add_Schedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate, scheduleRemindRepeatType, executor, flagFocus, flagCreateGroup);
 }
 
 function remindDate() {
     var remind = document.getElementById("remind_time");
     var index = remind.selectedIndex;
-    if (remind.options[index].value != "time_9") {
-        document.getElementById("remind_Date").setAttribute("hidden", true);
-    } else {
+    if (remind.options[index].value === "time_9") {
         document.getElementById("remind_Date").removeAttribute("hidden");
+    } else {
+        document.getElementById("remind_Date").setAttribute("hidden", true);
     }
 }
 

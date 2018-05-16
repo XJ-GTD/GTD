@@ -24,12 +24,6 @@ public interface IScheduleService {
     int createSchedule(@RequestBody ScheduleInDto inDto);
 
     /**
-     * 获取上次添加日程id
-     * @param
-     */
-    int selectScheduleId();
-
-    /**
      * 日程关联创建（执行事件表）
      * @param
      */
