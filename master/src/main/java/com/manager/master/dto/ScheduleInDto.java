@@ -13,13 +13,13 @@ public class ScheduleInDto {
     private String scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
     private String  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
     private String  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
-    private String scheduledEndDate;     //截止时间SCHEDULE_END_DATE
-    private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
+    private String scheduleEndDate;     //截止时间SCHEDULE_END_DATE
+    private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduledMap;     //位置SCHEDULE_MAP
-    private String scheduledRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
-    private String scheduledRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
-    private String scheduledRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+    private String scheduleRenindDate;     //提醒时间SCHEDULE_REMIND_DATE
+    private String scheduleRenindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
+    private String scheduleRenindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
     private String flagCreateGroup;     //是否创建群组（1否 0是）
     private String flagFocus;     //是否关注（1否 0是）
 
@@ -99,13 +99,6 @@ public class ScheduleInDto {
         this.scheduleExecutor = scheduleExecutor;
     }
 
-    public String getScheduledState() {
-        return scheduledState;
-    }
-
-    public void setScheduledState(String scheduledState) {
-        this.scheduledState = scheduledState;
-    }
 
     public String getGroupId() {
         return GroupId;
@@ -123,29 +116,7 @@ public class ScheduleInDto {
         this.scheduledMap = scheduledMap;
     }
 
-    public String getScheduledRenindDate() {
-        return scheduledRenindDate;
-    }
 
-    public void setScheduledRenindDate(String scheduledRenindDate) {
-        this.scheduledRenindDate = scheduledRenindDate;
-    }
-
-    public String getScheduledRenindRepeat() {
-        return scheduledRenindRepeat;
-    }
-
-    public void setScheduledRenindRepeat(String scheduledRenindRepeat) {
-        this.scheduledRenindRepeat = scheduledRenindRepeat;
-    }
-
-    public String getScheduledRenindRepeatType() {
-        return scheduledRenindRepeatType;
-    }
-
-    public void setScheduledRenindRepeatType(String scheduledRenindRepeatType) {
-        this.scheduledRenindRepeatType = scheduledRenindRepeatType;
-    }
 
     public int getScheduleId() {
         return scheduleId;
@@ -204,13 +175,6 @@ public class ScheduleInDto {
         this.scheduleFinishDate = scheduleFinishDate;
     }
 
-    public String getScheduledEndDate() {
-        return scheduledEndDate;
-    }
-
-    public void setScheduledEndDate(String scheduledEndDate) {
-        this.scheduledEndDate = scheduledEndDate;
-    }
 
     public String getExecutorFinshDate() {
         return ExecutorFinshDate;
@@ -226,5 +190,45 @@ public class ScheduleInDto {
 
     public void setExecutorRenindDate(String executorRenindDate) {
         ExecutorRenindDate = executorRenindDate;
+    }
+
+    public String getScheduleEndDate() {
+        return scheduleEndDate;
+    }
+
+    public void setScheduleEndDate(String scheduleEndDate) {
+        this.scheduleEndDate = scheduleEndDate;
+    }
+
+    public String getScheduleState() {
+        return scheduleState;
+    }
+
+    public void setScheduleState(String scheduleState) {
+        this.scheduleState = scheduleState;
+    }
+
+    public String getScheduleRenindDate() {
+        return scheduleRenindDate;
+    }
+
+    public void setScheduleRenindDate(String scheduleRenindDate) {
+        this.scheduleRenindDate = scheduleRenindDate;
+    }
+
+    public String getScheduleRenindRepeat() {
+        return scheduleRenindRepeat;
+    }
+
+    public void setScheduleRenindRepeat(String scheduleRenindRepeat) {
+        this.scheduleRenindRepeat = scheduleRenindRepeat;
+    }
+
+    public String getScheduleRenindRepeatType() {
+        return scheduleRenindRepeatType;
+    }
+
+    public void setScheduleRenindRepeatType(String scheduleRenindRepeatType) {
+        this.scheduleRenindRepeatType = scheduleRenindRepeatType;
     }
 }

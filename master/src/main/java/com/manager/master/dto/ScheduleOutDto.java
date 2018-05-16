@@ -13,32 +13,27 @@ public class ScheduleOutDto {
     private int scheduleExecutor;       //执行人EXECUTOR
     private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
     private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    private Date  scheduleFinshDate;     //完成时间SCHEDULE_FINISH_DATE
+    private Date  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
     private Date scheduleEndDate;     //截止时间SCHEDULE_END_DATE
-    private String scheduledState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
+    private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
-    private String scheduledMap;     //位置SCHEDULE_MAP
-    private String scheduledRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
-    private String scheduledRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
-    private String scheduledRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
-
+    private String scheduleMap;     //位置SCHEDULE_MAP
+    private String scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
+    private String scheduleRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
+    private String scheduleRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+    private Date scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
 
     //执行事件表(日程关联表)
+
     private Date ExecutorFinshDate;     //完成时间-执行事件表
     private Date ExecutorRemindDate;    //提醒时间-执行事件表
     private String ExecutorRemindRepeat;     //重复提醒-执行事件表
     private String ExecutorRemindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+    private int userId;//执行人ID  USER_ID
+    //事件ID
+    private int executorState;//事件状态 EXECUTOR_STATE
     //用户表
     private String userName;//执行人姓名（用户表里的用户名）
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public int getScheduleId() {
         return scheduleId;
     }
@@ -53,6 +48,14 @@ public class ScheduleOutDto {
 
     public void setScheduleName(String scheduleName) {
         this.scheduleName = scheduleName;
+    }
+
+    public String getScheduleDetail() {
+        return scheduleDetail;
+    }
+
+    public void setScheduleDetail(String scheduleDetail) {
+        this.scheduleDetail = scheduleDetail;
     }
 
     public int getScheduleIssuer() {
@@ -87,44 +90,12 @@ public class ScheduleOutDto {
         this.scheduleStartDate = scheduleStartDate;
     }
 
-    public Date getScheduleFinshDate() {
-        return scheduleFinshDate;
+    public Date getScheduleFinishDate() {
+        return scheduleFinishDate;
     }
 
-    public void setScheduleFinshDate(Date scheduleFinshDate) {
-        this.scheduleFinshDate = scheduleFinshDate;
-    }
-
-    public String getScheduledState() {
-        return scheduledState;
-    }
-
-    public void setScheduledState(String scheduledState) {
-        this.scheduledState = scheduledState;
-    }
-
-    public String getGroupId() {
-        return GroupId;
-    }
-
-    public void setGroupId(String groupId) {
-        GroupId = groupId;
-    }
-
-    public String getScheduledMap() {
-        return scheduledMap;
-    }
-
-    public void setScheduledMap(String scheduledMap) {
-        this.scheduledMap = scheduledMap;
-    }
-
-    public Date getExecutorFinshDate() {
-        return ExecutorFinshDate;
-    }
-
-    public void setExecutorFinshDate(Date executorFinshDate) {
-        ExecutorFinshDate = executorFinshDate;
+    public void setScheduleFinishDate(Date scheduleFinishDate) {
+        this.scheduleFinishDate = scheduleFinishDate;
     }
 
     public Date getScheduleEndDate() {
@@ -135,36 +106,60 @@ public class ScheduleOutDto {
         this.scheduleEndDate = scheduleEndDate;
     }
 
-    public String getScheduleDetail() {
-        return scheduleDetail;
+    public String getScheduleState() {
+        return scheduleState;
     }
 
-    public void setScheduleDetail(String scheduleDetail) {
-        this.scheduleDetail = scheduleDetail;
+    public void setScheduleState(String scheduleState) {
+        this.scheduleState = scheduleState;
     }
 
-    public String getScheduledRemindDate() {
-        return scheduledRemindDate;
+    public String getGroupId() {
+        return GroupId;
     }
 
-    public void setScheduledRemindDate(String scheduledRemindDate) {
-        this.scheduledRemindDate = scheduledRemindDate;
+    public void setGroupId(String groupId) {
+        GroupId = groupId;
     }
 
-    public String getScheduledRemindRepeat() {
-        return scheduledRemindRepeat;
+    public String getScheduleMap() {
+        return scheduleMap;
     }
 
-    public void setScheduledRemindRepeat(String scheduledRemindRepeat) {
-        this.scheduledRemindRepeat = scheduledRemindRepeat;
+    public void setScheduleMap(String scheduleMap) {
+        this.scheduleMap = scheduleMap;
     }
 
-    public String getScheduledRemindRepeatType() {
-        return scheduledRemindRepeatType;
+    public String getScheduleRemindDate() {
+        return scheduleRemindDate;
     }
 
-    public void setScheduledRemindRepeatType(String scheduledRemindRepeatType) {
-        this.scheduledRemindRepeatType = scheduledRemindRepeatType;
+    public void setScheduleRemindDate(String scheduleRemindDate) {
+        this.scheduleRemindDate = scheduleRemindDate;
+    }
+
+    public String getScheduleRemindRepeat() {
+        return scheduleRemindRepeat;
+    }
+
+    public void setScheduleRemindRepeat(String scheduleRemindRepeat) {
+        this.scheduleRemindRepeat = scheduleRemindRepeat;
+    }
+
+    public String getScheduleRemindRepeatType() {
+        return scheduleRemindRepeatType;
+    }
+
+    public void setScheduleRemindRepeatType(String scheduleRemindRepeatType) {
+        this.scheduleRemindRepeatType = scheduleRemindRepeatType;
+    }
+
+    public Date getExecutorFinshDate() {
+        return ExecutorFinshDate;
+    }
+
+    public void setExecutorFinshDate(Date executorFinshDate) {
+        ExecutorFinshDate = executorFinshDate;
     }
 
     public Date getExecutorRemindDate() {
@@ -189,5 +184,36 @@ public class ScheduleOutDto {
 
     public void setExecutorRemindRepeatType(String executorRemindRepeatType) {
         ExecutorRemindRepeatType = executorRemindRepeatType;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Date getScheduleEditDate() {
+        return scheduleEditDate;
+    }
+
+    public void setScheduleEditDate(Date scheduleEditDate) {
+        this.scheduleEditDate = scheduleEditDate;
+    }
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getExecutorState() {
+        return executorState;
+    }
+
+    public void setExecutorState(int executorState) {
+        this.executorState = executorState;
     }
 }

@@ -161,6 +161,24 @@ public interface IScheduleDao {
             " LEFT JOIN GTD_USER GU ON GU.USER_ID = GES.USER_ID " +
             " where group_id = #{groupId} "  )
     List<ScheduleOutDto> findScheduleAndUserName(@Param("groupId") String groupId);
+    /**
+     * 根据事件ID和执行人ID查询事件表和执行事件表。
+     * @return
+     */
+    @Select(" select " +
+            " GS.SCHEDULE_ID,GS.SCHEDULE_NAME,GS.SCHEDULE_DETAIL,GS.SCHEDULE_ISSUER," +
+            " GS.SCHEDULE_CREATE_DATE,GS.SCHEDULE_START_DATE,GS.SCHEDULE_EDIT_DATE," +
+            " GS.SCHEDULE_FINISH_DATE,GS.SCHEDULE_END_DATE,GS.SCHEDULE_STATE," +
+            " GS.GROUP_ID,GS.SCHEDULE_MAP,GS.SCHEDULE_REMIND_DATE,GS.SCHEDULE_REMIND_REPEAT," +
+            " GS.SCHEDULE_REMIND_REPEAT_TYPE,GES.USER_ID,GES.SCHEDULE_ID,GES.EXECUTOR_FINISH_DATE," +
+            " GES.EXECUTOR_STATE,GES.EXECUTOR_REMIND_DATE,GES.EXECUTOR_REMIND_REPEAT,GES.EXECUTOR_REMIND_REPEAT_TYPE," +
+            " GES.EXECUTOR_SCHEDULE_NUMBER" +
+            " from gtd_schedule GS" +
+            " left join GTD_EXECUTOR_SCHEDULE GES ON GS.SCHEDULE_ID = GES.SCHEDULE_ID" +
+            " WHERE GS.SCHEDULE_ID = #{scheduleId}" +
+            " AND GES.USER_ID = #{userId}" )
+    List<ScheduleOutDto> findScheduleAndExeBySchIdAndUserId(@Param("scheduleId") int scheduleId,@Param("userId") int userId);
+
 
 
 }

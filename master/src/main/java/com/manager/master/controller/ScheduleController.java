@@ -87,7 +87,7 @@ public class ScheduleController {
     public BaseOutDto updateSchedule(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, ScheduleOutDto> data = new HashMap<>();
-        inDto.setScheduledState("-1");//事件状态(-1 未完成 1完成)
+        inDto.setScheduleState("-1");//事件状态(-1 未完成 1完成)
         scheduleService.updateSchedule(inDto);
 
         outBean.setData(data);
@@ -166,6 +166,34 @@ public class ScheduleController {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<ScheduleOutDto>> data = new HashMap<>();
         List<ScheduleOutDto> ScheduleDataList = scheduleService.findScheduleByGroup(groupId);
+
+        if(ScheduleDataList != null){
+            data.put("scheduleInfoList", ScheduleDataList);
+            outBean.setData(data);
+            outBean.setCode("0");
+            outBean.setMessage("[查询成功]");
+            logger.info("[查询成功]"+ data);
+        }else{
+            data.put("scheduleInfoList", ScheduleDataList);
+            outBean.setData(data);
+            outBean.setCode("1");
+            outBean.setMessage("[查询失败]");
+            logger.info("[查询失败]" + data);
+        }
+
+        return outBean;
+    }
+    /**
+     * 根据事件ID和USERID查询时间表和执行表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/findSchAndExcu/{scheduleId}/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseOutDto findSchAndExcuByScheduleIdAndUserId(@PathVariable int scheduleId,@PathVariable int userId) {
+        BaseOutDto outBean = new BaseOutDto();
+        Map<String, List<ScheduleOutDto>> data = new HashMap<>();
+        List<ScheduleOutDto> ScheduleDataList = scheduleService.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
 
         if(ScheduleDataList != null){
             data.put("scheduleInfoList", ScheduleDataList);
