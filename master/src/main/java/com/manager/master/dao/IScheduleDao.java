@@ -26,16 +26,16 @@ public interface IScheduleDao {
      * @return
      */
     @Select("INSERT INTO gtd.gtd_schedule (" +
-            "`SCHEDULE_NAME`, `SCHEDULE_DETIAL`, `SCHEDULE_ISSUER`,`SCHEDULE_CREATE_DATE`,`SCHEDULE_START_DATE`,`SCHEDULE_FINISH_DATE`,`SCHEDULE_END_DATE`,`SCHEDULE_STATE`, " +
+            "`SCHEDULE_NAME`, `SCHEDULE_DETAIL`, `SCHEDULE_ISSUER`,`SCHEDULE_CREATE_DATE`,`SCHEDULE_START_DATE`,`SCHEDULE_FINISH_DATE`,`SCHEDULE_END_DATE`,`SCHEDULE_STATE`, " +
             "`GROUP_ID`,`SCHEDULE_MAP`, `SCHEDULE_REMIND_DATE`,`SCHEDULE_REMIND_REPEAT`,`SCHEDULE_REMIND_REPEAT_TYPE`) " +
             "VALUES (" +
-            " #{scheduleName}, #{scheduleDetial}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduledEndDate},#{scheduledState}," +
-            "#{groupId},#{scheduledMap},#{scheduledRenindDate},#{scheduledRenindRepeat},#{scheduledRenindRepeatType})")
-    ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleNamwe,@Param("scheduleDetial") String scheduleDetial,@Param("scheduleIssuer") int scheduleIssuer,
+            " #{scheduleName}, #{scheduleDetail}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState}," +
+            "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduledRemindRepeat},#{scheduleRemindRepeatType})")
+    ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleNamwe,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
                                   @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
-                                  @Param("scheduledEndDate")   Date scheduledEndDate,@Param("scheduledState")  String scheduledState,@Param("groupId")  String  groupId,
-                                  @Param("scheduledMap")  String scheduledMap,@Param("scheduledRenindDate")  String scheduledRenindDate,@Param("scheduledRenindRepeat")  String scheduledRenindRepeat,
-                                  @Param("scheduledRenindRepeatType")  String  scheduledRenindRepeatType);
+                                  @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
+                                  @Param("scheduleMap")  String scheduleMap,@Param("scheduledRemindDate")  String scheduleRemindDate,@Param("scheduledRemindRepeat")  String scheduleRemindRepeat,
+                                  @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
 
 
     /**
@@ -54,22 +54,22 @@ public interface IScheduleDao {
             "`EXECUTOR_STATE`,`EXECUTOR_REMIND_DATE`,`EXECUTOR_REMIND_REPEAT`," +
             "`EXECUTOR_REMIND_REPEAT_TYPE`) " +
             "VALUES (" +
-            " #{userid}, #{scheduledId}, #{executorFinshDate}," +
-            "#{scheduledState}, #{executorRenindDate},#{executorRenindRepeat}," +
-            "#{executorRenindRepeatType})")
+            " #{userId}, #{scheduleId}, #{executorFinishDate}," +
+            "#{scheduleState}, #{executorRemindDate},#{executorRemindRepeat}," +
+            "#{executorRemindRepeatType})")
 
 
-    void createExecutorScheduleId(@Param("userid") int userid,@Param("scheduledId") int  scheduledId,@Param("executorFinshDate") Date executorFinshDate,
-                                  @Param("scheduledState") String scheduledState,@Param("executorRenindDate") Date executorRenindDate,@Param("executorRenindRepeat") String executorRenindRepeat,
-                                  @Param("executorRenindRepeatType") String executorRenindRepeatType);
+    void createExecutorScheduleId(@Param("userId") int userId,@Param("scheduleId") int  scheduleId,@Param("executorFinishDate") Date executorFinishDate,
+                                  @Param("scheduleState") String scheduleState,@Param("executorRemindDate") Date executorRemindDate,@Param("executorRemindRepeat") String executorRemindRepeat,
+                                  @Param("executorRemindRepeatType") String executorRemindRepeatType);
 
 
     /**
      * 查询单条个人日程信息
      * @return
      */
-    @Select("select * FROM gtd_schedule where SCHEDULE_ID = #{scheduledId}")
-    ScheduleOutDto findScheduleByOne(@Param("scheduledId") int scheduledId);
+    @Select("select * FROM gtd_schedule where SCHEDULE_ID = #{scheduleId}")
+    ScheduleOutDto findScheduleByOne(@Param("scheduleId") int scheduleId);
 
     /**
      * 编辑个人日程
@@ -78,7 +78,7 @@ public interface IScheduleDao {
     @Update("UPDATE gtd.GTD_SCHEDULE SET " +
             "`SCHEDULE_ID`=#{scheduledId}, " +//事件ID
             "`SCHEDULE_NAME`=#{scheduleName}, " + //事件名
-            "`SCHEDULE_DETIAL`=#{scheduleDetial} , " + //事件详情
+            "`SCHEDULE_DETAIL`=#{scheduleDetail} , " + //事件详情
 
             "`SCHEDULE_ISSUER`=#{scheduleIssuer} , " + //发布人
             "`SCHEDULE_CREATE_DATE`=#{scheduleCreateDate} , " + //创建时间
@@ -117,7 +117,7 @@ public interface IScheduleDao {
     @Select(" select  " +
             " GS.SCHEDULE_ID, " +
             " GS.SCHEDULE_NAME, " +
-            " GS.SCHEDULE_DETIAL, " +
+            " GS.SCHEDULE_DETAIL, " +
             " GS.SCHEDULE_ISSUER, " +
             " date_format(GS.SCHEDULE_CREATE_DATE,'%Y-%m-%d %T') SCHEDULE_CREATE_DATE, " +
             " GS.SCHEDULE_START_DATE, " +
@@ -142,7 +142,7 @@ public interface IScheduleDao {
     @Select(" select  " +
             " GS.SCHEDULE_ID, " +
             " GS.SCHEDULE_NAME, " +
-            " GS.SCHEDULE_DETIAL, " +
+            " GS.SCHEDULE_DETAIL, " +
             " GS.SCHEDULE_ISSUER, " +
             " date_format(GS.SCHEDULE_CREATE_DATE,'%Y-%m-%d %T') SCHEDULE_CREATE_DATE, " +
             " GS.SCHEDULE_START_DATE, " +

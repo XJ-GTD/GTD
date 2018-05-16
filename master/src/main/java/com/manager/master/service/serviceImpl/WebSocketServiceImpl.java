@@ -1,6 +1,5 @@
 package com.manager.master.service.serviceImpl;
 
-import com.manager.master.dao.IUserDao;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ServerMessageDto;
 import com.manager.master.dto.ToUserMessageDto;
@@ -10,7 +9,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +55,8 @@ public class WebSocketServiceImpl implements IWebSocketService {
 //            String userMobile = userDao.findMobileById(schedule.getScheduleIssuer());//发布人手机号
             String userMobile = schedule.getSchedulePhoneNum();//发布人手机号
             String title = schedule.getScheduleName();//事件名
-            String finshDateString = schedule.getScheduleFinshDateString();//完成时间
-            toUserMsg.setMessage("用户 " + userMobile + " 给您安排了" + title + "，希望您在" + finshDateString + "之前能完成！");
+            String finishDateString = schedule.getScheduleFinishDateString();//完成时间
+            toUserMsg.setMessage("用户 " + userMobile + " 给您安排了" + title + "，希望您在" + finishDateString + "之前能完成！");
             toUserMsg.getUsers().forEach(name -> {
                 template.convertAndSendToUser(name, "/message", toUserMsg.getMessage());
             });

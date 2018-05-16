@@ -61,7 +61,7 @@ public class ScheduleServiceImpl implements IScheduleService {
         DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date scheduleStartDate=null;
         Date scheduleFinishDate=null;
-        Date scheduledEndDate=null;
+        Date scheduleEndDate=null;
         try {
             if(inDto.getScheduleStartDate()!=null){
                 scheduleStartDate=df2.parse(inDto.getScheduleStartDate());// 开始时间
@@ -70,32 +70,32 @@ public class ScheduleServiceImpl implements IScheduleService {
                 scheduleFinishDate = df2.parse(inDto.getScheduleFinishDate());// 完成时间
             }
             if(inDto.getScheduleEndDate()!=null) {
-                scheduledEndDate = df2.parse(inDto.getScheduleEndDate());// 截止时间
+                scheduleEndDate = df2.parse(inDto.getScheduleEndDate());// 截止时间
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 //        String scheduleStartDate=inDto.getScheduleStartDate();// 开始时间
 //        String scheduleFinishDate = inDto.getScheduleFinishDate();// 完成时间
 //        String scheduleCreateDate=df2.format(new Date());// new Date()为获取当前系统时间new Date()
 //        String scheduledEndDate = inDto.getScheduledEndDate();// 截止时间
 
         String scheduleName=inDto.getScheduleName();//事件名称
-        String scheduleDetial=inDto.getScheduleDetial();//事件详情
+        String scheduleDetail=inDto.getScheduleDetail();//事件详情
         int scheduleIssuer=inDto.getScheduleIssuer();//发布人id
         Date scheduleCreateDate=new Date();// 创建时间
-        String scheduledState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
+        String scheduleState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
         String  groupId=inDto.getGroupId();//组群id
-        String scheduledMap=inDto.getScheduledMap();//位置
-        String scheduledRenindDate=inDto.getScheduleRenindDate();//提醒时间
-        String scheduledRenindRepeat=inDto.getScheduleRenindRepeat();//重复提醒
-        String  scheduledRenindRepeatType=inDto.getScheduleRenindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
-        scheduleDao.createSchedule(scheduleName,scheduleDetial,scheduleIssuer,
+        String scheduleMap=inDto.getScheduleMap();//位置
+        String scheduleRemindDate=inDto.getScheduleRemindDate();//提醒时间
+        String scheduleRemindRepeat=inDto.getScheduleRemindRepeat();//重复提醒
+        String  scheduleRemindRepeatType=inDto.getScheduleRemindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+        scheduleDao.createSchedule(scheduleName,scheduleDetail,scheduleIssuer,
                 scheduleCreateDate,scheduleStartDate,scheduleFinishDate,
-                scheduledEndDate,scheduledState,groupId,
-                scheduledMap,scheduledRenindDate,scheduledRenindRepeat,
-                scheduledRenindRepeatType);
-
+                scheduleEndDate,scheduleState,groupId,
+                scheduleMap,scheduleRemindDate,scheduleRemindRepeat,
+                scheduleRemindRepeatType);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return -1;
+        }
 
         return this.selectScheduleId();
     }
@@ -117,32 +117,32 @@ public class ScheduleServiceImpl implements IScheduleService {
      * @param
      */
     public  void   createExecutorSchedule(@RequestBody ScheduleInDto inDto){
-        int  userid=0;
+        int  userId = 0;
         DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        int scheduledId=inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
-        String  userMobile=inDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
-        Date executorFinshDate= null;     //完成时间-执行事件表
-        Date executorRenindDate=null;       //提醒时间-执行事件表
+        int scheduledId = inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
+        String userMobile = inDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
+        Date executorFinishDate= null;     //完成时间-执行事件表
+        Date executorRemindDate=null;       //提醒时间-执行事件表
         try {
-            if(inDto.getExecutorFinshDate()!=null) {
-                executorFinshDate = df2.parse(inDto.getExecutorFinshDate());//完成时间-执行事件表
+            if(inDto.getExecutorFinishDate()!=null) {
+                executorFinishDate = df2.parse(inDto.getExecutorFinishDate());//完成时间-执行事件表
             }
-            if(inDto.getExecutorRenindDate()!=null) {
-                executorRenindDate = df2.parse(inDto.getExecutorRenindDate());    //提醒时间-执行事件表
+            if(inDto.getExecutorRemindDate()!=null) {
+                executorRemindDate = df2.parse(inDto.getExecutorRemindDate());    //提醒时间-执行事件表
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         String scheduledState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
-        String executorRenindRepeat=inDto.getExecutorRenindRepeat();     //重复提醒-执行事件表
-        String executorRenindRepeatType=inDto.getExecutorRenindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+        String executorRemindRepeat=inDto.getExecutorRemindRepeat();     //重复提醒-执行事件表
+        String executorRemindRepeatType=inDto.getExecutorRemindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
 
 
         if(userMobile!=null){
             //添加群组创建人
             String groupId=inDto.getGroupId();
-            int userId=inDto.getScheduleIssuer();//获取用户id
+            userId=inDto.getScheduleIssuer();//获取用户id
             int roleId=1;//1群主 2成员 3发布人 4执行人
             String groupName=inDto.getScheduleName();
             if("0".equals(inDto.getFlagCreateGroup())){
@@ -153,9 +153,9 @@ public class ScheduleServiceImpl implements IScheduleService {
             for (int i = 0; i < mobile.length; i++) {
                 //获取用户id
                 UserInfoOutDto userInfo= userDao.findUser(mobile[i]);
-                userid=userInfo.getUserId();
+                userId=userInfo.getUserId();
                 //添加执行事件表
-                scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
+                scheduleDao.createExecutorScheduleId(userId,scheduledId,executorFinishDate,scheduledState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
 
                 //添加群组
                 groupId=inDto.getGroupId();
@@ -168,8 +168,8 @@ public class ScheduleServiceImpl implements IScheduleService {
             }
         }else{
             //执行人为空时发布人变为执行人
-            userid=inDto.getScheduleIssuer();
-            scheduleDao.createExecutorScheduleId(userid,scheduledId,executorFinshDate,scheduledState,executorRenindDate,executorRenindRepeat,executorRenindRepeatType);
+            userId=inDto.getScheduleIssuer();
+            scheduleDao.createExecutorScheduleId(userId,scheduledId,executorFinishDate,scheduledState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
         }
     }
 
@@ -197,12 +197,12 @@ public class ScheduleServiceImpl implements IScheduleService {
         DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
         int scheduledId=inDto.getScheduleId();
         String scheduleName=inDto.getScheduleName();
-        String scheduleDetial=inDto.getScheduleDetial();
+        String scheduleDetail=inDto.getScheduleDetail();
         int scheduleIssuer=inDto.getScheduleIssuer();
         Date scheduleCreateDate= null;
-        Date  scheduleStartDate= null;
-        Date scheduleFinshDate=null;
-        Date scheduledEndDate=null;
+        Date scheduleStartDate= null;
+        Date scheduleFinishDate=null;
+        Date scheduleEndDate=null;
         try {
             if(inDto.getScheduleCreateDate()!=null) {
                 scheduleCreateDate = df2.parse(inDto.getScheduleCreateDate());
@@ -211,10 +211,10 @@ public class ScheduleServiceImpl implements IScheduleService {
                 scheduleStartDate = df2.parse(inDto.getScheduleStartDate());
             }
             if(inDto.getScheduleFinishDate()!=null) {
-                scheduleFinshDate = df2.parse(inDto.getScheduleFinishDate());
+                scheduleFinishDate = df2.parse(inDto.getScheduleFinishDate());
             }
             if(inDto.getScheduleEndDate()!=null) {
-                scheduledEndDate = df2.parse(inDto.getScheduleEndDate());
+                scheduleEndDate = df2.parse(inDto.getScheduleEndDate());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -222,18 +222,18 @@ public class ScheduleServiceImpl implements IScheduleService {
 
 
         Date scheduleEditDate=new Date();
-        String scheduledState=inDto.getScheduleState();
+        String scheduleState=inDto.getScheduleState();
         String GroupId=inDto.getGroupId();
-        String scheduledMap=inDto.getScheduledMap();
-        String scheduledRenindDate=inDto.getScheduleRenindDate();
-        String scheduledRenindRepeat=inDto.getScheduleRenindRepeat();
-        String scheduledRenindRepeatTyp=inDto.getScheduleRenindRepeatType();
+        String scheduleMap=inDto.getScheduleMap();
+        String scheduleRemindDate=inDto.getScheduleRemindDate();
+        String scheduleRemindRepeat=inDto.getScheduleRemindRepeat();
+        String scheduleRemindRepeatTyp=inDto.getScheduleRemindRepeatType();
 
-        scheduleDao.updateSchedule(scheduledId,scheduleName,scheduleDetial,
+        scheduleDao.updateSchedule(scheduledId,scheduleName,scheduleDetail,
                 scheduleIssuer,scheduleCreateDate,scheduleStartDate,
-                scheduleEditDate,scheduleFinshDate,scheduledEndDate,
-                scheduledState,GroupId,scheduledMap,
-                scheduledRenindDate,scheduledRenindRepeat,scheduledRenindRepeatTyp);
+                scheduleEditDate,scheduleFinishDate,scheduleEndDate,
+                scheduleState,GroupId,scheduleMap,
+                scheduleRemindDate,scheduleRemindRepeat,scheduleRemindRepeatTyp);
         return null;
     }
 

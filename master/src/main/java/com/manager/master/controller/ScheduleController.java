@@ -108,7 +108,7 @@ public class ScheduleController {
     public BaseOutDto find(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         Map<String, List<ScheduleOutDto>> data = new HashMap<>();
-        List<ScheduleOutDto> ScheduleDataList = scheduleService.findSchedule(inDto.getScheduleExecutor());
+        List<ScheduleOutDto> ScheduleDataList = scheduleService.findSchedule(Integer.parseInt(inDto.getUserId()));
 
         if(ScheduleDataList != null){
             data.put("scheduleInfoList", ScheduleDataList);
