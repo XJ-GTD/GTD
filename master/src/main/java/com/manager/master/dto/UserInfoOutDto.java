@@ -12,6 +12,8 @@ public class UserInfoOutDto {
     private String realName; 	//姓名
     private String idNumber; 	//身份证号
     private String userHead; 	//头像URL
+    private String userSex;     //性别
+    private String userBirthday;        //生日
 
     public String getAccountMobile() {
         return accountMobile;
@@ -75,5 +77,21 @@ public class UserInfoOutDto {
 
     public void setUserHead(String userHead) {
         this.userHead = userHead;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getUserBirthday() {
+        return userBirthday;
+    }
+
+    public void setUserBirthday(String userBirthday) {
+        this.userBirthday = userBirthday;
     }
 }

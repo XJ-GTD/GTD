@@ -43,7 +43,11 @@ public interface IUserDao {
      *用户登录
      * @return
      */
-    @Select("SELECT ACCOUNT_ID,ACCOUNT_NAME,ACCOUNT_MOBILE,USER_ID FROM GTD_ACCOUNT t WHERE t.ACCOUNT_MOBILE = #{mobile} AND t.ACCOUNT_PASSWORD = #{password}")
+    @Select(" SELECT B.ACCOUNT_ID,A.ACCOUNT_NAME,A.ACCOUNT_MOBILE," +
+            " B.USER_ID,B.USER_SEX,B.USER_NAME,B.USER_HEAD,B.EMAIL " +
+            " FROM GTD_ACCOUNT A " +
+            " INNER JOIN GTD_USER B ON A.ACCOUNT_ID = B.ACCOUNT_ID " +
+            " WHERE A.ACCOUNT_MOBILE = #{mobile} AND A.ACCOUNT_PASSWORD = #{password}")
     UserAccountBean loginUser(@Param("mobile") String mobile, @Param("password")String password);
     /**
      *获取上次添加用户ID

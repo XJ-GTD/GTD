@@ -76,8 +76,10 @@ public class LoginHtml extends Activity {
             userInfoJson.setAccountMobile(userinfo.optString("accountMobile"));
             userInfoJson.setAccountName(userinfo.optString("accountName"));
             userInfoJson.setUserId(userinfo.optInt("userId"));
-
-
+            userInfoJson.setUserName(userinfo.optString("userName"));
+            userInfoJson.setUserSex(userinfo.optString("userSex"));
+            userInfoJson.setEmail(userinfo.optString("email"));
+            userInfoJson.setUserHead(userinfo.optString("userHead"));
 
 
         } catch (JSONException e) {
