@@ -31,7 +31,7 @@ public interface IScheduleDao {
             "VALUES (" +
             " #{scheduleName}, #{scheduleDetail}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState}," +
             "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduledRemindRepeat},#{scheduleRemindRepeatType})")
-    ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleNamwe,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
+    ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
                                   @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
                                   @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
                                   @Param("scheduleMap")  String scheduleMap,@Param("scheduledRemindDate")  String scheduleRemindDate,@Param("scheduledRemindRepeat")  String scheduleRemindRepeat,
@@ -166,7 +166,7 @@ public interface IScheduleDao {
      * @return
      */
     @Select(" select " +
-            " GS.SCHEDULE_ID,GS.SCHEDULE_NAME,GS.SCHEDULE_DETAIL,GS.SCHEDULE_ISSUER," +
+            " GS.SCHEDULE_ID,GS.SCHEDULE_NAME,GS.SCHEDULE_DETAIL,GS.SCHEDULE_ISSUER,GU1.USER_NAME scheduleIssuerName," +
             " GS.SCHEDULE_CREATE_DATE,GS.SCHEDULE_START_DATE,GS.SCHEDULE_EDIT_DATE," +
             " GS.SCHEDULE_FINISH_DATE,GS.SCHEDULE_END_DATE,GS.SCHEDULE_STATE," +
             " GS.GROUP_ID,GS.SCHEDULE_MAP,GS.SCHEDULE_REMIND_DATE,GS.SCHEDULE_REMIND_REPEAT," +
@@ -175,10 +175,40 @@ public interface IScheduleDao {
             " GES.EXECUTOR_SCHEDULE_NUMBER" +
             " from gtd_schedule GS" +
             " left join GTD_EXECUTOR_SCHEDULE GES ON GS.SCHEDULE_ID = GES.SCHEDULE_ID" +
+            "  left join GTD_USER GU1 ON GU1.USER_ID = GS.SCHEDULE_ISSUER" +
             " WHERE GS.SCHEDULE_ID = #{scheduleId}" +
             " AND GES.USER_ID = #{userId}" )
     List<ScheduleOutDto> findScheduleAndExeBySchIdAndUserId(@Param("scheduleId") int scheduleId,@Param("userId") int userId);
 
+    /**
+     * 根据群组ID插入事件（事件表入库）
+     * @return
+     */
+    @Insert(" insert into gtd_schedule (SCHEDULE_NAME,SCHEDULE_DETAIL,SCHEDULE_ISSUER,SCHEDULE_CREATE_DATE,SCHEDULE_START_DATE," +
+            " SCHEDULE_EDIT_DATE,SCHEDULE_FINISH_DATE,SCHEDULE_END_DATE,SCHEDULE_STATE,GROUP_ID," +
+            " SCHEDULE_MAP,SCHEDULE_REMIND_DATE,SCHEDULE_REMIND_REPEAT,SCHEDULE_REMIND_REPEAT_TYPE)" +
+            " values(#{scheduleName},#{scheduleDetail},#{scheduleIssuer},#{scheduleCreateDate},#{scheduleStartDate}," +
+            "#{scheduleEditDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState},#{groupId}," +
+            "#{scheduleMap},#{scheduleRemindDate},#{scheduleRemindRepeat},#{scheduleRemindRepeatType})" )
+    void createSchByGroupId(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
+                            @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleEditDate")   Date scheduleEditDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
+                            @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
+                            @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  String scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
+                            @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
 
-
+    /**
+     * 添加完群组时间之后通过执行人添加执行事件表
+     * @return
+     */
+    @Insert("INSERT INTO gtd.GTD_EXECUTOR_SCHEDULE (" +
+            "`USER_ID`, `SCHEDULE_ID`, `EXECUTOR_FINISH_DATE`," +
+            "`EXECUTOR_STATE`,`EXECUTOR_REMIND_DATE`,`EXECUTOR_REMIND_REPEAT`," +
+            "`EXECUTOR_REMIND_REPEAT_TYPE`) " +
+            "VALUES (" +
+            " #{userId}, #{scheduleId}, #{executorFinishDate}," +
+            "#{scheduleState}, #{executorRemindDate},#{executorRemindRepeat}," +
+            "#{executorRemindRepeatType})")
+    void createExecutorScheduleAfterCreateGroupSch(@Param("userId") int userId,@Param("scheduleId") int  scheduleId,@Param("executorFinishDate") Date executorFinishDate,
+                                  @Param("scheduleState") String scheduleState,@Param("executorRemindDate") Date executorRemindDate,@Param("executorRemindRepeat") String executorRemindRepeat,
+                                  @Param("executorRemindRepeatType") String executorRemindRepeatType);
 }

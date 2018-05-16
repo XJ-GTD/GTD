@@ -288,4 +288,69 @@ public class ScheduleServiceImpl implements IScheduleService {
     public List<ScheduleOutDto> findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId) {
         return scheduleDao.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
     }
+
+    /**
+     * 群组事件创建
+     *
+     * @param outDto
+     */
+    @Override
+    public void createSchByGroupId(ScheduleOutDto outDto) {
+        outDto.setScheduleState("-1"); //事件状态SCHEDULE_STATE(-1 未完成 1完成)
+//        inDto.setScheduleCreateDate(new Date());// new Date()为获取当前系统时间
+        DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date scheduleStartDate=null;
+        Date scheduleFinishDate=null;
+        Date scheduleEndDate=null;
+        Date scheduleEditDate = null;
+        try {
+            scheduleStartDate=outDto.getScheduleStartDate();// 开始时间
+            scheduleFinishDate = outDto.getScheduleFinishDate();// 完成时间
+            scheduleEndDate = outDto.getScheduleEndDate();// 截止时间
+            scheduleEditDate = outDto.getScheduleEditDate();
+            String scheduleName=outDto.getScheduleName();//事件名称
+            String scheduleDetail=outDto.getScheduleDetail();//事件详情
+            int scheduleIssuer=outDto.getScheduleIssuer();//发布人id
+            Date scheduleCreateDate=new Date();// 创建时间
+            String scheduleState=outDto.getScheduleState();//事件状态(-1 未完成 1完成)
+
+            String  groupId=outDto.getGroupId();//组群id
+            String scheduleMap=outDto.getScheduleMap();//位置
+            String scheduleRemindDate=outDto.getScheduleRemindDate();//提醒时间
+            String scheduleRemindRepeat=outDto.getScheduleRemindRepeat();//重复提醒
+            String  scheduleRemindRepeatType=outDto.getScheduleRemindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+            scheduleDao.createSchByGroupId(scheduleName,scheduleDetail,scheduleIssuer,
+                    scheduleCreateDate,scheduleStartDate,scheduleEditDate, scheduleFinishDate,
+                    scheduleEndDate,scheduleState,groupId,
+                    scheduleMap,scheduleRemindDate,scheduleRemindRepeat,
+                    scheduleRemindRepeatType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 创建执行事件表
+     *
+     * @param outDto
+     */
+    @Override
+    public void createExecutorScheduleAfterCreateGroupSch(ScheduleOutDto outDto) {
+        int  userId = 0;
+        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        int scheduleId = outDto.getScheduleId();         //执行事件IDSCHEDULE_ID
+        String userMobile = outDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
+//        Date executorFinishDate= null;     //完成时间-执行事件表
+//        Date executorRemindDate=null;       //提醒时间-执行事件表
+        Date executorFinishDate =outDto.getExecutorFinishDate();//完成时间-执行事件表
+        Date  executorRemindDate = outDto.getExecutorRemindDate();    //提醒时间-执行事件表
+        String scheduleState=outDto.getScheduleState();//事件状态(-1 未完成 1完成)
+        String executorRemindRepeat=outDto.getExecutorRemindRepeat();     //重复提醒-执行事件表
+        String executorRemindRepeatType=outDto.getExecutorRemindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+        Integer schIDNew = userDao.selectPKId();
+        scheduleDao.createExecutorScheduleAfterCreateGroupSch(userId,schIDNew,executorFinishDate,
+        scheduleState,executorRemindDate,executorRemindRepeat,
+        executorRemindRepeatType);
+
+    }
 }

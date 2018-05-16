@@ -211,5 +211,22 @@ public class ScheduleController {
 
         return outBean;
     }
-
+    /**
+     * 新建群组下的事件,然后添加执行事件表的关联
+     * @parame
+     * @return
+     */
+    @RequestMapping(value = "/createII", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseOutDto createSchBy(@RequestBody ScheduleOutDto outDto) {
+        BaseOutDto outBean = new BaseOutDto();
+        //添加日程
+        scheduleService.createSchByGroupId(outDto);
+        //添加日程关联
+        scheduleService.createExecutorScheduleAfterCreateGroupSch(outDto);
+        outBean.setCode("0");
+        outBean.setMessage("[创建成功]");
+        logger.info("[创建成功]");
+        return outBean;
+    }
 }

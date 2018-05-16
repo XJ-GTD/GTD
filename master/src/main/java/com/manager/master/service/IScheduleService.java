@@ -66,7 +66,15 @@ public interface IScheduleService {
     List<ScheduleOutDto>  findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId);
 
 
-
-
+    /**
+     * 群组事件创建
+     * @param
+     */
+     void createSchByGroupId(@RequestBody ScheduleOutDto inDto);
+    /**
+     * 创建执行事件表
+     * @param
+     */
+    void createExecutorScheduleAfterCreateGroupSch(@RequestBody ScheduleOutDto inDto);
 
 }
