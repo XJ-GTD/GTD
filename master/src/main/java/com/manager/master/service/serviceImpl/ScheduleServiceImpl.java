@@ -76,40 +76,32 @@ public class ScheduleServiceImpl implements IScheduleService {
 //        String scheduleFinishDate = inDto.getScheduleFinishDate();// 完成时间
 //        String scheduleCreateDate=df2.format(new Date());// new Date()为获取当前系统时间new Date()
 //        String scheduledEndDate = inDto.getScheduledEndDate();// 截止时间
-
-        String scheduleName=inDto.getScheduleName();//事件名称
-        String scheduleDetail=inDto.getScheduleDetail();//事件详情
-        int scheduleIssuer=inDto.getScheduleIssuer();//发布人id
-        Date scheduleCreateDate=new Date();// 创建时间
-        String scheduleState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
-        String  groupId=inDto.getGroupId();//组群id
-        String scheduleMap=inDto.getScheduleMap();//位置
-        String scheduleRemindDate=inDto.getScheduleRemindDate();//提醒时间
-        String scheduleRemindRepeat=inDto.getScheduleRemindRepeat();//重复提醒
-        String  scheduleRemindRepeatType=inDto.getScheduleRemindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
-        scheduleDao.createSchedule(scheduleName,scheduleDetail,scheduleIssuer,
-                scheduleCreateDate,scheduleStartDate,scheduleFinishDate,
-                scheduleEndDate,scheduleState,groupId,
-                scheduleMap,scheduleRemindDate,scheduleRemindRepeat,
-                scheduleRemindRepeatType);
         } catch (ParseException e) {
             e.printStackTrace();
             return -1;
         }
+        String scheduleName=inDto.getScheduleName();//事件名称
+        String scheduleDetail=inDto.getScheduleDetail();//事件详情
+        int scheduleIssuer = inDto.getScheduleIssuer();//发布人id
+        String scheduleCreateDate = inDto.getScheduleCreateDate();  // 创建时间
+        String scheduleState = inDto.getScheduleState();//事件状态(-1 未完成 1完成)
+        String  groupId = inDto.getGroupId();//组群id
+        String scheduleMap = inDto.getScheduleMap();//位置
+        Date scheduleRemindDate = inDto.getScheduleRemindDate();//提醒时间
+//            if (inDto.getScheduleRemindDate() != null) {
+//                scheduleRemindDate =
+//            }
+            String scheduleRemindRepeat = inDto.getScheduleRemindRepeat();//重复提醒
+            String scheduleRemindRepeatType = inDto.getScheduleRemindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
+            scheduleDao.createSchedule(scheduleName,scheduleDetail,scheduleIssuer,
+                scheduleCreateDate,scheduleStartDate,scheduleFinishDate,
+                scheduleEndDate,scheduleState,groupId,
+                scheduleMap,scheduleRemindDate,scheduleRemindRepeat,
+                scheduleRemindRepeatType);
 
-        return this.selectScheduleId();
+
+        return scheduleDao.selectScheduleId();
     }
-
-
-    /**
-     * 获取上次添加日程id
-     * @param
-     */
-    public int selectScheduleId(){
-        int ScheduleId=scheduleDao.selectScheduleId();
-      return ScheduleId;
-    }
-
 
 
     /**
@@ -199,14 +191,11 @@ public class ScheduleServiceImpl implements IScheduleService {
         String scheduleName=inDto.getScheduleName();
         String scheduleDetail=inDto.getScheduleDetail();
         int scheduleIssuer=inDto.getScheduleIssuer();
-        Date scheduleCreateDate= null;
+        String scheduleCreateDate= inDto.getScheduleCreateDate();
         Date scheduleStartDate= null;
         Date scheduleFinishDate=null;
         Date scheduleEndDate=null;
         try {
-            if(inDto.getScheduleCreateDate()!=null) {
-                scheduleCreateDate = df2.parse(inDto.getScheduleCreateDate());
-            }
             if(inDto.getScheduleStartDate()!=null) {
                 scheduleStartDate = df2.parse(inDto.getScheduleStartDate());
             }
@@ -225,7 +214,7 @@ public class ScheduleServiceImpl implements IScheduleService {
         String scheduleState=inDto.getScheduleState();
         String GroupId=inDto.getGroupId();
         String scheduleMap=inDto.getScheduleMap();
-        String scheduleRemindDate=inDto.getScheduleRemindDate();
+        Date scheduleRemindDate=inDto.getScheduleRemindDate();
         String scheduleRemindRepeat=inDto.getScheduleRemindRepeat();
         String scheduleRemindRepeatTyp=inDto.getScheduleRemindRepeatType();
 

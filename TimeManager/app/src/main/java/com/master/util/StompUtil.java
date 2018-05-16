@@ -87,7 +87,7 @@ public class StompUtil {
      * @return
      */
     private static void sendMessage(final ScheduleJson schedule) {
-        String data ="{\"userId\":\""+schedule.getUserId()+"\",\"schedulePhoneNum\":\""+schedule.getScheduleIssuer()+"\",\"scheduleName\":\""+schedule.getScheduleName()+"\",\"scheduleFinshDateString\":\""+schedule.getScheduledEndDate()+"\"}";
+        String data ="{\"userId\":\""+schedule.getUserId()+"\",\"schedulePhoneNum\":\""+schedule.getScheduleIssuer()+"\",\"scheduleName\":\""+schedule.getScheduleName()+"\",\"scheduleFinishDateString\":\""+schedule.getScheduleEndDate()+"\"}";
         mStompClient.send("/app/cheat",data)
                 .subscribe(new Subscriber<Void>() {
                     @Override

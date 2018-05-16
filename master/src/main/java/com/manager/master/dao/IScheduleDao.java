@@ -30,11 +30,11 @@ public interface IScheduleDao {
             "`GROUP_ID`,`SCHEDULE_MAP`, `SCHEDULE_REMIND_DATE`,`SCHEDULE_REMIND_REPEAT`,`SCHEDULE_REMIND_REPEAT_TYPE`) " +
             "VALUES (" +
             " #{scheduleName}, #{scheduleDetail}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState}," +
-            "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduledRemindRepeat},#{scheduleRemindRepeatType})")
+            "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduleRemindRepeat},#{scheduleRemindRepeatType})")
     ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
                                   @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
                                   @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
-                                  @Param("scheduleMap")  String scheduleMap,@Param("scheduledRemindDate")  String scheduleRemindDate,@Param("scheduledRemindRepeat")  String scheduleRemindRepeat,
+                                  @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  Date scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
                                   @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
 
 
@@ -76,7 +76,7 @@ public interface IScheduleDao {
      *
      */
     @Update("UPDATE gtd.GTD_SCHEDULE SET " +
-            "`SCHEDULE_ID`=#{scheduledId}, " +//事件ID
+            "`SCHEDULE_ID`=#{scheduleId}, " +//事件ID
             "`SCHEDULE_NAME`=#{scheduleName}, " + //事件名
             "`SCHEDULE_DETAIL`=#{scheduleDetail} , " + //事件详情
 
@@ -85,22 +85,22 @@ public interface IScheduleDao {
             "`SCHEDULE_START_DATE`=#{scheduleStartDate} , " + //开始时间
 
             "`SCHEDULE_EDIT_DATE`=#{scheduleEditDate} , " + //修改时间
-            "`SCHEDULE_FINISH_DATE`=#{scheduleFinshDate} , " + //完成时间
-            "`SCHEDULE_END_DATE`=#{scheduledEndDate} , " + //截止时间
+            "`SCHEDULE_FINISH_DATE`=#{scheduleFinishDate} , " + //完成时间
+            "`SCHEDULE_END_DATE`=#{scheduleEndDate} , " + //截止时间
 
-            "`SCHEDULE_STATE`=#{scheduleIssuer} , " + //事件状态(-1 未完成 1完成)
-            "`GROUP_ID`=#{scheduleIssuer} , " + //组群id
-            "`SCHEDULE_MAP`=#{scheduledMap} , " + //位置
+            "`SCHEDULE_STATE`=#{scheduleState} , " + //事件状态(-1 未完成 1完成)
+            "`GROUP_ID`=#{GroupId} , " + //组群id
+            "`SCHEDULE_MAP`=#{scheduleMap} , " + //位置
 
-            "`SCHEDULE_REMIND_DATE`=#{scheduledRenindDate} , " + //提醒时间
-            "`SCHEDULE_REMIND_REPEAT`=#{scheduledRenindRepeat} , " + //重复提醒
-            "`SCHEDULE_REMIND_REPEAT_TYPE`=#{scheduledRenindRepeatType}  " + //重复提醒类型（1 每日 2 每月 3每年）
-            "WHERE `SCHEDULE_ID`=#{scheduledId}")
-    void updateSchedule(@Param("scheduledId") int scheduledId,@Param("scheduleName") String scheduleName,@Param("scheduleDetial") String scheduleDetial,
-                        @Param("scheduleIssuer") int scheduleIssuer,@Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate") Date  scheduleStartDate,
-                        @Param("scheduleEditDate") Date scheduleEditDate,@Param("scheduleFinshDate") Date scheduleFinshDate,@Param("scheduledEndDate") Date scheduledEndDate,
-                        @Param("scheduledState") String scheduledState,@Param("GroupId") String GroupId,@Param("scheduledMap") String scheduledMap,
-                        @Param("scheduledRenindDate") String scheduledRenindDate,@Param("scheduledRenindRepeat") String scheduledRenindRepeat,@Param("scheduledRenindRepeatType") String scheduledRenindRepeatType);
+            "`SCHEDULE_REMIND_DATE`=#{scheduleRemindDate} , " + //提醒时间
+            "`SCHEDULE_REMIND_REPEAT`=#{scheduleRemindRepeat} , " + //重复提醒
+            "`SCHEDULE_REMIND_REPEAT_TYPE`=#{scheduleRemindRepeatType}  " + //重复提醒类型（1 每日 2 每月 3每年）
+            "WHERE `SCHEDULE_ID`=#{scheduleId}")
+    void updateSchedule(@Param("scheduleId") int scheduleId,@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,
+                        @Param("scheduleIssuer") int scheduleIssuer,@Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate") Date  scheduleStartDate,
+                        @Param("scheduleEditDate") Date scheduleEditDate,@Param("scheduleFinishDate") Date scheduleFinishDate,@Param("scheduleEndDate") Date scheduleEndDate,
+                        @Param("scheduleState") String scheduleState,@Param("GroupId") String GroupId,@Param("scheduleMap") String scheduleMap,
+                        @Param("scheduleRemindDate") Date scheduleRemindDate,@Param("scheduleRemindRepeat") String scheduleRemindRepeat,@Param("scheduleRemindRepeatType") String scheduleRemindRepeatType);
 
     //DELETE FROM `gtd`.`GTD_SCHEDULE` WHERE `SCHEDULE_ID`='1133';
     /**

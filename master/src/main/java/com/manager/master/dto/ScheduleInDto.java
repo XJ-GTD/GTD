@@ -1,5 +1,8 @@
 package com.manager.master.dto;
 
+
+import java.util.Date;
+
 /**
  * 日程
  * create  zy
@@ -16,7 +19,7 @@ public class ScheduleInDto {
     private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduleMap;     //位置SCHEDULE_MAP
-    private String scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
+    private Date scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduleRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduleRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
     private String flagCreateGroup;     //是否创建群组（1否 0是）
@@ -113,11 +116,11 @@ public class ScheduleInDto {
         this.scheduleMap = scheduleMap;
     }
 
-    public String getScheduleRemindDate() {
+    public Date getScheduleRemindDate() {
         return scheduleRemindDate;
     }
 
-    public void setScheduleRemindDate(String scheduleRemindDate) {
+    public void setScheduleRemindDate(Date scheduleRemindDate) {
         this.scheduleRemindDate = scheduleRemindDate;
     }
 

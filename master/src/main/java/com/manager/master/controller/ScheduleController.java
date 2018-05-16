@@ -64,7 +64,7 @@ public class ScheduleController {
 
         //查询日程id
 //        int  ScheduleId=scheduleService.selectScheduleId();
-        int  ScheduleId=scheduleService.createSchedule(inDto);
+        int  ScheduleId = scheduleService.createSchedule(inDto);
         inDto.setScheduleId(ScheduleId);
         //添加日程关联
         scheduleService.createExecutorSchedule(inDto);

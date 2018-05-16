@@ -27,13 +27,14 @@ public class ScheduleHtml {
      * 添加日程请求 POST
      * @return
      */
-    public static String addSchedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
+    public static String addSingleSchedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
                                      String scheduleRemindDate, String scheduleRemindRepeatType, String executor, int scheduleIssuer,
-                                     String flagCreateGroup, String flagFocus) {
+                                     String flagCreateGroup, String flagFocus, String scheduleCreateDate) {
         String url = GlobalVar.SCHEDULE_ADD_URL();
         String data = "{\"scheduleIssuer\":\""+ scheduleIssuer +"\", \"userId\":\""+ executor +"\", \"scheduleName\":\""+ scheduleName +"\", \"scheduleDetail\":\""+ scheduleDetail +"\"," +
                 "\"scheduleStartDate\":\""+ scheduleStartDate + "\", \"scheduleEndDate\":\"" + scheduleEndDate + "\", \"scheduleRemindDate\":\""+ scheduleRemindDate + "\"," +
-                "\"scheduleRemindRepeatType\":\""+ scheduleRemindRepeatType + "\",\"flagCreateGroup\":\""+ flagCreateGroup + "\",\"flagFocus\":\""+ flagFocus + "\"}";
+                "\"scheduleRemindRepeatType\":\""+ scheduleRemindRepeatType + "\",\"flagCreateGroup\":\""+ flagCreateGroup + "\"," +
+                "\"flagFocus\":\""+ flagFocus + "\",\"scheduleCreateDate\":\""+ scheduleCreateDate + "\"}";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
@@ -207,7 +208,8 @@ public class ScheduleHtml {
             public void add_Schedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
                                      String scheduleRemindDate, String scheduleRemindRepeatType, String executor, String flagCreateGroup,
                                      String flagFocus) {
-                String dataJson = addSchedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate, scheduleRemindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus);
+                String scheduleCreateDate = BasicUtil.getNowDate();
+                String dataJson = addSingleSchedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate, scheduleRemindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus, scheduleCreateDate);
                 BaseJson data = BasicUtil.jsonToString(dataJson);
                 if (data.getCode().equals("0")) {
                     Toast.makeText(context, data.getMessage() , 0).show();
