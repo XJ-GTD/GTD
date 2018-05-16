@@ -274,7 +274,7 @@ public class ScheduleServiceImpl implements IScheduleService {
      * @return
      */
     @Override
-    public List<ScheduleOutDto> findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId) {
+    public ScheduleOutDto findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId) {
         return scheduleDao.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
     }
 

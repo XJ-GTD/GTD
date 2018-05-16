@@ -32,7 +32,7 @@ public interface IScheduleDao {
             " #{scheduleName}, #{scheduleDetail}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState}," +
             "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduleRemindRepeat},#{scheduleRemindRepeatType})")
     ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
-                                  @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
+                                  @Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
                                   @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
                                   @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  Date scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
                                   @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
@@ -178,7 +178,7 @@ public interface IScheduleDao {
             "  left join GTD_USER GU1 ON GU1.USER_ID = GS.SCHEDULE_ISSUER" +
             " WHERE GS.SCHEDULE_ID = #{scheduleId}" +
             " AND GES.USER_ID = #{userId}" )
-    List<ScheduleOutDto> findScheduleAndExeBySchIdAndUserId(@Param("scheduleId") int scheduleId,@Param("userId") int userId);
+    ScheduleOutDto findScheduleAndExeBySchIdAndUserId(@Param("scheduleId") int scheduleId,@Param("userId") int userId);
 
     /**
      * 根据群组ID插入事件（事件表入库）

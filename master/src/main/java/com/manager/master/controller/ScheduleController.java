@@ -192,19 +192,19 @@ public class ScheduleController {
     @ResponseBody
     public BaseOutDto findSchAndExcuByScheduleIdAndUserId(@PathVariable int scheduleId,@PathVariable int userId) {
         BaseOutDto outBean = new BaseOutDto();
-        Map<String, List<ScheduleOutDto>> data = new HashMap<>();
-        List<ScheduleOutDto> ScheduleDataList = scheduleService.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
+        Map<String, ScheduleOutDto> data = new HashMap<>();
+        ScheduleOutDto ScheduleData = scheduleService.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
 
-        if(ScheduleDataList != null){
-            data.put("scheduleInfoList", ScheduleDataList);
+        if(ScheduleData != null){
+            data.put("scheduleInfo", ScheduleData);
             outBean.setData(data);
             outBean.setCode("0");
             outBean.setMessage("[查询成功]");
             logger.info("[查询成功]"+ data);
         }else{
-            data.put("scheduleInfoList", ScheduleDataList);
-            outBean.setData(data);
+            data.put("scheduleInfo", ScheduleData);
             outBean.setCode("1");
+            outBean.setData(data);
             outBean.setMessage("[查询失败]");
             logger.info("[查询失败]" + data);
         }

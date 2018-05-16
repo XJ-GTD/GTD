@@ -57,7 +57,7 @@ public interface IScheduleService {
      * 根据事件ID和执行人ID查询事件表和执行事件表。
      * @return
      */
-    List<ScheduleOutDto>  findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId);
+    ScheduleOutDto  findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId);
 
 
     /**
