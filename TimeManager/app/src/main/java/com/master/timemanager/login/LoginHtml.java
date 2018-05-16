@@ -71,7 +71,7 @@ public class LoginHtml extends Activity {
             }
 
             //第二层解析
-            JSONObject userinfo = data.optJSONObject("userinfo");
+            JSONObject userinfo = data.optJSONObject("userInfo");
             userInfoJson.setAccountId(userinfo.optInt("accountId"));
             userInfoJson.setAccountMobile(userinfo.optString("accountMobile"));
             userInfoJson.setAccountName(userinfo.optString("accountName"));

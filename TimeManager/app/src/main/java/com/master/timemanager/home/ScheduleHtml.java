@@ -27,13 +27,13 @@ public class ScheduleHtml {
      * 添加日程请求 POST
      * @return
      */
-    public static String addSchedule(String scheduleName, String scheduleDetial, String scheduleStartDate, String scheduledEndDate,
-                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor, int scheduleIssuer,
+    public static String addSchedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
+                                     String scheduleRemindDate, String scheduleRemindRepeatType, String executor, int scheduleIssuer,
                                      String flagCreateGroup, String flagFocus) {
         String url = GlobalVar.SCHEDULE_ADD_URL();
-        String data = "{\"scheduleIssuer\":\""+ scheduleIssuer +"\", \"userId\":\""+ executor +"\", \"scheduleName\":\""+ scheduleName +"\", \"scheduleDetial\":\""+ scheduleDetial +"\"," +
-                "\"scheduleStartDate\":\""+ scheduleStartDate + "\", \"scheduledEndDate\":\"" + scheduledEndDate + "\", \"scheduledRenindDate\":\""+ scheduledRenindDate + "\"," +
-                "\"scheduledRenindRepeatType\":\""+ scheduledRenindRepeatType + "\",\"flagCreateGroup\":\""+ flagCreateGroup + "\",\"flagFocus\":\""+ flagFocus + "\"}";
+        String data = "{\"scheduleIssuer\":\""+ scheduleIssuer +"\", \"userId\":\""+ executor +"\", \"scheduleName\":\""+ scheduleName +"\", \"scheduleDetail\":\""+ scheduleDetail +"\"," +
+                "\"scheduleStartDate\":\""+ scheduleStartDate + "\", \"scheduleEndDate\":\"" + scheduleEndDate + "\", \"scheduleRemindDate\":\""+ scheduleRemindDate + "\"," +
+                "\"scheduleRemindRepeatType\":\""+ scheduleRemindRepeatType + "\",\"flagCreateGroup\":\""+ flagCreateGroup + "\",\"flagFocus\":\""+ flagFocus + "\"}";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
@@ -107,19 +107,19 @@ public class ScheduleHtml {
 
                     json1.setScheduleName(jsonObject1.optString("scheduleName"));
                     json1.setScheduleId(jsonObject1.optString("scheduleId"));
-                    json1.setScheduleDetial(jsonObject1.optString("scheduleDetail"));
+                    json1.setScheduleDetail(jsonObject1.optString("scheduleDetail"));
                     json1.setScheduleIssuer(jsonObject1.optString("scheduleIssuer"));
                     json1.setUserName(jsonObject1.optString("userName"));
                     json1.setScheduleCreateDate(jsonObject1.optString("scheduleCreateDate"));
                     json1.setScheduleStartDate(jsonObject1.optString("scheduleStartDate"));
-                    json1.setScheduleFinshDate(jsonObject1.optString("scheduleFinshDate"));
-                    json1.setScheduledEndDate(jsonObject1.optString("scheduleEndDate"));
-                    json1.setScheduledState(jsonObject1.optString("scheduledState"));
+                    json1.setScheduleFinishDate(jsonObject1.optString("scheduleFinishDate"));
+                    json1.setScheduleEndDate(jsonObject1.optString("scheduleEndDate"));
+                    json1.setScheduleState(jsonObject1.optString("scheduleState"));
                     json1.setGroupId(jsonObject1.optString("GroupId"));
-                    json1.setExecutorFinshDate(jsonObject1.optString("ExecutorFinshDate"));
-                    json1.setExecutorRenindDate(jsonObject1.optString("ExecutorRenindDate"));
-                    json1.setExecutorRenindRepeat(jsonObject1.optString("ExecutorRenindRepeat"));
-                    json1.setExecutorRenindRepeatType(jsonObject1.optString("ExecutorRenindRepeatType"));
+                    json1.setExecutorFinishDate(jsonObject1.optString("ExecutorFinishDate"));
+                    json1.setExecutorRemindDate(jsonObject1.optString("ExecutorRemindDate"));
+                    json1.setExecutorRemindRepeat(jsonObject1.optString("ExecutorRemindRepeat"));
+                    json1.setExecutorRemindRepeatType(jsonObject1.optString("ExecutorRemindRepeatType"));
 
                     scheduleList.add(json1);
                 }
@@ -204,10 +204,10 @@ public class ScheduleHtml {
         webView.addJavascriptInterface(new Object() {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void add_Schedule(String scheduleName, String scheduleDetial, String scheduleStartDate, String scheduledEndDate,
-                                     String scheduledRenindDate, String scheduledRenindRepeatType, String executor, String flagCreateGroup,
+            public void add_Schedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
+                                     String scheduleRemindDate, String scheduleRemindRepeatType, String executor, String flagCreateGroup,
                                      String flagFocus) {
-                String dataJson = addSchedule(scheduleName, scheduleDetial, scheduleStartDate, scheduledEndDate, scheduledRenindDate, scheduledRenindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus);
+                String dataJson = addSchedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate, scheduleRemindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus);
                 BaseJson data = BasicUtil.jsonToString(dataJson);
                 if (data.getCode().equals("0")) {
                     Toast.makeText(context, data.getMessage() , 0).show();

@@ -41,13 +41,13 @@ public class UserController {
         UserAccountBean userAccountBean = userService.loginUser(inDto.getAccountMobile(),inDto.getAccountPassword());
 
         if (userAccountBean != null) {
-            data.put("userinfo", userAccountBean);
+            data.put("userInfo", userAccountBean);
             outBean.setData(data);
             outBean.setCode("0");
             outBean.setMessage("[登录成功]");
             logger.info("[登录成功]"+ data);
         } else {
-            data.put("userinfo", userAccountBean);
+            data.put("userInfo", userAccountBean);
             outBean.setData(data);
             outBean.setCode("1");
             outBean.setMessage("[登录失败]:用户名或密码输入错误!");
