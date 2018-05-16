@@ -97,7 +97,7 @@ public interface IScheduleDao {
             "`SCHEDULE_REMIND_REPEAT_TYPE`=#{scheduleRemindRepeatType}  " + //重复提醒类型（1 每日 2 每月 3每年）
             "WHERE `SCHEDULE_ID`=#{scheduleId}")
     void updateSchedule(@Param("scheduleId") int scheduleId,@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,
-                        @Param("scheduleIssuer") int scheduleIssuer,@Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate") Date  scheduleStartDate,
+                        @Param("scheduleIssuer") int scheduleIssuer,@Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate") Date  scheduleStartDate,
                         @Param("scheduleEditDate") Date scheduleEditDate,@Param("scheduleFinishDate") Date scheduleFinishDate,@Param("scheduleEndDate") Date scheduleEndDate,
                         @Param("scheduleState") String scheduleState,@Param("GroupId") String GroupId,@Param("scheduleMap") String scheduleMap,
                         @Param("scheduleRemindDate") Date scheduleRemindDate,@Param("scheduleRemindRepeat") String scheduleRemindRepeat,@Param("scheduleRemindRepeatType") String scheduleRemindRepeatType);

@@ -170,11 +170,11 @@ public class ScheduleHtml {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void findSingleSchedule(final int scheduleId) {
+                String dataJson = findGroupScheduleMine(scheduleId, user.getUserId());
+                final BaseJson data = jsonToScheduleString(dataJson, 2);
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        String dataJson = findGroupScheduleMine(scheduleId, user.getUserId());
-                        BaseJson data = jsonToScheduleString(dataJson, 2);
                         if (data.getCode().equals("0")) {
                             singleSchedule(webView, context, user, data);
                         } else {
