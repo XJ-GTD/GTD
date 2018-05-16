@@ -43,7 +43,6 @@ function remindDate() {
 
 function remindTimeSpilt(remindTime1, remindTime2, remindType) {
     var time = null;
-    alert(remindType);
     if (remindType === "time_2") {
         time = remindTime1  + " " + remindTime2;
     } else if (remindType === "time_3") {

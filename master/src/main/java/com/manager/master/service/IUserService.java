@@ -1,9 +1,8 @@
 package com.manager.master.service;
 
 import com.manager.master.bean.UserAccountBean;
-import com.manager.master.bean.UserInfoBean;
-import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.UserInfoInDto;
+import com.manager.master.dto.UserInfoOutDto;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -16,7 +15,7 @@ public interface IUserService {
      * 根据手机号码询用户信息
      * @return
      */
-     UserInfoBean findUser(String mobile);
+    UserInfoOutDto findUser(String mobile);
     /**
      * 用户登录
      * @param mobile  登录账号
@@ -35,7 +34,7 @@ public interface IUserService {
      * 获取上次添加的userId
      * @param
      */
-    public int selectPKId();
+    int selectPKId();
 
     /**
      * 用户注册

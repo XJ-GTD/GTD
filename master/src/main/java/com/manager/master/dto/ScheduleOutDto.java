@@ -24,7 +24,6 @@ public class ScheduleOutDto {
     private Date scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
 
     //执行事件表(日程关联表)
-
     private Date ExecutorFinshDate;     //完成时间-执行事件表
     private Date ExecutorRemindDate;    //提醒时间-执行事件表
     private String ExecutorRemindRepeat;     //重复提醒-执行事件表
@@ -34,6 +33,15 @@ public class ScheduleOutDto {
     private int executorState;//事件状态 EXECUTOR_STATE
     //用户表
     private String userName;//执行人姓名（用户表里的用户名）
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public int getScheduleId() {
         return scheduleId;
     }

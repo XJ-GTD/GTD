@@ -1,9 +1,9 @@
 package com.manager.master.controller;
 
 import com.manager.master.bean.UserAccountBean;
-import com.manager.master.bean.UserInfoBean;
 import com.manager.master.dto.BaseOutDto;
 import com.manager.master.dto.UserInfoInDto;
+import com.manager.master.dto.UserInfoOutDto;
 import com.manager.master.service.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,8 +64,8 @@ public class UserController {
     @ResponseBody
     public BaseOutDto findUser(@PathVariable String mobile) {
         BaseOutDto outBean = new BaseOutDto();
-        Map<String, UserInfoBean> data = new HashMap<>();
-        UserInfoBean userInfoBean = userService.findUser(mobile);
+        Map<String, UserInfoOutDto> data = new HashMap<>();
+        UserInfoOutDto userInfoBean = userService.findUser(mobile);
 
         if (userInfoBean != null) {
             data.put("user", userInfoBean);
