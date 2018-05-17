@@ -218,12 +218,12 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/createII", method = RequestMethod.POST)
     @ResponseBody
-    public BaseOutDto createSchBy(@RequestBody ScheduleOutDto outDto) {
+    public BaseOutDto createSchBy(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();
         //添加日程
-        scheduleService.createSchByGroupId(outDto);
+        scheduleService.createSchByGroupId(inDto);
         //添加日程关联
-        scheduleService.createExecutorScheduleAfterCreateGroupSch(outDto);
+        scheduleService.createExecutorScheduleAfterCreateGroupSch(inDto);
         outBean.setCode("0");
         outBean.setMessage("[创建成功]");
         logger.info("[创建成功]");

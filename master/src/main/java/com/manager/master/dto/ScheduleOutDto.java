@@ -14,17 +14,17 @@ public class ScheduleOutDto {
     private String scheduleIssuerName;       //发布人姓名
 
     private int scheduleExecutor;       //执行人EXECUTOR
-    private Date scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
-    private Date  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
-    private Date  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
-    private Date scheduleEndDate;     //截止时间SCHEDULE_END_DATE
+    private String scheduleCreateDate;     //创建时间SCHEDULE_CREATE_DATE
+    private String  scheduleStartDate;     //开始时间SCHEDULE_START_DATE
+    private String  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
+    private String scheduleEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduleMap;     //位置SCHEDULE_MAP
     private String scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduleRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduleRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
-    private Date scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
+    private String scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
     //执行事件表(日程关联表)
 
     private Date ExecutorFinishDate;     //完成时间-执行事件表
@@ -84,35 +84,35 @@ public class ScheduleOutDto {
         this.scheduleExecutor = scheduleExecutor;
     }
 
-    public Date getScheduleCreateDate() {
+    public String getScheduleCreateDate() {
         return scheduleCreateDate;
     }
 
-    public void setScheduleCreateDate(Date scheduleCreateDate) {
+    public void setScheduleCreateDate(String scheduleCreateDate) {
         this.scheduleCreateDate = scheduleCreateDate;
     }
 
-    public Date getScheduleStartDate() {
+    public String getScheduleStartDate() {
         return scheduleStartDate;
     }
 
-    public void setScheduleStartDate(Date scheduleStartDate) {
+    public void setScheduleStartDate(String scheduleStartDate) {
         this.scheduleStartDate = scheduleStartDate;
     }
 
-    public Date getScheduleFinishDate() {
+    public String getScheduleFinishDate() {
         return scheduleFinishDate;
     }
 
-    public void setScheduleFinishDate(Date scheduleFinishDate) {
+    public void setScheduleFinishDate(String scheduleFinishDate) {
         this.scheduleFinishDate = scheduleFinishDate;
     }
 
-    public Date getScheduleEndDate() {
+    public String getScheduleEndDate() {
         return scheduleEndDate;
     }
 
-    public void setScheduleEndDate(Date scheduleEndDate) {
+    public void setScheduleEndDate(String scheduleEndDate) {
         this.scheduleEndDate = scheduleEndDate;
     }
 
@@ -196,11 +196,11 @@ public class ScheduleOutDto {
         this.userName = userName;
     }
 
-    public Date getScheduleEditDate() {
+    public String getScheduleEditDate() {
         return scheduleEditDate;
     }
 
-    public void setScheduleEditDate(Date scheduleEditDate) {
+    public void setScheduleEditDate(String scheduleEditDate) {
         this.scheduleEditDate = scheduleEditDate;
     }
     public String getUserId() {

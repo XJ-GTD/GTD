@@ -32,9 +32,9 @@ public interface IScheduleDao {
             " #{scheduleName}, #{scheduleDetail}, #{scheduleIssuer},#{scheduleCreateDate}, #{scheduleStartDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState}," +
             "#{groupId},#{scheduleMap},#{scheduleRemindDate},#{scheduleRemindRepeat},#{scheduleRemindRepeatType})")
     ScheduleOutDto createSchedule(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
-                                  @Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
-                                  @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
-                                  @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  Date scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
+                                  @Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate")  String scheduleStartDate, @Param("scheduleFinishDate")  String scheduleFinishDate,
+                                  @Param("scheduleEndDate")   String scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
+                                  @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  String scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
                                   @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
 
 
@@ -97,10 +97,10 @@ public interface IScheduleDao {
             "`SCHEDULE_REMIND_REPEAT_TYPE`=#{scheduleRemindRepeatType}  " + //重复提醒类型（1 每日 2 每月 3每年）
             "WHERE `SCHEDULE_ID`=#{scheduleId}")
     void updateSchedule(@Param("scheduleId") int scheduleId,@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,
-                        @Param("scheduleIssuer") int scheduleIssuer,@Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate") Date  scheduleStartDate,
-                        @Param("scheduleEditDate") Date scheduleEditDate,@Param("scheduleFinishDate") Date scheduleFinishDate,@Param("scheduleEndDate") Date scheduleEndDate,
+                        @Param("scheduleIssuer") int scheduleIssuer,@Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate") String  scheduleStartDate,
+                        @Param("scheduleEditDate") String scheduleEditDate,@Param("scheduleFinishDate") String scheduleFinishDate,@Param("scheduleEndDate") String scheduleEndDate,
                         @Param("scheduleState") String scheduleState,@Param("GroupId") String GroupId,@Param("scheduleMap") String scheduleMap,
-                        @Param("scheduleRemindDate") Date scheduleRemindDate,@Param("scheduleRemindRepeat") String scheduleRemindRepeat,@Param("scheduleRemindRepeatType") String scheduleRemindRepeatType);
+                        @Param("scheduleRemindDate") String scheduleRemindDate,@Param("scheduleRemindRepeat") String scheduleRemindRepeat,@Param("scheduleRemindRepeatType") String scheduleRemindRepeatType);
 
     //DELETE FROM `gtd`.`GTD_SCHEDULE` WHERE `SCHEDULE_ID`='1133';
     /**
@@ -191,8 +191,8 @@ public interface IScheduleDao {
             "#{scheduleEditDate},#{scheduleFinishDate},#{scheduleEndDate},#{scheduleState},#{groupId}," +
             "#{scheduleMap},#{scheduleRemindDate},#{scheduleRemindRepeat},#{scheduleRemindRepeatType})" )
     void createSchByGroupId(@Param("scheduleName") String scheduleName,@Param("scheduleDetail") String scheduleDetail,@Param("scheduleIssuer") int scheduleIssuer,
-                            @Param("scheduleCreateDate") Date scheduleCreateDate,@Param("scheduleStartDate")  Date scheduleStartDate, @Param("scheduleEditDate")   Date scheduleEditDate, @Param("scheduleFinishDate")  Date scheduleFinishDate,
-                            @Param("scheduleEndDate")   Date scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
+                            @Param("scheduleCreateDate") String scheduleCreateDate,@Param("scheduleStartDate")  String scheduleStartDate, @Param("scheduleEditDate")   String scheduleEditDate, @Param("scheduleFinishDate")  String scheduleFinishDate,
+                            @Param("scheduleEndDate")   String scheduleEndDate,@Param("scheduleState")  String scheduleState,@Param("groupId")  String  groupId,
                             @Param("scheduleMap")  String scheduleMap,@Param("scheduleRemindDate")  String scheduleRemindDate,@Param("scheduleRemindRepeat")  String scheduleRemindRepeat,
                             @Param("scheduleRemindRepeatType")  String  scheduleRemindRepeatType);
 
@@ -208,7 +208,7 @@ public interface IScheduleDao {
             " #{userId}, #{scheduleId}, #{executorFinishDate}," +
             "#{scheduleState}, #{executorRemindDate},#{executorRemindRepeat}," +
             "#{executorRemindRepeatType})")
-    void createExecutorScheduleAfterCreateGroupSch(@Param("userId") int userId,@Param("scheduleId") int  scheduleId,@Param("executorFinishDate") Date executorFinishDate,
-                                  @Param("scheduleState") String scheduleState,@Param("executorRemindDate") Date executorRemindDate,@Param("executorRemindRepeat") String executorRemindRepeat,
+    void createExecutorScheduleAfterCreateGroupSch(@Param("userId") int userId,@Param("scheduleId") int  scheduleId,@Param("executorFinishDate") String executorFinishDate,
+                                  @Param("scheduleState") String scheduleState,@Param("executorRemindDate") String executorRemindDate,@Param("executorRemindRepeat") String executorRemindRepeat,
                                   @Param("executorRemindRepeatType") String executorRemindRepeatType);
 }

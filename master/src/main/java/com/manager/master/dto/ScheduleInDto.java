@@ -19,12 +19,21 @@ public class ScheduleInDto {
     private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
     private String GroupId;          //组群idGROUP_ID
     private String scheduleMap;     //位置SCHEDULE_MAP
-    private Date scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
+    private String scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduleRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduleRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
     private String flagCreateGroup;     //是否创建群组（1否 0是）
     private String flagFocus;     //是否关注（1否 0是）
 
+    public String getScheduleEditDate() {
+        return scheduleEditDate;
+    }
+
+    public void setScheduleEditDate(String scheduleEditDate) {
+        this.scheduleEditDate = scheduleEditDate;
+    }
+
+    private String scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
     //执行事件表(日程关联表)
     private int scheduleId;          //执行事件IDSCHEDULE_ID
     private String userId;         //执行人电话（执行人id）  String  ,拼写字符串
@@ -116,11 +125,11 @@ public class ScheduleInDto {
         this.scheduleMap = scheduleMap;
     }
 
-    public Date getScheduleRemindDate() {
+    public String getScheduleRemindDate() {
         return scheduleRemindDate;
     }
 
-    public void setScheduleRemindDate(Date scheduleRemindDate) {
+    public void setScheduleRemindDate(String scheduleRemindDate) {
         this.scheduleRemindDate = scheduleRemindDate;
     }
 

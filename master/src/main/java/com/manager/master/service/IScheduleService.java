@@ -64,11 +64,11 @@ public interface IScheduleService {
      * 群组事件创建
      * @param
      */
-     void createSchByGroupId(@RequestBody ScheduleOutDto inDto);
+     void createSchByGroupId(@RequestBody ScheduleInDto inDto);
     /**
      * 创建执行事件表
      * @param
      */
-    void createExecutorScheduleAfterCreateGroupSch(@RequestBody ScheduleOutDto inDto);
+    void createExecutorScheduleAfterCreateGroupSch(@RequestBody ScheduleInDto inDto);
 
 }
