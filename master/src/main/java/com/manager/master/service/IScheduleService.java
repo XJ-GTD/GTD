@@ -1,5 +1,6 @@
 package com.manager.master.service;
 
+import com.manager.master.dto.PersonScheduleDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,5 +71,11 @@ public interface IScheduleService {
      * @param
      */
     void createExecutorScheduleAfterCreateGroupSch(@RequestBody ScheduleInDto inDto);
+
+    /**
+     * 个人日历日程查询
+     * @return
+     */
+    PersonScheduleDto createSchByCalendar(String date,int userId);
 
 }
