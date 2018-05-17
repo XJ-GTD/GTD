@@ -28,7 +28,7 @@ public class StompUtil {
      * @return
      */
     public static void init(final String userId, final Context context) {
-        mStompClient = Stomp.over(WebSocket.class, "ws://192.168.99.31:8080/gtd/webSocketServer/websocket");
+        mStompClient = Stomp.over(WebSocket.class, "ws://192.168.99.39:8080/gtd/webSocketServer/websocket");
         mStompClient.connect();
         mStompClient.lifecycle().subscribe(new Action1<LifecycleEvent>() {
             @Override

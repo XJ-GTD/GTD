@@ -46,7 +46,7 @@ public class GroupController {
         } else {
             outBean.setCode("1");
             outBean.setMessage("[查询失败]数据库无数据");
-            logger.info("[查询失败]"+ data.toString());
+            logger.info("[查询失败]数据库无数据"+ data.toString());
         }
 
         return outBean;
