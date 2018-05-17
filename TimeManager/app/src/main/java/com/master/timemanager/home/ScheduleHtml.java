@@ -325,12 +325,7 @@ public class ScheduleHtml {
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void editPersonSchedule() {
-                webView.post(new Runnable() {
-                    @Override
-                    public void run() {
 
-                    }
-                });
             }
 
         }, "personSchedule");

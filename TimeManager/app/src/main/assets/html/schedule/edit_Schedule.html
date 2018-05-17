@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../../css/datedropper.css">
     <link rel="stylesheet" type="text/css" href="../../css/timedropper.min.css">
-    <script src="../../js/schedule/add_schedule.js"></script>
+    <script src="../../js/schedule/schedule.js"></script>
     <script src="../../js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="../../js/schedule/jquery-1.12.3.min.js"></script>
     <script src="../../js/schedule/datedropper.min.js"></script>
     <script src="../../js/schedule/timedropper.min.js"></script>
 </head>
-<body>
+<body onload="editInit()">
 <header></header>
 <div id="main_schedule" class="schedule">
     <form class="schedule-form">
-        <input id="schedule_name" type="text" placeholder="请输入事件标题..."/><br>
-        <input id="schedule_detail" type="text" placeholder="事件详情描述..."/><br>
+        <div id="schedule_name"></div><br>
+        <div id="schedule_detail"></div><br>
         <select id="remind_time" name="remind_time" onclick="remindDate()">
             <option value="time_1">不提醒</option>
             <option value="time_2">事件开始时</option>
