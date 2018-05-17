@@ -8,8 +8,15 @@
 <script type="text/javascript">
     var dataList = window.singleSchedule.singleScheduleDetail();
     var scheduleDetail = null;
+    var scheduleState = null;
     if (dataList != null) {
         scheduleDetail = JSON.parse(dataList);
+        if (scheduleDetail.scheduleState === "-1"){
+            scheduleState = "未完成";
+        } else if (scheduleDetail.scheduleState === "1") {
+            scheduleState = "已完成";
+        }
+
     }
 
     if (scheduleDetail != null) {
@@ -18,8 +25,11 @@
             "    <div id=\"schedule_content\">" +
             "       <div>事件名：" + scheduleDetail.scheduleName + "</div>" +
             "       <div>事件详情：" + scheduleDetail.scheduleDetail + "</div>" +
+            "       <div>创建时间：" + scheduleDetail.scheduleCreateDate + "</div>" +
+            "       <div>发布人：" + scheduleDetail.scheduleIssuerName + "</div>" +
             "       <div>截止时间：" + scheduleDetail.scheduleEndDate + "</div>" +
-            "       <div>提醒时间：" + scheduleDetail.ExecutorRenindDate + "</div>" +
+            "       <div>提醒时间：" + scheduleDetail.ExecutorRemindDate + "</div>" +
+            "       <div>事件状态：" + scheduleState + "</div>" +
             "       <div>执行人：" + scheduleDetail.userName + "</div>" +
             "    </div>\n" +
             "</div>")
@@ -28,6 +38,8 @@
     }
 
 </script>
-<footer></footer>
+<footer>
+
+</footer>
 </body>
 </html>

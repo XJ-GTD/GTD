@@ -47,7 +47,7 @@ public class GroupHtml extends Activity {
     }
 
     /**
-     *
+     *  群组json解析
      * @param json
      * @return
      */

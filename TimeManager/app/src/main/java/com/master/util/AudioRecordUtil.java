@@ -102,7 +102,7 @@ public class AudioRecordUtil {
     public void uploadFile(final Context context)
     {
         //服务器端地址
-        String url = "http://192.168.99.31:8080/gtd/readAudio/read";
+        String url = "http://192.168.99.39:8080/gtd/readAudio/read";
         //手机端要上传的文件，首先要保存你手机上存在该文件
         String filePath = AudioFileFunc.getWavFilePath();
 
