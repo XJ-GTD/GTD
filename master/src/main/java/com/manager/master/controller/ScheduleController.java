@@ -1,6 +1,7 @@
 package com.manager.master.controller;
 
 import com.manager.master.dto.BaseOutDto;
+import com.manager.master.dto.PersonScheduleDto;
 import com.manager.master.dto.ScheduleInDto;
 import com.manager.master.dto.ScheduleOutDto;
 import com.manager.master.service.IScheduleService;
@@ -229,4 +230,23 @@ public class ScheduleController {
         logger.info("[创建成功]");
         return outBean;
     }
+
+    /**
+     * 个人日历日程查询
+     * @parame
+     * @return
+     */
+    @RequestMapping(value = "/createschbycalendar/{date}/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseOutDto createSchByCalendar(@PathVariable String date,@PathVariable int userId) {
+        BaseOutDto outBean = new BaseOutDto();
+        PersonScheduleDto PersonScheduleDto=new PersonScheduleDto();
+//        PersonScheduleDto.setCalendarDate(date);
+
+        outBean.setCode("0");
+        outBean.setMessage("[创建成功]");
+        logger.info("[创建成功]");
+        return outBean;
+    }
+
 }

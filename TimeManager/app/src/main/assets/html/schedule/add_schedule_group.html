@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>编辑日程</title>
+    <title>添加日程页面2</title>
     <link rel="stylesheet" href="../../css/schedule.css">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../../css/datedropper.css">
@@ -59,15 +59,11 @@
 
             <!--<option value="type_7">自定义</option>-->
         </select><br>
-        <select id="createGroup" name="remind_time" >
-            <option value="0">生成群组</option>
-            <option value="1">不生成群组</option>
-        </select><br>
         <select id="focus" name="remind_time" >
             <option value="0">关注本事件</option>
             <option value="1">不关注本事件</option>
         </select><br>
-        <input id="btnAdd" onclick="addClick()" value="创建" type="submit"/><input type="reset"/>
+        <input id="btnAdd" onclick="addGroupClick()" value="创建" type="submit"/><input type="reset"/>
 
     </form>
 </div>
