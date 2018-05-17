@@ -20,6 +20,13 @@
     }
 
     if (scheduleDetail != null) {
+        document.write("<header>\n" +
+            "        <div id=\"main_header\" style=\"position: fixed;top:0\">\n" +
+            "            <input id=\"btn_group\" type=\"button\" value=\"<返回\" onClick=\"javascript:window.history.back();\"/>\n" +
+            "            <input id=\"btn_add\" type=\"button\" value=\"编辑>\" onClick=\"javascript:window.singleSchedule.editSchedule();\"/>\n" +
+            "        </div>\n" +
+            "    </header>");
+
         document.write("<div>\n" +
             "    <div id=\"schedule_header\"></div>\n" +
             "    <div id=\"schedule_content\">" +
