@@ -291,7 +291,7 @@ public class ScheduleHtml {
      * @param groupId
      */
     public static void addScheduleGroup(final WebView webView, final Context context, final UserInfoJson user, final String groupId) {
-        webView.loadUrl("file:///android_asset/html/schedule/add_schedule_Group.html");
+        webView.loadUrl("file:///android_asset/html/schedule/add_schedule_group.html");
 
         webView.addJavascriptInterface(new Object() {
             /* 群组内日程创建 */

@@ -42,7 +42,7 @@ public class BasicUtil {
     public static String getNowDate() {
         String dateString = null;
         Date currentTime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateString = sdf.format(currentTime);
 
         return dateString;

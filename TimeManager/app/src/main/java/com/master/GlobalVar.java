@@ -33,7 +33,7 @@ public class GlobalVar extends Application {
     private static String GROUP_ADD_URL = GROUP_URL + "/";
 
     private static String SCHEDULE_ADD_URL = SCHEDULE_URL + "/create";      //添加日程
-    private static String SCHEDULE_ADD_GROUP_URL = SCHEDULE_URL + "/";      //群组内添加日程
+    private static String SCHEDULE_ADD_GROUP_URL = SCHEDULE_URL + "/createII";      //群组内添加日程
     private static String SCHEDULE_FIND_URL = SCHEDULE_URL + "/find";       //查询日程列表
     private static String SCHEDULE_SINGLE_FIND_URL = SCHEDULE_URL + "/findScheduleByOne";       //查询单个日程
     private static String SCHEDULE_GROUP_URL = SCHEDULE_URL + "/findSchByGroup";        //查询群组全部日程

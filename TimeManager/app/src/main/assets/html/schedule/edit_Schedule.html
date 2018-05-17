@@ -18,23 +18,7 @@
 <div id="main_schedule" class="schedule">
     <form class="schedule-form">
         <input id="schedule_name" type="text" placeholder="请输入事件标题..."/><br>
-        <input id="schedule_person" type="text" placeholder="请添加联系人..."/><br>
-        <!--<select type="text" multiple="multiple">
-            <option>请添加联系人...</option>
-            <option>联系人1</option>
-            <option>联系人2</option>
-            <option>联系人3</option>
-            <option>联系人4</option>
-            <option>联系人5</option>
-            <option>联系人6</option>
-            <option>联系人7</option>
-            <option>联系人8</option>
-        </select>-->
         <input id="schedule_detail" type="text" placeholder="事件详情描述..."/><br>
-        <div class="demo">
-            <input type="text" class="input" id="pickdate" placeholder="开始时间" /><input type="text" class="input" id="picktime" />
-            <input type="text" class="input" id="pickdate2" placeholder="结束时间"/><input type="text" class="input" id="picktime2" /><br>
-        </div>
         <select id="remind_time" name="remind_time" onclick="remindDate()">
             <option value="time_1">不提醒</option>
             <option value="time_2">事件开始时</option>
@@ -59,15 +43,7 @@
 
             <!--<option value="type_7">自定义</option>-->
         </select><br>
-        <select id="createGroup" name="remind_time" >
-            <option value="0">生成群组</option>
-            <option value="1">不生成群组</option>
-        </select><br>
-        <select id="focus" name="remind_time" >
-            <option value="0">关注本事件</option>
-            <option value="1">不关注本事件</option>
-        </select><br>
-        <input id="btnAdd" onclick="addClick()" value="创建" type="submit"/><input type="reset"/>
+        <input id="btnAdd" onclick="editGroupScheduleClick()" value="创建" type="submit"/><input type="reset"/>
 
     </form>
 </div>
