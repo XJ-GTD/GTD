@@ -39,6 +39,21 @@ public class ScheduleHtml {
     }
 
     /**
+     * 群组内添加日程 POST
+     * @return
+     */
+    public static String addGroupSchedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
+                                           String scheduleRemindDate, String scheduleRemindRepeatType, String executor, int scheduleIssuer,
+                                           String flagCreateGroup, String flagFocus, String scheduleCreateDate, String groupId) {
+        String url = GlobalVar.SCHEDULE_ADD_GROUP_URL();
+        String data = "{\"scheduleIssuer\":\""+ scheduleIssuer +"\", \"userId\":\""+ executor +"\", \"scheduleName\":\""+ scheduleName +"\", \"scheduleDetail\":\""+ scheduleDetail +"\"," +
+                "\"scheduleStartDate\":\""+ scheduleStartDate + "\", \"scheduleEndDate\":\"" + scheduleEndDate + "\", \"scheduleRemindDate\":\""+ scheduleRemindDate + "\"," +
+                "\"scheduleRemindRepeatType\":\""+ scheduleRemindRepeatType + "\",\"flagCreateGroup\":\""+ flagCreateGroup + "\"," +
+                "\"flagFocus\":\""+ flagFocus + "\",\"scheduleCreateDate\":\""+ scheduleCreateDate + "\",\"groupId\":\"" + groupId + "\"}";
+        return HttpRequestUtil.requestPOST(url,data);
+    }
+
+    /**
      * 查询日程列表请求 POST
      * @param userid
      * @return
@@ -146,13 +161,15 @@ public class ScheduleHtml {
         return scheduleBase;
     }
 
-    /*================== ======= =================*/
+    /*================== ==== 页面相关方法 === =================*/
 
+    /* 群组日程列表初始化 */
     public static void groupSchedule(final WebView webView, final Context context, final UserInfoJson user, final String groupId) {
         webView.loadUrl("file:///android_asset/html/schedule/group_schedule.html");
 
 
         webView.addJavascriptInterface(new Object() {
+
             /*返回单个群组的日程列表*/
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
@@ -184,6 +201,18 @@ public class ScheduleHtml {
                 });
 
             }
+
+            /* 群组的日程添加 */
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void groupAddSchedule() {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        addSchedule(webView, context, user, 1, groupId);
+                    }
+                });
+            }
         }, "schedule");
     }
 
@@ -202,13 +231,30 @@ public class ScheduleHtml {
                 } else {
                     return null;
                 }
-
             }
+
+            /* 日程编辑 */
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void editSchedule() {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+            }
+
         }, "singleSchedule");
 
     }
 
-    public static void addSchedule(final WebView webView, final Context context, final UserInfoJson user) {
+    /**
+     * 添加日程
+     * @param webView
+     * @param context
+     * @param user
+     */
+    public static void addSchedule(final WebView webView, final Context context, final UserInfoJson user, final int flag, final String groupId) {
         webView.loadUrl("file:///android_asset/html/schedule/add_schedule.html");
 
         webView.addJavascriptInterface(new Object() {
@@ -217,12 +263,25 @@ public class ScheduleHtml {
             public void add_Schedule(String scheduleName, String scheduleDetail, String scheduleStartDate, String scheduleEndDate,
                                      String scheduleRemindDate, String scheduleRemindRepeatType, String executor, String flagCreateGroup,
                                      String flagFocus) {
+                /* 获取当前时间[创建时间] */
                 String scheduleCreateDate = BasicUtil.getNowDate();
-                String dataJson = addSingleSchedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate, scheduleRemindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus, scheduleCreateDate);
+                String dataJson = null;
+                if (flag == 0) {    //如果是0，为首页添加，不传群组ID
+                    dataJson = addSingleSchedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate,
+                            scheduleRemindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus, scheduleCreateDate);
+                } else if (flag ==1) {      //如果是1，为群组添加，回传群组ID
+                    dataJson = addGroupSchedule(scheduleName, scheduleDetail, scheduleStartDate, scheduleEndDate, scheduleRemindDate,
+                            scheduleRemindRepeatType, executor, user.getUserId(), flagCreateGroup, flagFocus, scheduleCreateDate, groupId);
+                }
                 BaseJson data = BasicUtil.jsonToString(dataJson);
                 if (data.getCode().equals("0")) {
                     Toast.makeText(context, data.getMessage() , 0).show();
-                    goBackIndex(webView);
+                    if (flag == 0) {  //如果为0，返回首页
+                        goBackIndex(webView);
+                    } else if (flag == 1) {  //如果为1， 返回群组详情
+                        goBackGroup(webView);
+                    }
+
                 } else {
                     //失败应本地存储，预留
                     Toast.makeText(context, data.getMessage() , 0).show();
@@ -231,11 +290,41 @@ public class ScheduleHtml {
         }, "index_schedule");
     }
 
+    public static void editSchedule(final WebView webView, final Context context, final UserInfoJson user) {
+        webView.loadUrl("file:///android_asset/html/schedule/add_schedule.html");
+
+        webView.addJavascriptInterface(new Object() {
+            /* 日程编辑 */
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public void editPersonSchedule() {
+                webView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+            }
+
+        }, "personSchedule");
+    }
+
+    /* 返回首页 */
     private static void goBackIndex(final WebView webView) {
         webView.post(new Runnable() {
             @Override
             public void run() {
                 webView.loadUrl("file:///android_asset/html/home/index.html");
+            }
+        });
+
+    }
+
+    /* 返回群组 */
+    private static void goBackGroup(final WebView webView) {
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.loadUrl("file:///android_asset/html/schedule/group_schedule.html");
             }
         });
 

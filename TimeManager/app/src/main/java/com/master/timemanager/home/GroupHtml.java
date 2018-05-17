@@ -97,11 +97,14 @@ public class GroupHtml extends Activity {
 
     /*================ ====== 群组相关业务 ======= ==========*/
 
+    /* 首页初始化 */
     public static void initGroup(final WebView webView, final Context context, final UserInfoJson user) {
 
         webView.loadUrl("file:///android_asset/html/home/index.html");
 
         webView.addJavascriptInterface(new Object() {
+
+            /* 首页群组展示 */
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public String getGroupList() {
@@ -114,6 +117,7 @@ public class GroupHtml extends Activity {
                 }
             }
 
+            /* 群组详情展示（组内日程列表） */
             @android.webkit.JavascriptInterface
             public void groupScheduleDetail(final String groupId) {
                 webView.post(new Runnable() {
@@ -125,17 +129,19 @@ public class GroupHtml extends Activity {
 
             }
 
+            /* 首页添加日程 */
             @android.webkit.JavascriptInterface
             public void addSchedule() {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        ScheduleHtml.addSchedule(webView, context, user);
+                        ScheduleHtml.addSchedule(webView, context, user, 0, null);
                     }
                 });
 
             }
 
+            /*  */
             @android.webkit.JavascriptInterface
             public void recordStart() {
                 webView.post(new Runnable() {
@@ -148,6 +154,7 @@ public class GroupHtml extends Activity {
 
             }
 
+            /*  */
             @android.webkit.JavascriptInterface
             public void recordEnd() {
                 webView.post(new Runnable() {
@@ -164,13 +171,14 @@ public class GroupHtml extends Activity {
 
     }
 
-    private static void showGroupList(final WebView webView, final BaseJson groupJson) {
-        webView.post(new Runnable() {
-            @Override
-            public void run() {
-                webView.loadUrl("javascript:groupShow("+ groupJson.getJsonArray() +")");
-            }
-        });
-
-    }
+//    /* 群组页面返回 */
+//    private static void showGroupList(final WebView webView, final BaseJson groupJson) {
+//        webView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                webView.loadUrl("javascript:groupShow("+ groupJson.getJsonArray() +")");
+//            }
+//        });
+//
+//    }
 }

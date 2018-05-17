@@ -96,6 +96,7 @@ public class LoginHtml extends Activity {
     /* ====================== 登陆相关操作 ======================*/
 
     private static UserInfoJson user;
+    //登陆线程创建
     @SuppressLint("HandlerLeak")
     private static Handler mHandler = new Handler() {
         @Override
@@ -110,6 +111,12 @@ public class LoginHtml extends Activity {
     };
     private static Runnable mRunnable;
 
+    /**
+     * 登陆初始化
+     * @param webView
+     * @param settings
+     * @param context
+     */
     public static void loginWebView(final WebView webView, WebSettings settings, final Context context) {
         settings = webView.getSettings();
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
@@ -132,6 +139,8 @@ public class LoginHtml extends Activity {
          * 添加调用接口,并给接口设置名字;
          */
         webView.addJavascriptInterface(new Object() {
+
+            /* 用户注册 */
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void signIn() {
@@ -143,6 +152,7 @@ public class LoginHtml extends Activity {
                 });
             }
 
+            /* 测试方法，可以更改为其他方法 */
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void toast2(String str) {
@@ -150,6 +160,7 @@ public class LoginHtml extends Activity {
                         .show();
             }
 
+            /* 用户登陆 */
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void loginSuccess(final String accountName, final String password) {
@@ -188,6 +199,7 @@ public class LoginHtml extends Activity {
         super.onDestroy();
     }
 
+    /* 登陆后加载首页 */
     @SuppressLint("WrongConstant")
     private static void loginDeal(final WebView webView, final Context context) {
         if (user != null && user.getCode().equals("0")) {
@@ -217,6 +229,7 @@ public class LoginHtml extends Activity {
 
         webView.addJavascriptInterface(new Object() {
 
+            /* 注册成功后自动登陆 */
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
             public void signIn(final String accountName, String mobile, String verificationCode, final String password) {

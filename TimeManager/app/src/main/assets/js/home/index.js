@@ -8,13 +8,7 @@ function load_add() {
     // document.getElementById("main_html").innerHTML = '<object type="text/html" data="../schedule/add_schedule.html" width="100%" height="100%"></object>';
     window.index_group.addSchedule();
 }
-// function groupClick() {
-//     window.location.href = "file:///android_asset/html/home/index_group.html";
-//
-// }
-// function addSchedule() {
-//     window.location.href = "file:///android_asset/html/schedule/add_schedule.html";
-// }
+
 var record_switch=false;
 function audio_record() {
     if(!record_switch){

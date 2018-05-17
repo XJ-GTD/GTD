@@ -10,6 +10,7 @@ public class GlobalVar extends Application {
 
     private static GlobalVar instance = null;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,6 +33,7 @@ public class GlobalVar extends Application {
     private static String GROUP_ADD_URL = GROUP_URL + "/";
 
     private static String SCHEDULE_ADD_URL = SCHEDULE_URL + "/create";      //添加日程
+    private static String SCHEDULE_ADD_GROUP_URL = SCHEDULE_URL + "/";      //群组内添加日程
     private static String SCHEDULE_FIND_URL = SCHEDULE_URL + "/find";       //查询日程列表
     private static String SCHEDULE_SINGLE_FIND_URL = SCHEDULE_URL + "/findScheduleByOne";       //查询单个日程
     private static String SCHEDULE_GROUP_URL = SCHEDULE_URL + "/findSchByGroup";        //查询群组全部日程
@@ -119,5 +121,13 @@ public class GlobalVar extends Application {
 
     public static void setScheduleMineGroupUrl(String scheduleMineGroupUrl) {
         SCHEDULE_MINE_GROUP_URL = scheduleMineGroupUrl;
+    }
+
+    public static String SCHEDULE_ADD_GROUP_URL() {
+        return SCHEDULE_ADD_GROUP_URL;
+    }
+
+    public static void setScheduleAddGroupUrl(String scheduleAddGroupUrl) {
+        SCHEDULE_ADD_GROUP_URL = scheduleAddGroupUrl;
     }
 }

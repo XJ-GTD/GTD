@@ -7,10 +7,10 @@ import java.util.List;
  * 基础接收类
  */
 public class BaseJson {
-    private String message;
-    private String code;
-    private List<?> dataList;
-    private String jsonArray;
+    private String message;     //返回信息
+    private String code;        //返回值
+    private List<?> dataList;   //java数据list
+    private String jsonArray;   //html数据json
 
     public String getMessage() {
         return message;
