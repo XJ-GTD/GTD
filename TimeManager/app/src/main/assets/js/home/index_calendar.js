@@ -163,7 +163,8 @@
 						inner += '<span class="fc-date">' + day + '</span><span class="fc-weekday">' + this.options.weekabbrs[ j + this.options.startIn > 6 ? j + this.options.startIn - 6 - 1 : j + this.options.startIn ] + '</span>';
 
 						// this day is:
-						var strdate = ( this.month + 1 < 10 ? '0' + ( this.month + 1 ) : this.month + 1 ) + '-' + ( day < 10 ? '0' + day : day ) + '-' + this.year,
+						// var strdate = ( this.month + 1 < 10 ? '0' + ( this.month + 1 ) : this.month + 1 ) + '-' + ( day < 10 ? '0' + day : day ) + '-' + this.year,
+                        var strdate = this.year + '-' + ( this.month + 1 < 10 ? '0' + ( this.month + 1 ) : this.month + 1 ) + '-' + ( day < 10 ? '0' + day : day ),
 							dayData = this.caldata[ strdate ];
 
 						if( dayData ) {
@@ -211,9 +212,13 @@
 		_isValidDate : function( date ) {
 
 			date = date.replace(/-/gi,'');
-			var month = parseInt( date.substring( 0, 2 ), 10 ),
-				day = parseInt( date.substring( 2, 4 ), 10 ),
-				year = parseInt( date.substring( 4, 8 ), 10 );
+			// var month = parseInt( date.substring( 0, 2 ), 10 ),
+			// 	day = parseInt( date.substring( 2, 4 ), 10 ),
+			// 	year = parseInt( date.substring( 4, 8 ), 10 );
+            var year = parseInt( date.substring( 0, 4 ), 10 ),
+				month = parseInt( date.substring( 4, 6), 10 ),
+                day = parseInt( date.substring( 6, 8 ), 10 );
+
 
 			if( ( month < 1 ) || ( month > 12 ) ) {
 				return false;
@@ -467,7 +472,9 @@ var codropsEvents = {
 	'12-07-2013' : '<a>农历十一月初五</a><br><a href="http://www.17sucai.com/">大雪</a>',
 	'12-22-2013' : '<a>农历十一月二十</a><br><a href="http://www.17sucai.com/">冬至</a>',
 	'12-24-2013' : '<a>农历十一月二十二</a> <a>平安夜</a>',
-	'12-25-2013' : '<a>农历十一月二十三</a> <a>圣诞节</a>'
+	'12-25-2013' : '<a>农历十一月二十三</a> <a>圣诞节</a>',
+
+    '2018-05-01' : '<a href="#">testing</a>'
 };
 
 
@@ -506,18 +513,18 @@ var codropsEvents = {
 				}
 
 				// you can also add more data later on. As an example:
-				/*
-				someElement.on( 'click', function() {
+
+				/*someElement.on( 'click', function() {
 					
 					cal.setData( {
-						'03-01-2013' : '<a href="#">testing</a>',
+						'05-01-2018' : '<a href="#">testing</a>',
 						'03-10-2013' : '<a href="#">testing</a>',
 						'03-12-2013' : '<a href="#">testing</a>'
 					} );
 					// goes to a specific month/year
 					cal.goto( 2, 2013, updateMonthYear );
 
-				} );
-				*/
+				} );*/
+
 			
 			});
