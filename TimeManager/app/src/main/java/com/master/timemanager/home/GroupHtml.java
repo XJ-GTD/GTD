@@ -135,7 +135,7 @@ public class GroupHtml extends Activity {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        ScheduleHtml.addSchedule(webView, context, user, 0, null);
+                        ScheduleHtml.addSchedule(webView, context, user);
                     }
                 });
 
