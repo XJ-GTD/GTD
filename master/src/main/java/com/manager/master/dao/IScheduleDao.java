@@ -212,4 +212,47 @@ public interface IScheduleDao {
     void createExecutorScheduleAfterCreateGroupSch(@Param("userId") int userId,@Param("scheduleId") int  scheduleId,@Param("executorFinishDate") String executorFinishDate,
                                   @Param("scheduleState") String scheduleState,@Param("executorRemindDate") String executorRemindDate,@Param("executorRemindRepeat") String executorRemindRepeat,
                                   @Param("executorRemindRepeatType") String executorRemindRepeatType);
+    /**
+     * 根据事件ID和执行人ID查询事件表和执行事件表。
+     * @return
+     */
+    @Select(" select " +
+            " GS.SCHEDULE_ID,GS.SCHEDULE_NAME,GS.SCHEDULE_DETAIL,GS.SCHEDULE_ISSUER,GU1.USER_NAME scheduleIssuerName," +
+            " GS.SCHEDULE_CREATE_DATE,GS.SCHEDULE_START_DATE,GS.SCHEDULE_EDIT_DATE," +
+            " GS.SCHEDULE_FINISH_DATE,GS.SCHEDULE_END_DATE,GS.SCHEDULE_STATE," +
+            " GS.GROUP_ID,GS.SCHEDULE_MAP,GS.SCHEDULE_REMIND_DATE,GS.SCHEDULE_REMIND_REPEAT," +
+            " GS.SCHEDULE_REMIND_REPEAT_TYPE,GES.USER_ID,GES.SCHEDULE_ID,GES.EXECUTOR_FINISH_DATE," +
+            " GES.EXECUTOR_STATE,GES.EXECUTOR_REMIND_DATE,GES.EXECUTOR_REMIND_REPEAT,GES.EXECUTOR_REMIND_REPEAT_TYPE," +
+            " GES.EXECUTOR_SCHEDULE_NUMBER, GU2.USER_NAME userName" +
+            " from gtd_schedule GS" +
+            " left join GTD_EXECUTOR_SCHEDULE GES ON GS.SCHEDULE_ID = GES.SCHEDULE_ID" +
+            " LEFT JOIN GTD_USER GU2 ON GU2.USER_ID = GES.USER_ID " +
+            " left join GTD_USER GU1 ON GU1.USER_ID = GS.SCHEDULE_ISSUER" +
+            " WHERE GS.SCHEDULE_CREATE_DATE between #{dayStarDate}  and #{dayEndDate} " +
+            " AND GES.USER_ID = #{userId}" +
+            "order by GS.SCHEDULE_CREATE_DATE asc" )
+    List<ScheduleOutDto> createSchByCalendar(@Param("dayStarDate") String dayStarDate,@Param("dayStarDate") String dayEndDate,@Param("userId") int userId);
+
+    /**
+     * 通过事件ID和userId编辑执行事件表
+     *
+     */
+    @Update("UPDATE GTD_EXECUTOR_SCHEDULE SET " +
+            " USER_ID = #{userId}," +
+            " SCHEDULE_ID = #{scheduleId}," +
+            " EXECUTOR_FINISH_DATE = #{executorFinishDate}," +
+            " EXECUTOR_STATE = #{executorState}," +
+            " EXECUTOR_REMIND_DATE = #{executorRemindDate}," +
+            " EXECUTOR_REMIND_REPEAT = #{executorRemindRepeat}," +
+            " EXECUTOR_REMIND_REPEAT_TYPE = #{executorRemindRepeatType}" +
+            "WHERE SCHEDULE_ID = #{scheduleId} and USER_ID = #{userId}")
+    void updateScheduleByScheduleIdAndUserId(@Param("userId") String userId,@Param("scheduleId") int scheduleId,@Param("executorFinishDate") String executorFinishDate,
+                        @Param("executorState") String executorState,@Param("executorRemindDate") String executorRemindDate,@Param("executorRemindRepeat") String executorRemindRepeat,
+                       @Param("executorRemindRepeatType") String executorRemindRepeatType);
+//    @Param("scheduleId") int scheduleId,@Param("userId")int userId
+
+
+
+
+
 }

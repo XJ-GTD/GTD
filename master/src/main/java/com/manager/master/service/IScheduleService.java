@@ -78,4 +78,10 @@ public interface IScheduleService {
      */
     PersonScheduleDto createSchByCalendar(String date,int userId);
 
+    /**
+     * 编辑个人单条日程信息
+     * @return
+     */
+    int  updateScheduleByScheduleIdAndUserId(ScheduleInDto inDto);
+
 }

@@ -248,5 +248,25 @@ public class ScheduleController {
         logger.info("[创建成功]");
         return outBean;
     }
+    /**
+     * 个人日程编辑
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/updateScheduleByScheduleIdAndUserId", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseOutDto updateScheduleByScheduleIdAndUserId(@RequestBody ScheduleInDto inDto) {
+        BaseOutDto outBean = new BaseOutDto();
+        Map<String, ScheduleOutDto> data = new HashMap<>();
+        inDto.setScheduleState("-1");//事件状态(-1 未完成 1完成)
+        scheduleService.updateScheduleByScheduleIdAndUserId(inDto);
+
+        outBean.setData(data);
+        outBean.setCode("0");
+        outBean.setMessage("[修改成功]");
+        logger.info("[修改成功]"+ data);
+
+        return outBean;
+    }
 
 }
