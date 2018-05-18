@@ -378,7 +378,37 @@ public class ScheduleServiceImpl implements IScheduleService {
         String dayStarDate=date+"-01";
         String dayEndDate=date+"-31";
         PersonScheduleDto PersonScheduleDto=new PersonScheduleDto();
+        List<ScheduleOutDto> Scheduledata=scheduleDao.createSchByCalendar(dayStarDate,dayEndDate,userId);
 
+        for(ScheduleOutDto sod:Scheduledata ){
+            String [] breakDate=null;
+            if (sod.getScheduleStartDate()!=null){
+                breakDate=sod.getScheduleStartDate().split(" ");
+                String  schDate=breakDate[0];
+            }
+
+        }
         return PersonScheduleDto;
+    }
+
+    /**
+     * 编辑个人单条日程信息
+     *
+     * @param inDto
+     * @return
+     */
+    @Override
+    public int updateScheduleByScheduleIdAndUserId(ScheduleInDto inDto) {
+        String  userId = inDto.getUserId();
+        int scheduleId = inDto.getScheduleId();
+        String executorFinishDate = inDto.getExecutorFinishDate();
+        String executorState = inDto.getScheduleState();
+        String executorRemindDate = inDto.getExecutorRemindDate();
+        String executorRemindRepeat = inDto.getExecutorRemindRepeat();
+        String executorRemindRepeatType = inDto.getExecutorRemindRepeatType();
+
+        scheduleDao.updateScheduleByScheduleIdAndUserId(userId,scheduleId,executorFinishDate,executorState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
+
+        return 0;
     }
 }
