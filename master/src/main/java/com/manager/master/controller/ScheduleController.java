@@ -253,7 +253,7 @@ public class ScheduleController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/updateScheduleByScheduleIdAndUserId", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateExecutorSchedule", method = RequestMethod.POST)
     @ResponseBody
     public BaseOutDto updateScheduleByScheduleIdAndUserId(@RequestBody ScheduleInDto inDto) {
         BaseOutDto outBean = new BaseOutDto();

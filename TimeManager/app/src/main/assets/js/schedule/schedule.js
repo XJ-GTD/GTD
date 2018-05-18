@@ -51,7 +51,7 @@ function addGroupClick() {
 
 //编辑日程初始化
 function editInit() {
-    var data = null;
+    var data = window.personSchedule.getPersonSchedule();
     var scheduleData = null;
     if (data != null) {
         scheduleData = JSON.parse(data);
@@ -59,8 +59,8 @@ function editInit() {
 
     document.getElementById("schedule_name").innerHTML = scheduleData.scheduleName;
     document.getElementById("schedule_detail").innerHTML = scheduleData.schedule_detail;
-    document.getElementById("schedule_name").innerHTML = scheduleData.scheduleName;
-    document.getElementById("schedule_name").innerHTML = scheduleData.scheduleName;
+    // document.getElementById("remind_time").innerHTML = scheduleData.scheduleName;
+    // document.getElementById("schedule_name").innerHTML = scheduleData.scheduleName;
 
 }
 
@@ -81,7 +81,7 @@ function editGroupScheduleClick() {
     var focusIndex = focus.selectedIndex;
     var flagFocus =focus.options[focusIndex].value;
 
-    window.singleSchedule.editSchedule(scheduleRemindDate, scheduleRemindRepeatType, executor, flagFocus);
+    window.personSchedule.editPersonSchedule(scheduleRemindDate, scheduleRemindRepeatType, executor, flagFocus);
 }
 
 /*=======================================================*/

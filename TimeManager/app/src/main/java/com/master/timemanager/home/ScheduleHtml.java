@@ -55,12 +55,12 @@ public class ScheduleHtml {
 
     /**
      * 查询日程列表请求 POST
-     * @param userid
+     * @param userId
      * @return
      */
-    public static String findAllSchedule(int userid) {
+    public static String findAllSchedule(int userId) {
         String url = GlobalVar.SCHEDULE_FIND_URL();
-        String data = "{\"userId\": \"" + userid + "\"}";
+        String data = "{\"userId\": \"" + userId + "\"}";
         return HttpRequestUtil.requestPOST(url,data);
     }
 
@@ -85,12 +85,23 @@ public class ScheduleHtml {
     }
 
     /**
-     * 查询群组内日程执行人是否有自己
+     * 查询群组内日程执行人是否有自己 GET
      * @return
      */
     public static String findGroupScheduleMine(int scheduleId, int userId) {
         String url = GlobalVar.SCHEDULE_MINE_GROUP_URL() + "/" + scheduleId + "/" + userId;
         return HttpRequestUtil.requestGET(url);
+    }
+
+    /**
+     * 编辑个人执行日程提醒时间相关 POST
+     * @return
+     */
+    public static String updateExecutorSchedule(int scheduleId, int userId, String executorRemindDate, String executorRemindRepeat, String executorRemindRepeatType) {
+        String url = GlobalVar.SCHEDULE_EDIT_EXECUTOR_URL();
+        String data = "{\"userId\": \"" + userId + "\",\"scheduleId\":\"" + scheduleId + "\",\"executorRemindDate\":\""+ executorRemindDate + "\"," +
+                "\"executorRemindRepeat\":\"" + executorRemindRepeat + "\",\"executorRemindRepeatType\":\"" + executorRemindRepeatType + "\"}";
+        return HttpRequestUtil.requestPOST(url, data);
     }
 
     /**
@@ -218,7 +229,7 @@ public class ScheduleHtml {
 
     /* 单个事件详情*/
     private static void singleSchedule(final WebView webView, final Context context, final UserInfoJson user, final BaseJson data, final String groupId) {
-        webView.loadUrl("file:///android_asset/html/schedule/scheduleDetail.html");
+        webView.loadUrl("file:///android_asset/html/schedule/detail_schedule.html");
 
         webView.addJavascriptInterface(new Object() {
 
@@ -240,7 +251,7 @@ public class ScheduleHtml {
                 webView.post(new Runnable() {
                     @Override
                     public void run() {
-                        editGroupSchedule(webView, context, user, groupId);
+                        editGroupSchedule(webView, context, user, data, groupId);
                     }
                 });
             }
@@ -317,15 +328,29 @@ public class ScheduleHtml {
     }
 
     /* 编辑日程 */
-    public static void editGroupSchedule(final WebView webView, final Context context, final UserInfoJson user, final String groupId) {
-        webView.loadUrl("file:///android_asset/html/schedule/add_schedule.html");
+    public static void editGroupSchedule(final WebView webView, final Context context, final UserInfoJson user, final BaseJson data, final String groupId) {
+        webView.loadUrl("file:///android_asset/html/schedule/edit_schedule.html");
 
         webView.addJavascriptInterface(new Object() {
-            /* 日程编辑 */
+            /* 日程编辑 提交 */
             @SuppressLint("WrongConstant")
             @android.webkit.JavascriptInterface
-            public void editPersonSchedule() {
+            public void editPersonSchedule(String executorRemindDate, String executorRemindRepeat, String executorRemindRepeatType, int scheduleId) {
+                BasicUtil.jsonToString(updateExecutorSchedule(scheduleId, user.getUserId(), executorRemindDate, executorRemindRepeat, executorRemindRepeatType));
+                if (data.getCode().equals("0")) {
+                    Toast.makeText(context, data.getMessage() , 0).show();
+                    goBackGroup(webView);
+                } else {
+                    //失败应本地存储，预留
+                    Toast.makeText(context, data.getMessage() , 0).show();
+                }
+            }
 
+            /* 日程编辑 获取信息 */
+            @SuppressLint("WrongConstant")
+            @android.webkit.JavascriptInterface
+            public String getPersonSchedule() {
+                return data.getJsonArray();
             }
 
         }, "personSchedule");
@@ -350,6 +375,15 @@ public class ScheduleHtml {
                 webView.loadUrl("file:///android_asset/html/schedule/group_schedule.html");
             }
         });
+    }
 
+    /* 返回事件 */
+    private static void goBackSchedule(final WebView webView) {
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.loadUrl("file:///android_asset/html/schedule/detail_schedule.html");
+            }
+        });
     }
 }
