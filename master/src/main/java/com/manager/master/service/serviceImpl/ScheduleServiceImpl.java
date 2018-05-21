@@ -204,6 +204,7 @@ public class ScheduleServiceImpl implements IScheduleService {
         Date scheduleEndDate=null;
         Date scheduleRemindDate=null;
         Date scheduleEditDate=null;
+        /* 时间类型转化 */
         try {
             if (inDto.getScheduleCreateDate() != null) {
                 scheduleCreateDate = df2.parse(inDto.getScheduleCreateDate());
@@ -258,42 +259,8 @@ public class ScheduleServiceImpl implements IScheduleService {
 
         for (ScheduleOutDto sod : schList ) {
 
-            String scheduleFinishDateString = sod.getScheduleFinishDate();
-            String scheduleRemindDateString = sod.getScheduleRemindDate();
-            String scheduleEndDateString=sod.getScheduleEndDate();
-            String scheduleStartDateString=sod.getScheduleStartDate();
+            sod = dateChangeFormat(sod);
 
-            if(scheduleEndDateString!=null &&!"".equals(scheduleEndDateString)){
-                int endpointEndDate =scheduleEndDateString.indexOf(".");
-                if(endpointEndDate>0){
-                    scheduleEndDateString  = scheduleEndDateString.substring(0,endpointEndDate-3);
-                }
-            }
-
-            if(scheduleRemindDateString!=null &&!"".equals(scheduleRemindDateString)) {
-                int endpointRemindDate =scheduleRemindDateString.indexOf(".");
-                if (endpointRemindDate > 0) {
-                    scheduleRemindDateString = scheduleRemindDateString.substring(0, endpointRemindDate - 3);
-                }
-            }
-
-            if(scheduleStartDateString!=null &&!"".equals(scheduleStartDateString)) {
-                int endpointStartDate =scheduleStartDateString.indexOf(".");
-                if (endpointStartDate > 0) {
-                    scheduleStartDateString = scheduleStartDateString.substring(0, endpointStartDate - 3);
-                }
-            }
-
-            if(scheduleFinishDateString!=null &&!"".equals(scheduleFinishDateString)) {
-                int endpointFinishDate =scheduleFinishDateString.indexOf(".");
-                if (endpointFinishDate > 0) {
-                    scheduleFinishDateString = scheduleFinishDateString.substring(0, endpointFinishDate - 3);
-                }
-            }
-            sod.setScheduleFinishDate(scheduleFinishDateString);
-            sod.setScheduleRemindDate(scheduleRemindDateString);
-            sod.setScheduleStartDate(scheduleStartDateString);
-            sod.setScheduleEndDate(scheduleEndDateString);
             List<ScheduleOutDto> sodAndUser =  scheduleDao.findScheduleAndUserName(groupId);
             //拼接执行人姓名
             for (ScheduleOutDto sodUser : sodAndUser) {
@@ -330,7 +297,11 @@ public class ScheduleServiceImpl implements IScheduleService {
      */
     @Override
     public ScheduleOutDto findScheduleAndExeBySchIdAndUserId(int scheduleId,int userId) {
-        return scheduleDao.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
+        ScheduleOutDto dataDto = scheduleDao.findScheduleAndExeBySchIdAndUserId(scheduleId,userId);
+
+        dataDto = dateChangeFormat(dataDto);
+
+        return dataDto;
     }
 
     /**
@@ -339,16 +310,19 @@ public class ScheduleServiceImpl implements IScheduleService {
      * @param inDto
      */
     @Override
-    public void createSchByGroupId(ScheduleInDto inDto) {
+    public int createSchByGroupId(ScheduleInDto inDto) {
         inDto.setScheduleState("-1"); //事件状态SCHEDULE_STATE(-1 未完成 1完成)
         DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+        String  groupId = null;
         Date scheduleCreateDate= null;// 创建时间
         Date scheduleStartDate=null;// 开始时间
         Date scheduleFinishDate=null;// 完成时间
         Date scheduleEndDate=null;// 截止时间
         Date scheduleRemindDate=null;//提醒时间
         Date scheduleEditDate=null;
+        Date executorFinishDate= null;     //完成时间-执行事件表
+        Date executorRemindDate=null;       //提醒时间-执行事件表
         try {
             if (inDto.getScheduleCreateDate() != null) {
                 scheduleCreateDate = df2.parse(inDto.getScheduleCreateDate());
@@ -368,17 +342,19 @@ public class ScheduleServiceImpl implements IScheduleService {
             if (inDto.getScheduleEditDate() != null) {
                 scheduleEditDate = df2.parse(inDto.getScheduleEndDate());
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
+            if(inDto.getExecutorFinishDate()==null) {
+                executorFinishDate = df2.parse(inDto.getExecutorFinishDate());//完成时间-执行事件表
+            }
+            if(inDto.getExecutorRemindDate()==null) {
+                executorRemindDate = df2.parse(inDto.getScheduleEndDate());    //提醒时间-执行事件表
+            }
 
             String scheduleName=inDto.getScheduleName();//事件名称
             String scheduleDetail=inDto.getScheduleDetail();//事件详情
             int scheduleIssuer=inDto.getScheduleIssuer();//发布人id
             String scheduleState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
 
-            String  groupId=inDto.getGroupId();//组群id
+            groupId=inDto.getGroupId();//组群id
             String scheduleMap=inDto.getScheduleMap();//位置
             String scheduleRemindRepeat=inDto.getScheduleRemindRepeat();//重复提醒
             String  scheduleRemindRepeatType=inDto.getScheduleRemindRepeatType();//重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
@@ -389,23 +365,44 @@ public class ScheduleServiceImpl implements IScheduleService {
                     scheduleRemindRepeatType);
         } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
 
         int  userId = 0;
-        DateFormat df= new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        int scheduleId = inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
+        int scheduledId = inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
         String userMobile = inDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
-//        Date executorFinishDate= null;     //完成时间-执行事件表
-//        Date executorRemindDate=null;       //提醒时间-执行事件表
-        String executorFinishDate =inDto.getExecutorFinishDate();//完成时间-执行事件表
-        String  executorRemindDate = inDto.getExecutorRemindDate();    //提醒时间-执行事件表
-        String scheduleState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
+
+        String scheduledState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
         String executorRemindRepeat=inDto.getExecutorRemindRepeat();     //重复提醒-执行事件表
         String executorRemindRepeatType=inDto.getExecutorRemindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
-        Integer schIDNew = userDao.selectPKId();
-        scheduleDao.createExecutorScheduleAfterCreateGroupSch(userId,schIDNew,executorFinishDate,
-                scheduleState,executorRemindDate,executorRemindRepeat,
-                executorRemindRepeatType);
+
+
+        if(userMobile!=null){
+
+            userId=inDto.getScheduleIssuer();//获取用户id
+
+            //分割电话号码
+            String[] mobile = userMobile.split(",");
+            for (int i = 0; i < mobile.length; i++) {
+                //获取用户id
+                UserInfoOutDto userInfo= userDao.findUser(mobile[i]);
+                int userIdZX=userInfo.getUserId();// 执行人id/获取用户id
+
+                if(userId!=userIdZX){
+
+                    //添加执行事件表
+                    scheduleDao.createExecutorScheduleId(userIdZX,scheduledId,executorFinishDate,scheduledState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
+
+                }
+
+            }
+        }else{
+            //执行人为空时发布人变为执行人
+            userId=inDto.getScheduleIssuer();
+            scheduleDao.createExecutorScheduleId(userId,scheduledId,executorFinishDate,scheduledState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
+        }
+
+        return 0;
     }
 
     /**
@@ -453,5 +450,101 @@ public class ScheduleServiceImpl implements IScheduleService {
         scheduleDao.updateScheduleByScheduleIdAndUserId(userId,scheduleId,executorFinishDate,executorState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
 
         return 0;
+    }
+
+    /**
+     * 日程日期格式转化公共方法
+     * @param data
+     * @return
+     */
+    private ScheduleOutDto dateChangeFormat(ScheduleOutDto data) {
+        ScheduleOutDto outDto = data;
+
+        /* 日程表 */
+        //创建时间
+        String scheduleCreateDateString = outDto.getScheduleCreateDate();
+        if(scheduleCreateDateString != null && !"".equals(scheduleCreateDateString)){
+            int endpointCreateDate =scheduleCreateDateString.indexOf(".");
+            if(endpointCreateDate > 0){
+                scheduleCreateDateString  = scheduleCreateDateString.substring(0,endpointCreateDate - 3);
+            }
+        }
+        outDto.setScheduleCreateDate(scheduleCreateDateString);
+        //完成时间
+        String scheduleFinishDateString = outDto.getScheduleFinishDate();
+        if(scheduleFinishDateString!=null &&!"".equals(scheduleFinishDateString)) {
+            int endpointFinishDate =scheduleFinishDateString.indexOf(".");
+            if (endpointFinishDate > 0) {
+                scheduleFinishDateString = scheduleFinishDateString.substring(0, endpointFinishDate - 3);
+            }
+        }
+        outDto.setScheduleFinishDate(scheduleFinishDateString);
+        //提醒时间
+        String scheduleRemindDateString = outDto.getScheduleRemindDate();
+        if(scheduleRemindDateString!=null &&!"".equals(scheduleRemindDateString)) {
+            int endpointRemindDate =scheduleRemindDateString.indexOf(".");
+            if (endpointRemindDate > 0) {
+                scheduleRemindDateString = scheduleRemindDateString.substring(0, endpointRemindDate - 3);
+            }
+        }
+        outDto.setScheduleRemindDate(scheduleRemindDateString);
+        //截止时间
+        String scheduleEndDateString = outDto.getScheduleEndDate();
+        if(scheduleEndDateString!=null &&!"".equals(scheduleEndDateString)){
+            int endpointEndDate =scheduleEndDateString.indexOf(".");
+            if(endpointEndDate>0){
+                scheduleEndDateString  = scheduleEndDateString.substring(0,endpointEndDate-3);
+            }
+        }
+        outDto.setScheduleEndDate(scheduleEndDateString);
+        //开始时间
+        String scheduleStartDateString = outDto.getScheduleStartDate();
+        if(scheduleStartDateString!=null &&!"".equals(scheduleStartDateString)) {
+            int endpointStartDate =scheduleStartDateString.indexOf(".");
+            if (endpointStartDate > 0) {
+                scheduleStartDateString = scheduleStartDateString.substring(0, endpointStartDate - 3);
+            }
+        }
+        outDto.setScheduleStartDate(scheduleStartDateString);
+        //更新时间
+        String scheduleEditDateString = outDto.getScheduleEditDate();
+        if(scheduleEditDateString!=null &&!"".equals(scheduleEditDateString)) {
+            int endpointEditDate =scheduleEditDateString.indexOf(".");
+            if (endpointEditDate > 0) {
+                scheduleEditDateString = scheduleEditDateString.substring(0, endpointEditDate - 3);
+            }
+        }
+        outDto.setScheduleEditDate(scheduleEditDateString);
+
+        /* 执行表 */
+        //个人完成时间
+        String executorFinishDateString = outDto.getScheduleFinishDate();
+        if(executorFinishDateString!=null &&!"".equals(executorFinishDateString)) {
+            int endpointFinishDate =executorFinishDateString.indexOf(".");
+            if (endpointFinishDate > 0) {
+                executorFinishDateString = executorFinishDateString.substring(0, endpointFinishDate - 3);
+            }
+        }
+        outDto.setExecutorFinishDate(executorFinishDateString);
+        //个人提醒时间
+        String executorRemindDateString = outDto.getExecutorRemindDate();
+        if(executorRemindDateString!=null &&!"".equals(executorRemindDateString)) {
+            int endpointRemindDate =executorRemindDateString.indexOf(".");
+            if (endpointRemindDate > 0) {
+                executorRemindDateString = executorRemindDateString.substring(0, endpointRemindDate - 3);
+            }
+        }
+        outDto.setExecutorRemindDate(executorRemindDateString);
+        //个人执行更新时间
+        String executorEditDateString = outDto.getExecutorEditDate();
+        if(executorEditDateString!=null &&!"".equals(executorEditDateString)) {
+            int endpointEditDate =executorEditDateString.indexOf(".");
+            if (endpointEditDate > 0) {
+                executorEditDateString = executorEditDateString.substring(0, endpointEditDate - 3);
+            }
+        }
+        outDto.setExecutorEditDate(executorEditDateString);
+
+        return outDto;
     }
 }

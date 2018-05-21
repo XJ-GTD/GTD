@@ -1,6 +1,5 @@
 package com.manager.master.dto;
 
-import java.util.Date;
 /**
  * 日程
  * creaty  zy
@@ -19,23 +18,26 @@ public class ScheduleOutDto {
     private String  scheduleFinishDate;     //完成时间SCHEDULE_FINISH_DATE
     private String scheduleEndDate;     //截止时间SCHEDULE_END_DATE
     private String scheduleState;     //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-    private String GroupId;          //组群idGROUP_ID
+    private String groupId;          //组群idGROUP_ID
     private String scheduleMap;     //位置SCHEDULE_MAP
     private String scheduleRemindDate;     //提醒时间SCHEDULE_REMIND_DATE
     private String scheduleRemindRepeat;     //重复提醒SCHEDULE_REMIND_REPEAT
     private String scheduleRemindRepeatType;     //重复提醒类型SCHEDULE_REMIND_REPEAT_TYPE（1 每日 2 每月 3每年）
     private String scheduleEditDate;//修改时间SCHEDULE_EDIT_DATE
-    //执行事件表(日程关联表)
 
-    private Date ExecutorFinishDate;     //完成时间-执行事件表
-    private Date ExecutorRemindDate;    //提醒时间-执行事件表
-    private String ExecutorRemindRepeat;     //重复提醒-执行事件表
-    private String ExecutorRemindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
+    //执行事件表(日程关联表)
+    private String executorFinishDate;     //完成时间-执行事件表
+    private String executorRemindDate;    //提醒时间-执行事件表
+    private String executorRemindRepeat;     //重复提醒-执行事件表
+    private String executorRemindRepeatType;     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
     private String userId;//执行人ID  USER_ID
+    private String executorEditDate;    //修改时间SCHEDULE_EDIT_DATE
+
     //事件ID
     private int executorState;//事件状态 EXECUTOR_STATE
     //用户表
     private String userName;//执行人姓名（用户表里的用户名）
+
     public int getScheduleId() {
         return scheduleId;
     }
@@ -124,14 +126,6 @@ public class ScheduleOutDto {
         this.scheduleState = scheduleState;
     }
 
-    public String getGroupId() {
-        return GroupId;
-    }
-
-    public void setGroupId(String groupId) {
-        GroupId = groupId;
-    }
-
     public String getScheduleMap() {
         return scheduleMap;
     }
@@ -164,30 +158,6 @@ public class ScheduleOutDto {
         this.scheduleRemindRepeatType = scheduleRemindRepeatType;
     }
 
-    public Date getExecutorRemindDate() {
-        return ExecutorRemindDate;
-    }
-
-    public void setExecutorRemindDate(Date executorRemindDate) {
-        ExecutorRemindDate = executorRemindDate;
-    }
-
-    public String getExecutorRemindRepeat() {
-        return ExecutorRemindRepeat;
-    }
-
-    public void setExecutorRemindRepeat(String executorRemindRepeat) {
-        ExecutorRemindRepeat = executorRemindRepeat;
-    }
-
-    public String getExecutorRemindRepeatType() {
-        return ExecutorRemindRepeatType;
-    }
-
-    public void setExecutorRemindRepeatType(String executorRemindRepeatType) {
-        ExecutorRemindRepeatType = executorRemindRepeatType;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -203,6 +173,7 @@ public class ScheduleOutDto {
     public void setScheduleEditDate(String scheduleEditDate) {
         this.scheduleEditDate = scheduleEditDate;
     }
+
     public String getUserId() {
         return userId;
     }
@@ -219,11 +190,51 @@ public class ScheduleOutDto {
         this.executorState = executorState;
     }
 
-    public Date getExecutorFinishDate() {
-        return ExecutorFinishDate;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setExecutorFinishDate(Date executorFinishDate) {
-        ExecutorFinishDate = executorFinishDate;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getExecutorFinishDate() {
+        return executorFinishDate;
+    }
+
+    public void setExecutorFinishDate(String executorFinishDate) {
+        this.executorFinishDate = executorFinishDate;
+    }
+
+    public String getExecutorRemindDate() {
+        return executorRemindDate;
+    }
+
+    public void setExecutorRemindDate(String executorRemindDate) {
+        this.executorRemindDate = executorRemindDate;
+    }
+
+    public String getExecutorRemindRepeat() {
+        return executorRemindRepeat;
+    }
+
+    public void setExecutorRemindRepeat(String executorRemindRepeat) {
+        this.executorRemindRepeat = executorRemindRepeat;
+    }
+
+    public String getExecutorRemindRepeatType() {
+        return executorRemindRepeatType;
+    }
+
+    public void setExecutorRemindRepeatType(String executorRemindRepeatType) {
+        this.executorRemindRepeatType = executorRemindRepeatType;
+    }
+
+    public String getExecutorEditDate() {
+        return executorEditDate;
+    }
+
+    public void setExecutorEditDate(String executorEditDate) {
+        this.executorEditDate = executorEditDate;
     }
 }

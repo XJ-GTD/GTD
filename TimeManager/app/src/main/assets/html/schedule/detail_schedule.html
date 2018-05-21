@@ -9,6 +9,7 @@
     var dataList = window.singleSchedule.singleScheduleDetail();
     var scheduleDetail = null;
     var scheduleState = null;
+    var scheduleRemindDate = null;
     if (dataList != null) {
         scheduleDetail = JSON.parse(dataList);
         if (scheduleDetail.scheduleState === "-1"){
@@ -17,7 +18,13 @@
             scheduleState = "已完成";
         }
 
+        if (scheduleDetail.executorRemindDate === null) {
+            scheduleRemindDate = scheduleDetail.executorRemindDate;
+        } else {
+            scheduleRemindDate = "未设置提醒时间"
+        }
     }
+
     
     function editOnclick() {
         window.singleSchedule.editSchedule();
@@ -39,7 +46,7 @@
             "       <div>创建时间：" + scheduleDetail.scheduleCreateDate + "</div>" +
             "       <div>发布人：" + scheduleDetail.scheduleIssuerName + "</div>" +
             "       <div>截止时间：" + scheduleDetail.scheduleEndDate + "</div>" +
-            "       <div>提醒时间：" + scheduleDetail.ExecutorRemindDate + "</div>" +
+            "       <div>提醒时间：" + scheduleRemindDate + "</div>" +
             "       <div>事件状态：" + scheduleState + "</div>" +
             "       <div>执行人：" + scheduleDetail.userName + "</div>" +
             "    </div>\n" +

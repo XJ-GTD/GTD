@@ -65,7 +65,7 @@ public interface IScheduleService {
      * 群组事件创建
      * @param
      */
-     void createSchByGroupId(@RequestBody ScheduleInDto inDto);
+     int createSchByGroupId(@RequestBody ScheduleInDto inDto);
 
     /**
      * 个人日历日程查询
