@@ -90,6 +90,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             }
         } catch (ParseException e) {
             e.printStackTrace();
+            return -1;
         }
 
         String scheduleRemindRepeat = inDto.getScheduleRemindRepeat();//重复提醒
@@ -100,18 +101,7 @@ public class ScheduleServiceImpl implements IScheduleService {
                 scheduleMap,scheduleRemindDate,scheduleRemindRepeat,
                 scheduleRemindRepeatType);
 
-
-        return scheduleDao.selectScheduleId();
-    }
-
-
-    /**
-     * 日程关联创建（执行事件表）
-     * @param
-     */
-    public  void   createExecutorSchedule(@RequestBody ScheduleInDto inDto){
         int  userId = 0;
-        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
         int scheduledId = inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
         String userMobile = inDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
         Date executorFinishDate= null;     //完成时间-执行事件表
@@ -125,6 +115,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             }
         } catch (ParseException e) {
             e.printStackTrace();
+            return -1;
         }
 
         String scheduledState=inDto.getScheduleState();//事件状态(-1 未完成 1完成)
@@ -134,7 +125,6 @@ public class ScheduleServiceImpl implements IScheduleService {
 
         if(userMobile!=null){
             //添加群组创建人
-            String groupId=inDto.getGroupId();
             userId=inDto.getScheduleIssuer();//获取用户id
             int roleId=1;//1群主 2成员 3发布人 4执行人
             String groupName=inDto.getScheduleName();
@@ -169,7 +159,18 @@ public class ScheduleServiceImpl implements IScheduleService {
             userId=inDto.getScheduleIssuer();
             scheduleDao.createExecutorScheduleId(userId,scheduledId,executorFinishDate,scheduledState,executorRemindDate,executorRemindRepeat,executorRemindRepeatType);
         }
+
+        return 0;
     }
+
+
+//    /**
+//     * 日程关联创建（执行事件表）
+//     * @param
+//     */
+//    public  void   createExecutorSchedule(@RequestBody ScheduleInDto inDto){
+//
+//    }
 
     /**
      * 查询个人单条日程信息
@@ -190,7 +191,7 @@ public class ScheduleServiceImpl implements IScheduleService {
      * @return
      */
     @Override
-    public ScheduleOutDto updateSchedule(ScheduleInDto inDto) {
+    public int updateSchedule(ScheduleInDto inDto) {
 
         DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
         int scheduledId=inDto.getScheduleId();
@@ -224,6 +225,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             }
         } catch (ParseException e) {
             e.printStackTrace();
+            return -1;
         }
 
         String scheduleState=inDto.getScheduleState();
@@ -237,7 +239,7 @@ public class ScheduleServiceImpl implements IScheduleService {
                 scheduleEditDate,scheduleFinishDate,scheduleEndDate,
                 scheduleState,GroupId,scheduleMap,
                 scheduleRemindDate,scheduleRemindRepeat,scheduleRemindRepeatTyp);
-        return null;
+        return 0;
     }
 
     /**
@@ -339,7 +341,6 @@ public class ScheduleServiceImpl implements IScheduleService {
     @Override
     public void createSchByGroupId(ScheduleInDto inDto) {
         inDto.setScheduleState("-1"); //事件状态SCHEDULE_STATE(-1 未完成 1完成)
-//        inDto.setScheduleCreateDate(new Date());// new Date()为获取当前系统时间
         DateFormat df2= new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         Date scheduleCreateDate= null;// 创建时间
@@ -389,19 +390,9 @@ public class ScheduleServiceImpl implements IScheduleService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-
-
-    /**
-     * 创建执行事件表
-     *
-     * @param inDto
-     */
-    @Override
-    public void createExecutorScheduleAfterCreateGroupSch(ScheduleInDto inDto) {
         int  userId = 0;
-        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        DateFormat df= new SimpleDateFormat("yyyy/MM/dd HH:mm");
         int scheduleId = inDto.getScheduleId();         //执行事件IDSCHEDULE_ID
         String userMobile = inDto.getUserId();         //执行人电话（执行人id）String  ,拼写字符串
 //        Date executorFinishDate= null;     //完成时间-执行事件表
@@ -413,9 +404,8 @@ public class ScheduleServiceImpl implements IScheduleService {
         String executorRemindRepeatType=inDto.getExecutorRemindRepeatType();     //重复提醒类型-执行事件表（1 每日 2 每月 3每年）
         Integer schIDNew = userDao.selectPKId();
         scheduleDao.createExecutorScheduleAfterCreateGroupSch(userId,schIDNew,executorFinishDate,
-        scheduleState,executorRemindDate,executorRemindRepeat,
-        executorRemindRepeatType);
-
+                scheduleState,executorRemindDate,executorRemindRepeat,
+                executorRemindRepeatType);
     }
 
     /**

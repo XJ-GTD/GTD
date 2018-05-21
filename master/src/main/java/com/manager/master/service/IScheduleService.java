@@ -28,7 +28,7 @@ public interface IScheduleService {
      * 日程关联创建（执行事件表）
      * @param
      */
-    void  createExecutorSchedule(@RequestBody ScheduleInDto inDto);
+//    void  createExecutorSchedule(@RequestBody ScheduleInDto inDto);
 
 
     /**
@@ -40,7 +40,7 @@ public interface IScheduleService {
      * 编辑个人单条日程信息
      * @return
      */
-    ScheduleOutDto  updateSchedule(ScheduleInDto inDto);
+    int  updateSchedule(ScheduleInDto inDto);
 
     /**
      * 查询一个群组下的所有日程
@@ -66,11 +66,6 @@ public interface IScheduleService {
      * @param
      */
      void createSchByGroupId(@RequestBody ScheduleInDto inDto);
-    /**
-     * 创建执行事件表
-     * @param
-     */
-    void createExecutorScheduleAfterCreateGroupSch(@RequestBody ScheduleInDto inDto);
 
     /**
      * 个人日历日程查询

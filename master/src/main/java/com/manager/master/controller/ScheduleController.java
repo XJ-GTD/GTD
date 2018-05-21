@@ -35,48 +35,38 @@ public class ScheduleController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public BaseOutDto create(@RequestBody ScheduleInDto inDto) {
-        BaseOutDto outBean = new BaseOutDto();
-        Map<String, Object> data = new HashMap<>();
+        BaseOutDto outDto = new BaseOutDto();
+
         //获取群编号
         String uuid =UUIDUtil.getUUID();
         inDto.setGroupId(uuid);//给群组id加上关联号
 
-        if(inDto.getScheduleName()==null  &&  "".equals(inDto.getScheduleName())){
-            outBean.setCode("1");
-            outBean.setMessage("[事件名为空]");
-            logger.info("[事件名为空！]");
-        }
         if(inDto.getScheduleIssuer()==0 ){
-            outBean.setCode("1");
-            outBean.setMessage("[发布人为空]");
+            outDto.setCode("1");
+            outDto.setMessage("[发布人为空]");
             logger.info("[发布人为空！]");
+            return outDto;
         }
-//        if(inDto.getScheduleIssuer()==0 ){
-//            outBean.setCode("1");
-//            outBean.setMessage("[发布人为空]");
-//            logger.info("[发布人为空！]");
-//        }
-//        if(inDto.getGroupId()==null  &&  "".equals(inDto.getGroupId())){
-//            outBean.setCode("1");
-//            outBean.setMessage("[群组ID为空]");
-//            logger.info("[群组ID为空！]");
-//        }
-//        scheduleService.createSchedule(inDto);
 
-        //查询日程id
-//        int  ScheduleId=scheduleService.selectScheduleId();
-        int  ScheduleId = scheduleService.createSchedule(inDto);
-        inDto.setScheduleId(ScheduleId);
-        //添加日程关联
-        scheduleService.createExecutorSchedule(inDto);
+        int  scheduleFlag = scheduleService.createSchedule(inDto);
+//        //添加日程关联
+//        scheduleService.createExecutorSchedule(inDto);
 
+        if(scheduleFlag == 0) {
+            outDto.setCode("0");
+            outDto.setMessage("[创建成功]");
+            logger.info("[创建成功]");
+        } else if (scheduleFlag == 1) {
+            outDto.setCode("1");
+            outDto.setMessage("[创建失败]：入库失败");
+            logger.info("[创建失败]：入库失败");
+        } else {
+            outDto.setCode("-1");
+            outDto.setMessage("[创建失败]：后台异常");
+            logger.info("[创建失败]：后台异常");
+        }
 
-        data.put("scheduleInfo", ScheduleId);
-        outBean.setData(data);
-        outBean.setCode("0");
-        outBean.setMessage("[创建成功]");
-        logger.info("[创建成功]");
-        return outBean;
+        return outDto;
     }
     /**
      * 个人日程编辑
@@ -86,18 +76,26 @@ public class ScheduleController {
     @RequestMapping(value = "/updateSchedule", method = RequestMethod.POST)
     @ResponseBody
     public BaseOutDto updateSchedule(@RequestBody ScheduleInDto inDto) {
-        BaseOutDto outBean = new BaseOutDto();
-        Map<String, ScheduleOutDto> data = new HashMap<>();
+        BaseOutDto outDto = new BaseOutDto();
+
         inDto.setScheduleState("-1");//事件状态(-1 未完成 1完成)
-        scheduleService.updateSchedule(inDto);
+        int flag = scheduleService.updateSchedule(inDto);
 
-        outBean.setData(data);
-        outBean.setCode("0");
-        outBean.setMessage("[修改成功]");
-        logger.info("[修改成功]"+ data);
+        if(flag == 0) {
+            outDto.setCode("0");
+            outDto.setMessage("[编辑成功]");
+            logger.info("[编辑成功]");
+        } else if (flag == 1) {
+            outDto.setCode("1");
+            outDto.setMessage("[编辑失败]：入库失败");
+            logger.info("[编辑失败]：入库失败");
+        } else {
+            outDto.setCode("-1");
+            outDto.setMessage("[编辑失败]：后台异常");
+            logger.info("[编辑失败]：后台异常");
+        }
 
-
-        return outBean;
+        return outDto;
     }
     /**
      * 日程查询
@@ -223,8 +221,6 @@ public class ScheduleController {
         BaseOutDto outBean = new BaseOutDto();
         //添加日程
         scheduleService.createSchByGroupId(inDto);
-        //添加日程关联
-        scheduleService.createExecutorScheduleAfterCreateGroupSch(inDto);
         outBean.setCode("0");
         outBean.setMessage("[创建成功]");
         logger.info("[创建成功]");
